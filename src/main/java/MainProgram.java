@@ -10,6 +10,7 @@ public class MainProgram implements Runnable {
     }
 
     public void screenCalibration() throws Exception{
+
         Robot robot=new Robot();
         int y= sl.getCoordinatesY("/html/body/div/p[2]/a");
         int x= sl.getCoordinatesX("/html/body/div/p[2]/a");
@@ -29,7 +30,6 @@ public class MainProgram implements Runnable {
         sl.pageOpener("https://www.skroutz.gr/c/40/kinhta-thlefwna.html?from=families");
         try {
             Thread.sleep(5000);
-//            sl.onClick("/html/body/div/p[2]/a");
             sl.getCoordinates("/html/body/div[3]/div/div[2]/a");
         } catch (InterruptedException e) {
             e.printStackTrace();
