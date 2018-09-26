@@ -13,6 +13,7 @@ public class SeleniumMethods {
 
     public void pageOpener (String url) {
         driver.get(url);
+        driver.manage().window().maximize();
     }
 
     public void onClick(String xpath) {
@@ -24,10 +25,14 @@ public class SeleniumMethods {
         driver.close();
     }
 
-    public void getCoordinates(String xpath){
-        System.out.println((driver.findElement(By.xpath(xpath)).getLocation().getX()));
-        System.out.println((driver.findElement(By.xpath(xpath)).getLocation().getY()));
-//        WebElement element=driver.findElement(By.xpath(xpath));
-//        Point point=element.getLocation();
+    public String getText(String xpath){
+        return driver.findElement(By.xpath(xpath)).getText();
+    }
+    public int getCoordinatesX(String xpath){
+        return (driver.findElement(By.xpath(xpath)).getLocation().getX());
+    }
+
+    public int getCoordinatesY(String xpath){
+        return (driver.findElement(By.xpath(xpath)).getLocation().getY());
     }
 }
