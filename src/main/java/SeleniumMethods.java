@@ -1,7 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 
@@ -21,6 +18,7 @@ public class SeleniumMethods {
         driver.findElement(By.xpath(xpath)).click();
     }
 
+
     public void pageCloser() {
         driver.close();
     }
@@ -34,5 +32,21 @@ public class SeleniumMethods {
 
     public int getCoordinatesY(String xpath){
         return (driver.findElement(By.xpath(xpath)).getLocation().getY());
+    }
+
+    public void getCoordinates( String xpath) {
+        System.out.println( driver.findElement(By.xpath(xpath)).getLocation());
+    }
+
+    public void scrollBy(int pixels) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,"+pixels+")");
+
+    }
+
+    public int isScrolledBy() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        int pixels = (Integer) js.executeScript("return window.pageYOffset;");
+        return  pixels;
     }
 }
