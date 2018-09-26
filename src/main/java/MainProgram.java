@@ -7,9 +7,9 @@ public class MainProgram implements Runnable{
         sl.pageOpener("http://www.example.com");
         try {
             Thread.sleep(5000);
+            sl.onClick("/html/body/div/p[2]/a");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        sl.onClick("/html/body/div/p[2]/a");
     }
 }

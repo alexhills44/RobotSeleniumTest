@@ -13,8 +13,7 @@ public class SeleniumMethods {
     }
 
     public void onClick(String xpath) {
-        System.out.println("blabla");
-        driver.findElement(By.xpath(xpath));
+        driver.findElement(By.xpath(xpath)).click();
     }
 
     public void pageCloser() {
