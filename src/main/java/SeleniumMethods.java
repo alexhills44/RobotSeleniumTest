@@ -13,6 +13,7 @@ public class SeleniumMethods {
     }
 
     public void onClick(String xpath) {
+        //Message for you
         driver.findElement(By.xpath(xpath)).click();
     }
 
