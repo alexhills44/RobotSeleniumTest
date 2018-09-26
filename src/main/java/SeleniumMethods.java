@@ -1,6 +1,9 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 
 public class SeleniumMethods {
     WebDriver driver;
@@ -21,4 +24,10 @@ public class SeleniumMethods {
         driver.close();
     }
 
+    public void getCoordinates(String xpath){
+        System.out.println((driver.findElement(By.xpath(xpath)).getLocation().getX()));
+        System.out.println((driver.findElement(By.xpath(xpath)).getLocation().getY()));
+//        WebElement element=driver.findElement(By.xpath(xpath));
+//        Point point=element.getLocation();
+    }
 }
