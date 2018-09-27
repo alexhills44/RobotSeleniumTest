@@ -28,14 +28,9 @@ public class MainProgram implements Runnable {
     public void run(){
         sl=new SeleniumMethods();
         sl.pageOpener("https://www.skroutz.gr/c/40/kinhta-thlefwna.html?from=families");
-        try {
-            Thread.sleep(5000);
-            sl.getCoordinates("/html/body/div[3]/div/div[2]/a");
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while (true) {
+            System.out.println(sl.getScrolledY());
         }
-            sl.scrollBy(1156);
-            int y=sl.getCoordinatesY("/html/body/div/p[2]/a");
-            System.out.println(y);
+
     }
 }

@@ -44,9 +44,9 @@ public class SeleniumMethods {
 
     }
 
-    public int isScrolledBy() {
+    public long getScrolledY() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        int pixels = (Integer) js.executeScript("return window.pageYOffset;");
+        Long pixels = (Long) js.executeScript("return window.pageYOffset;");
         return  pixels;
     }
 }
