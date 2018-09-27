@@ -1,6 +1,6 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
-
+import java.awt.Point;
 
 public class SeleniumMethods {
     WebDriver driver;
@@ -34,8 +34,12 @@ public class SeleniumMethods {
         return (driver.findElement(By.xpath(xpath)).getLocation().getY());
     }
 
-    public void getCoordinates( String xpath) {
-        System.out.println( driver.findElement(By.xpath(xpath)).getLocation());
+    public Point getCoordinates(String xpath) {
+        int x = getCoordinatesX(xpath);
+        int y = getCoordinatesY(xpath);
+        Point pointAwt= new Point();
+        pointAwt.setLocation(x,y);
+        return pointAwt;
     }
 
     public void scrollBy(int pixels) {
@@ -48,5 +52,13 @@ public class SeleniumMethods {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Long pixels = (Long) js.executeScript("return window.pageYOffset;");
         return  pixels;
+    }
+
+    public Point getElementSurface (String xpath) {
+        int x = driver.findElement(By.xpath(xpath)).getSize().getWidth();
+        int y = driver.findElement(By.xpath(xpath)).getSize().getHeight();
+        Point pointAwt= new Point();
+        pointAwt.setLocation(x,y);
+        return pointAwt;
     }
 }
