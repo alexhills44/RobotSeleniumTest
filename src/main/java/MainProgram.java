@@ -1,6 +1,6 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
-import java.util.Random;
+
 
 public class MainProgram implements Runnable {
 
@@ -38,25 +38,11 @@ public class MainProgram implements Runnable {
     public void run(){
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
-        sl.pageOpener("https://www.skroutz.gr/c/40/kinhta-thlefwna.html");
-        //"/html/body/main/div[1]/section/div[2]/div/div/ul/li[1]/a"
-        //sl.getElementSurface("/html/body/div[2]/ol/li[1]");
-        //randomCursorMoveMethod1("/html/body/main/div[1]/section/div[2]/div/div/ul/li[1]/a");
-        ms.scrollToView("/html/body/div[3]/div/div[2]/a");
+//        sl.pageOpener("https://www.example.com");
+        sl.pageOpener("https://www.skroutz.gr");
+        ms.scrollToView("//*[@id=\"search-bar-input\"]");
         ms.onLeftClick();
-//        try {
-//            Robot robot = new Robot();
-//            robot.mouseWheel(+1000);
-//            Thread.sleep(1000);
-//            System.out.println(sl.getScrolledY());
-//            Thread.sleep(2000);
-//            robot.mouseWheel(-1000);
-//            Thread.sleep(1000);
-//            System.out.println(sl.getScrolledY());
-//        } catch (AWTException e) {
-//            e.printStackTrace();
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        ms.typeString("iphone");
+        ms.pressEnter();
     }
 }

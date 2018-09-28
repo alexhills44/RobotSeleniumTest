@@ -1,5 +1,6 @@
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.awt.Point;
 
 public class SeleniumMethods {
@@ -14,10 +15,8 @@ public class SeleniumMethods {
     }
 
     public void onClick(String xpath) {
-        //Message for you
         driver.findElement(By.xpath(xpath)).click();
     }
-
 
     public void pageCloser() {
         driver.close();
