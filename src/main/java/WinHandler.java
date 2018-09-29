@@ -74,9 +74,9 @@ public class WinHandler {
         }
     }
 
-    public Point findOdd() {
+    public String findOdd() {
         // if findOdd Fails then it return point(0,0)
-        Point point=new Point(0,0);
+        String xpath="";
         if (success) {
             float readValue;
             float inputValue =100000;
@@ -95,10 +95,10 @@ public class WinHandler {
                         readValue=0;
                     }
                 }
-                point=sl.getCoordinates(xpathConstant);
+                xpath = xpathConstant;
             }
         }
-        return point;
+        return xpath;
     }
 
     public float valueToNumber(String value0) {

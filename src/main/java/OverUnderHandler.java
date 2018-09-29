@@ -74,9 +74,9 @@ public class OverUnderHandler {
         }
     }
 
-    public Point findOverUnder() {
+    public String findOverUnder() {
         // if findOverUnder Fails then it return point(0,0)
-        Point point=new Point(0,0);
+        String xpath = "";
         if (success) {
             float readValue;
             float inputValue =100000;
@@ -96,7 +96,7 @@ public class OverUnderHandler {
                             readValue=0;
                         }
                     }
-                    point=sl.getCoordinates(xpathConstant);
+                    xpath = xpathConstant;
                 }else if (value.contains("U")) {
                     while(inputValue>=readValue || readValue==0) {
                         try {
@@ -106,11 +106,11 @@ public class OverUnderHandler {
                             readValue=0;
                         }
                     }
-                    point=sl.getCoordinates(xpathConstant);
+                    xpath = xpathConstant;
                 }
             }
         }
-        return point;
+        return xpath;
     }
 
     public float valueToNumber(String value0) {

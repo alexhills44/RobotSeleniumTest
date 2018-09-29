@@ -7,7 +7,8 @@ public class HandicapHandler {
     private static int CONSTANT=1;
     boolean success=true;
 
-    int tourNumber=1,teamNumber=1,matchOfTour=1;
+    public static int tourNumber=1,teamNumber=1,matchOfTour=1;
+
     String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
     String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
@@ -74,9 +75,9 @@ public class HandicapHandler {
         }
     }
 
-    public Point findHandicap() {
+    public String findHandicap() {
         // if findHandler Fails then it return point(0,0)
-        Point point=new Point(0,0);
+        String xpath = "";
         if (success) {
             float readValue;
             float inputValue =100000;
@@ -95,10 +96,10 @@ public class HandicapHandler {
                         readValue=0;
                     }
                 }
-                point=sl.getCoordinates(xpathConstant);
+                xpath=xpathConstant;
             }
         }
-        return point;
+        return xpath;
     }
 
     public float valueToNumber(String value0) {
