@@ -39,10 +39,11 @@ public class MainProgram implements Runnable {
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
 //        sl.pageOpener("https://www.example.com");
-        sl.pageOpener("https://www.skroutz.gr");
-        ms.scrollToView("//*[@id=\"search-bar-input\"]");
+        sl.pageOpener("https://amiunique.org/");
+        ms.scrollToView("//*[@id=\"link\"]");
         ms.onLeftClick();
-        ms.typeString("iphone");
-        ms.pressEnter();
+        ms.randomDelay(10000,15000);
+        ms.scrollToView("//*[@id=\"detBut2\"]");
+        ms.onLeftClick();
     }
 }

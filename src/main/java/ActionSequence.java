@@ -35,15 +35,28 @@ public class ActionSequence {
     }
 
     public void basketCategory () {
-        ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
-        while (sl.getCoordinatesX("//*[contains(text(), 'Μπάσκετ')]")>600) {
-            ms.scrollToView(button to move menu);
-            ms.onLeftClick();
+        boolean isRunning=true;
+        while (isRunning) {
+            try {
+                ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
+                ms.onLeftClick();
+                isRunning=false;
+            }catch (Exception e) {
+                System.out.println("Not in View");
+                ms.scrollToView("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[3]");
+                ms.onLeftClick();
+            }
         }
-        ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
-        ms.onLeftClick();
 
     }
+    //basket
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[2]/div/div[12]
+    //right arrow
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[3]
+    //left arrow
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[1]
+    //table of sports
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]
 
     public void getUserInfo () {
         //MainProgram.getInfo....

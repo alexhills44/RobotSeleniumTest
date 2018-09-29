@@ -49,8 +49,7 @@ public class SeleniumMethods {
 
     public long getScrolledY() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Long pixels = (Long) js.executeScript("return window.pageYOffset;");
-        return  pixels;
+        return  (Long) js.executeScript("return window.pageYOffset;");
     }
 
     public Point getElementSurface (String xpath) {
