@@ -47,16 +47,24 @@ public class MouseMovement {
 
     public void scrollToView(String xpath) {
         randomDelay(30,60);
-        moveMouseToMain();
         while(!elementOnScreen(xpath)) {
-            try {
-                robot.mouseWheel(100);
-                Thread.sleep(500);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            robot.mouseWheel(30);
+            randomDelay(500,1000);
         }
         randomCursorMoveMethod1(xpath);
+    }
+
+    public void scrollToViewForZero(String xpath) {
+        randomDelay(30,60);
+        while(!elementOnScreenForZero(xpath)) {
+            robot.mouseWheel(30);
+            randomDelay(500,1000);
+        }
+        randomCursorMoveMethod1(xpath);
+    }
+
+    public void randomCursorMoveMethod1(String xpath) {
+        cursorMoveMethod1(randomRectPoint(xpath));
     }
 
     public void pressEnter() {
@@ -67,6 +75,10 @@ public class MouseMovement {
         randomDelay(50,100);
     }
 
+    public void moveMouseToMain() {
+       // robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(598)+1);
+        robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(yOffset));
+    }
 
     private Point getMousePosition() {
         PointerInfo a = MouseInfo.getPointerInfo();
@@ -108,10 +120,10 @@ public class MouseMovement {
     private Point randomRectPoint(String xpath) {
         Point destinationPoint=sl.getCoordinates(xpath);
         Point point = sl.getElementSurface(xpath);
-        Double pointX = point.getX()-2;
-        int randomX = rand.nextInt(pointX.intValue())+1;
-        Double pointY = point.getY()-2;
-        int randomY = rand.nextInt(pointY.intValue())+1;
+        Double pointX = point.getX()-4;
+        int randomX = rand.nextInt(pointX.intValue())+2;
+        Double pointY = point.getY()-4;
+        int randomY = rand.nextInt(pointY.intValue())+2;
         Double xd = destinationPoint.getX();
         Double yd = destinationPoint.getY();
         Long scrolledPixels = sl.getScrolledY();
@@ -122,14 +134,10 @@ public class MouseMovement {
         return returnPoint;
     }
 
-    private void randomCursorMoveMethod1(String xpath) {
-        cursorMoveMethod1(randomRectPoint(xpath));
-    }
-
     private boolean elementOnScreen (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
-        if (sl.getScrolledY()+500>point &&point>sl.getScrolledY()+50) {
+        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()+1) {
             isDisplayed=true;
         }else {
             isDisplayed=false;
@@ -137,8 +145,15 @@ public class MouseMovement {
         return isDisplayed;
     }
 
-    private void moveMouseToMain() {
-        robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(598)+1);
+    private boolean elementOnScreenForZero (String xpath) {
+        boolean isDisplayed;
+        int point = sl.getCoordinatesY(xpath);
+        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()) {
+            isDisplayed=true;
+        }else {
+            isDisplayed=false;
+        }
+        return isDisplayed;
     }
 
     private void doType(int value) {

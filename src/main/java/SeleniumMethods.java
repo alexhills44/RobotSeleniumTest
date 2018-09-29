@@ -25,6 +25,7 @@ public class SeleniumMethods {
     public String getText(String xpath){
         return driver.findElement(By.xpath(xpath)).getText();
     }
+
     public int getCoordinatesX(String xpath){
         return (driver.findElement(By.xpath(xpath)).getLocation().getX());
     }

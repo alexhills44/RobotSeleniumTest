@@ -13,6 +13,10 @@ public class ActionSequence {
         //getUserInfo();
     }
 
+    public void openBet() {
+        sl.pageOpener("https://www.bet365.gr/");
+    }
+
     public void languageScreen () {
         ms.scrollToView("//*[contains(text(), 'Ελληνικά')]");
         ms.onLeftClick();
@@ -20,17 +24,23 @@ public class ActionSequence {
 
     public void setCredentials() {
         // username element
+        System.out.println(sl.getCoordinates("/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[1]/input"));
         ms.scrollToView("/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[1]/input");
         ms.onLeftClick();
         ms.typeString(username);
         // password element
-        ms.scrollToView("/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/input[2]");
+        System.out.println(sl.getCoordinates("/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/input[1]"));
+        ms.scrollToView("/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/input[1]");
         ms.onLeftClick();
         ms.typeString(password);
         // press enter
         ms.pressEnter();
+
+    }
+
+    public void inPlay() {
         // Σε-Εξέλιξη element
-        ms.scrollToView("/html/body/div[1]/div/div[1]/div/div[1]/div[1]/nav/a[2]");
+        ms.scrollToViewForZero("/html/body/div[1]/div/div[1]/div/div[1]/div[1]/nav/a[2]");
         ms.onLeftClick();
     }
 
