@@ -1,0 +1,45 @@
+
+    //Tour name /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[***TourNumber***]/div[1]/div[1]
+    //Team name /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[***TourNumber***]/div[3]/div[***matchOfTour**]/div/div[1]/div/div[3]/div[***TeamNumber***]/span
+    //Handicap  /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[***TourNumber***]/div[3]/div[***matchOfTour**]/div/div[2]/div[1]/div[***TeamNumber***]/span[2]
+    //O/U       /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[***TourNumber***]/div[3]/div[***matchOfTour**]/div/div[2]/div[2]/div[***TeamNumber***}/span[2]
+    //Odd       /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[***TourNumber***]/div[3]/div[***matchOfTour**]/div/div[2]/div[3]/div[***TeamNumber***}/span[2]
+
+    //Tour name
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[1]/div[1]
+    //Team 1 Name
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[1]/div/div[3]/div[1]/span
+    //Team 2 Name
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[1]/div/div[3]/div[2]/span
+    //Team 1 Handicap
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[1]/div[1]/span[2]
+    // Team 2 Handicap
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[1]/div[2]/span[2]
+    //Over
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[2]/div[1]/span[2]
+    //Under
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[2]/div[2]/span[2]
+    //Team 1 Odd
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[3]/div[1]/span[2]
+    //Team 2 Odd
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[1]/div[3]/div/div/div[2]/div[3]/div[2]/span[2]
+
+
+    //Tour
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[1]/div[1]
+    //Team 1 Name
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[1]/div/div[3]/div[1]/span
+    //Team 2 Name
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[1]/div/div[3]/div[2]/span
+    //Team 1 Handicap
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[1]/div[1]/span[2]
+    //Team 2 Handicap
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[1]/div[2]/span[2]
+    //Over
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[2]/div[1]/span[2]
+    //Under
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[2]/div[2]/span[2]
+    //Team 1 Odd
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[3]/div[1]/span[2]
+    //Team 2 Odd
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[6]/div[3]/div[2]/div/div[2]/div[3]/div[2]/span[2]

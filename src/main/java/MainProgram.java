@@ -34,8 +34,6 @@ public class MainProgram implements Runnable {
         yOffset=y-y1;
     }
 
-
-
     public void run(){
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
