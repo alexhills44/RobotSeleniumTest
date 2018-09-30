@@ -4,10 +4,11 @@ public class OverUnderHandler {
 
     private SeleniumMethods sl;
     private String tourName,teamName,value;
-    private static int CONSTANT=2;
+    private int CONSTANT=2;
     boolean success=true;
+    private int tourNumber=1,teamNumber=1,matchOfTour=1;
 
-    int tourNumber=1,teamNumber=1,matchOfTour=1;
+    // Sets the xpath for each attribute to take :: Look at NoteFile for more info
     String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
     String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
@@ -20,7 +21,16 @@ public class OverUnderHandler {
         value=value0;
     }
 
-    public void findTour() {
+    // combines all three methods in to one
+    public String findTip() {
+        findTour();
+        findTeam();
+        return findOverUnder();
+    }
+
+    // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
+    // if it loops more than 300 times it throws an ERROR
+    private void findTour() {
         while (!sl.getText(xpathTour).equals(tourName)) {
             tourNumber++;
             xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
@@ -39,11 +49,15 @@ public class OverUnderHandler {
         }
     }
 
-    public void findTeam() {
+    // Searches for the teamName with the same logic as the tournament ,
+    // it also checks if the tournament table only contains one match
+    // if it does it changes the xpath later the findOdd classes searches correctly
+    private void findTeam() {
         if(success) {
             try {
                 while (!sl.getText(xpathTeamForZero).equals(teamName)) {
                     teamNumber++;
+                    xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                     // Check for Error
                     if (teamNumber ==3) {
                         success=false;
@@ -63,6 +77,7 @@ public class OverUnderHandler {
                         success=false;
                         break;
                     }
+                    xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                 }
             }
             //Print Error Message
@@ -74,7 +89,9 @@ public class OverUnderHandler {
         }
     }
 
-    public String findOverUnder() {
+    //Searches for the value continuously until it finds it
+    //if it the inputValue from the tip cant be read then it stays at the default value 100000 and throws error
+    private String findOverUnder() {
         // if findOverUnder Fails then it return point(0,0)
         String xpath = "";
         if (success) {
@@ -113,18 +130,19 @@ public class OverUnderHandler {
         return xpath;
     }
 
-    public float valueToNumber(String value0) {
-        float valueFloat=0f;
-        try {
-            if(value0.contains("+")) {
-                valueFloat = Float.parseFloat(value0);
-            }else if (value0.contains("-")) {
-                valueFloat = Float.parseFloat(value0);
-                valueFloat = valueFloat-(2*valueFloat);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        return valueFloat;
+
+
+    //These are getter Methods
+    public int getCONSTANT() {
+        return CONSTANT;
+    }
+    public int getTourNumber() {
+        return tourNumber;
+    }
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+    public int getMatchOfTour() {
+        return matchOfTour;
     }
 }

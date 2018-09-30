@@ -4,15 +4,19 @@ import java.awt.event.InputEvent;
 
 public class MainProgram implements Runnable {
 
-    SeleniumMethods sl;
-    MouseMovement ms;
-    ActionSequence as;
-    int yOffset=77;
+    private SeleniumMethods sl;
+    private MouseMovement ms;
+    private ActionSequence as;
+    private int yOffset=77;
 
-    public MainProgram(){
+    MainProgram(){
 
     }
 
+    // TODO : has to be moved in an other Class
+    // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
+    // until it hits the button and redirects to another page
+    // then does a simple subtraction finish-start and gets the YOffset
     public void screenCalibration() throws Exception{
         sl=new SeleniumMethods();
         sl.pageOpener("https://www.example.com");
@@ -34,17 +38,12 @@ public class MainProgram implements Runnable {
         yOffset=y-y1;
     }
 
+    // TODO : the run() method has to be clean coded
     public void run(){
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
-//        sl.pageOpener("https://www.example.com");
-//        sl.pageOpener("https://amiunique.org/");
-//        ms.scrollToView("//*[@id=\"link\"]");
-//        ms.onLeftClick();
-//        ms.randomDelay(10000,15000);
-//        ms.scrollToView("//*[@id=\"detBut2\"]");
-//        ms.onLeftClick();
+
         ms.moveMouseToMain();
         as.openBet();
         System.out.println("opened bet");
@@ -59,5 +58,7 @@ public class MainProgram implements Runnable {
         ms.randomDelay(2000,5000);
         as.basketCategory();
         System.out.println("basket category");
+
+
     }
 }

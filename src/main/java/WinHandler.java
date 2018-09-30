@@ -4,23 +4,33 @@ public class WinHandler {
 
     private SeleniumMethods sl;
     private String tourName,teamName,value;
-    private static int CONSTANT=3;
-    boolean success=true;
+    private int CONSTANT=3;
+    private boolean success=true;
+    private int tourNumber=1,teamNumber=1,matchOfTour=1;
 
-    int tourNumber=1,teamNumber=1,matchOfTour=1;
-    String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
-    String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
+    // Sets the xpath for each attribute to take :: Look at NoteFile for more info
+    private String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
+    private String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
+    private String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
+    private String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
 
-    public WinHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
+    WinHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
         sl=sl0;
         tourName=tourName0;
         teamName=teamName0;
         value=value0;
     }
 
-    public void findTour() {
+    // combines all three methods in to one
+    public String findTip() {
+        findTour();
+        findTeam();
+        return findOdd();
+    }
+
+    // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
+    // if it loops more than 300 times it throws an ERROR
+    private void findTour() {
         while (!sl.getText(xpathTour).equals(tourName)) {
             tourNumber++;
             xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
@@ -39,11 +49,15 @@ public class WinHandler {
         }
     }
 
-    public void findTeam() {
+    // Searches for the teamName with the same logic as the tournament ,
+    // it also checks if the tournament table only contains one match
+    // if it does it changes the xpath later the findOdd classes searches correctly
+    private void findTeam() {
         if(success) {
             try {
                 while (!sl.getText(xpathTeamForZero).equals(teamName)) {
                     teamNumber++;
+                    xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                     // Check for Error
                     if (teamNumber ==3) {
                         success=false;
@@ -63,6 +77,7 @@ public class WinHandler {
                         success=false;
                         break;
                     }
+                    xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                 }
             }
             //Print Error Message
@@ -74,15 +89,17 @@ public class WinHandler {
         }
     }
 
-    public String findOdd() {
-        // if findOdd Fails then it return point(0,0)
+    //Searches for the value continuously until it finds it
+    //if it the inputValue from the tip cant be read then it stays at the default value 100000 and throws error
+    private String findOdd() {
+        // if findOdd Fails then it return xpath=""
         String xpath="";
         if (success) {
             float readValue;
             float inputValue =100000;
                 try {
-                    readValue = Float.parseFloat(sl.getText(xpathConstant));
                     inputValue = Float.parseFloat(value);
+                    readValue = Float.parseFloat(sl.getText(xpathConstant));
                 } catch (NumberFormatException e) {
                     readValue=0;
                 }
@@ -101,18 +118,18 @@ public class WinHandler {
         return xpath;
     }
 
-    public float valueToNumber(String value0) {
-        float valueFloat=0f;
-        try {
-            if(value0.contains("+")) {
-                valueFloat = Float.parseFloat(value0);
-            }else if (value0.contains("-")) {
-                valueFloat = Float.parseFloat(value0);
-                valueFloat = valueFloat-(2*valueFloat);
-            }
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
-        return valueFloat;
+
+    //These are getter Methods
+    public int getCONSTANT() {
+        return CONSTANT;
+    }
+    public int getTourNumber() {
+        return tourNumber;
+    }
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+    public int getMatchOfTour() {
+        return matchOfTour;
     }
 }

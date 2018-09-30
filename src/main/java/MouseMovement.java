@@ -6,10 +6,17 @@ import static java.awt.event.KeyEvent.*;
 
 
 public class MouseMovement {
-    SeleniumMethods sl;
-    Robot robot;
-    Random rand;
-    int yOffset=77;//afairesi
+    private SeleniumMethods sl;
+    private Robot robot;
+    private Random rand;
+    private int yOffset=77;
+
+    // TODO : get YOffset from the File with the user Constants
+    // TODO : Move the mouse more random
+    // TODO : Check if the Random Class is really random
+    // TODO : Scroll Randomly until it finds the Element
+    // TODO : Add "HotSpot" on randomRectPoint
+
     MouseMovement(SeleniumMethods sl0){
         rand = new Random();
         sl=sl0;
@@ -20,7 +27,7 @@ public class MouseMovement {
         }
     }
 
-
+    // Left clicks and release the mouse button with a start delay of 30-60
     public void onLeftClick() {
         randomDelay(30,60);
         robot.mousePress(InputEvent.BUTTON1_MASK);
@@ -28,6 +35,7 @@ public class MouseMovement {
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
     }
 
+    // Delays the program for min-max miliseconds
     public void randomDelay(int min,int max) {
         try {
             robot.delay(rand.nextInt(max-1-min)+min);
@@ -37,6 +45,7 @@ public class MouseMovement {
         }
     }
 
+    // Takes a string splits in a char array and calls the type(method) to execute right button press
     public void typeString(String string) {
         randomDelay(30,60);
         char[] charArray = string.toCharArray();
@@ -45,6 +54,7 @@ public class MouseMovement {
         }
     }
 
+    //Checks if the element is on the Screen , else scrolls by 30 with a delay of 500-1000ms
     public void scrollToView(String xpath) {
         randomDelay(30,60);
         while(!elementOnScreen(xpath)) {
@@ -54,6 +64,7 @@ public class MouseMovement {
         randomCursorMoveMethod1(xpath);
     }
 
+    // Same as Scroll to view but checks the screen from 0-500 pixes
     public void scrollToViewForZero(String xpath) {
         randomDelay(30,60);
         while(!elementOnScreenForZero(xpath)) {
@@ -63,10 +74,12 @@ public class MouseMovement {
         randomCursorMoveMethod1(xpath);
     }
 
+    // Combines the randomRectPoint and the CursorMoveMethod1
     public void randomCursorMoveMethod1(String xpath) {
         cursorMoveMethod1(randomRectPoint(xpath));
     }
 
+    // A method that presses Enter key
     public void pressEnter() {
         randomDelay(30,60);
         robot.keyPress(KeyEvent.VK_ENTER);
@@ -75,17 +88,19 @@ public class MouseMovement {
         randomDelay(50,100);
     }
 
+    // Moves the mouse at the Bar of the WebBrowser
     public void moveMouseToMain() {
-       // robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(598)+1);
         robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(yOffset));
     }
 
+    // gets the current position of the mouse
     private Point getMousePosition() {
         PointerInfo a = MouseInfo.getPointerInfo();
         Point b = a.getLocation();
         return b;
     }
 
+    // gets the starting point and the destination for the mouse and adds the YOffset value
     private void cursorMoveMethod1(Point destinationPoint){
         try {
             Point point=getMousePosition();
@@ -117,7 +132,8 @@ public class MouseMovement {
 
     }
 
-    private Point randomRectPoint(String xpath) {
+    // Gets the surface and coordinates for the element specified and return a point somewhere randomly on the element
+    private Point randomRectPoint(String xpath)  {
         Point destinationPoint=sl.getCoordinates(xpath);
         Point point = sl.getElementSurface(xpath);
         Double pointX = point.getX()-4;
@@ -127,13 +143,15 @@ public class MouseMovement {
         Double xd = destinationPoint.getX();
         Double yd = destinationPoint.getY();
         Long scrolledPixels = sl.getScrolledY();
-        int y=yd.intValue() + randomY - scrolledPixels.intValue();
+        // Minus 2 pixels just from experience , has to be tested
+        int y=yd.intValue() + randomY - scrolledPixels.intValue()-2;
         int x=xd.intValue() + randomX;
         Point returnPoint = new Point();
         returnPoint.setLocation(x,y);
         return returnPoint;
     }
 
+    // Checks if the element in the specified Xpath is on the web screen (1-500 pixels) and return boolean
     private boolean elementOnScreen (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
@@ -145,6 +163,7 @@ public class MouseMovement {
         return isDisplayed;
     }
 
+    // Checks if the element in the specified Xpath is on the web screen (0-500 pixels) and return boolean
     private boolean elementOnScreenForZero (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
@@ -156,6 +175,7 @@ public class MouseMovement {
         return isDisplayed;
     }
 
+    // Runs the awt.Robot method keyPress and keyRelease with a delay 50-400ms and 50-100ms
     private void doType(int value) {
         robot.keyPress(value);
         randomDelay(50,400);
@@ -163,6 +183,7 @@ public class MouseMovement {
         randomDelay(50,100);
     }
 
+    // Runs the awt.Robot method keyPress and keyRelease with a delay 50-400ms and 50-100ms (For Capital and Special Chars)
     private void doType(int shift,int value) {
         robot.keyPress(shift);
         randomDelay(50,400);
@@ -174,6 +195,8 @@ public class MouseMovement {
         randomDelay(50,100);
     }
 
+    //Extremely large switch statement that contains values for every char contained
+    // if it doesn't contain char then it throws an ERROR
     private void type(char character) {
         switch (character) {
             case 'a': doType(VK_A); break;

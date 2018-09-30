@@ -4,24 +4,33 @@ public class HandicapHandler {
 
     private SeleniumMethods sl;
     private String tourName,teamName,value;
-    private static int CONSTANT=1;
+    private int CONSTANT=1;
     boolean success=true;
+    private int tourNumber=1,teamNumber=1,matchOfTour=1;
 
-    public static int tourNumber=1,teamNumber=1,matchOfTour=1;
+    // Sets the xpath for each attribute to take :: Look at NoteFile for more info
+    private String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
+    private String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
+    private String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
+    private String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
 
-    String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
-    String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
-
-    public HandicapHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
+    HandicapHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
         sl=sl0;
         tourName=tourName0;
         teamName=teamName0;
         value=value0;
     }
 
-    public void findTour() {
+    // combines all three methods in to one
+    public String findTip() {
+        findTour();
+        findTeam();
+        return findHandicap();
+    }
+
+    // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
+    // if it loops more than 300 times it throws an ERROR
+    private void findTour() {
         while (!sl.getText(xpathTour).equals(tourName)) {
             tourNumber++;
             xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
@@ -40,11 +49,15 @@ public class HandicapHandler {
         }
     }
 
-    public void findTeam() {
+    // Searches for the teamName with the same logic as the tournament ,
+    // it also checks if the tournament table only contains one match
+    // if it does it changes the xpath later the findOdd classes searches correctly
+    private void findTeam() {
         if(success) {
             try {
                 while (!sl.getText(xpathTeamForZero).equals(teamName)) {
                     teamNumber++;
+                    xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                     // Check for Error
                     if (teamNumber ==3) {
                         success=false;
@@ -64,6 +77,7 @@ public class HandicapHandler {
                         success=false;
                         break;
                     }
+                    xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
                 }
             }
             //Print Error Message
@@ -75,7 +89,9 @@ public class HandicapHandler {
         }
     }
 
-    public String findHandicap() {
+    //Searches for the value continuously until it finds it
+    //if it the inputValue from the tip cant be read then it stays at the default value 100000 and throws error
+    private String findHandicap() {
         // if findHandler Fails then it return point(0,0)
         String xpath = "";
         if (success) {
@@ -102,6 +118,8 @@ public class HandicapHandler {
         return xpath;
     }
 
+
+    // This method is just a work of art
     public float valueToNumber(String value0) {
         float valueFloat=0f;
         try {
@@ -115,5 +133,19 @@ public class HandicapHandler {
             e.printStackTrace();
         }
         return valueFloat;
+    }
+
+    //These are getter Methods
+    public int getCONSTANT() {
+        return CONSTANT;
+    }
+    public int getTourNumber() {
+        return tourNumber;
+    }
+    public int getTeamNumber() {
+        return teamNumber;
+    }
+    public int getMatchOfTour() {
+        return matchOfTour;
     }
 }
