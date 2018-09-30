@@ -1,15 +1,15 @@
-import java.awt.*;
+
 
 public class PlayTip {
 
-    SeleniumMethods sl;
-    MouseMovement ms;
-    ActionSequence as;
-    String teamName;
-    String tourName;
-    String xpath;
-    String value;
-    int betSize;
+    private SeleniumMethods sl;
+    private MouseMovement ms;
+    private ActionSequence as;
+    private String teamName;
+    private String tourName;
+    private String xpath;
+    private String value;
+    private int betSize;
 
     HandicapHandler classConstant;
 

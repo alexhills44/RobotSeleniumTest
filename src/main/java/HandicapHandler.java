@@ -5,7 +5,7 @@ public class HandicapHandler {
     private SeleniumMethods sl;
     private String tourName,teamName,value;
     private int CONSTANT=1;
-    boolean success=true;
+    private boolean success=true;
     private int tourNumber=1,teamNumber=1,matchOfTour=1;
 
     // Sets the xpath for each attribute to take :: Look at NoteFile for more info

@@ -2,14 +2,14 @@ import java.util.Random;
 
 public class ActionSequence {
 
-    SeleniumMethods sl;
-    MouseMovement ms;
+    private SeleniumMethods sl;
+    private MouseMovement ms;
 
     private static String username = "pietrospan";
     private static String password = "captainhook13";
     private static float BET_SIZE = 0.25f;
 
-    public ActionSequence(SeleniumMethods sl0,MouseMovement ms0) {
+    ActionSequence(SeleniumMethods sl0,MouseMovement ms0) {
         sl=sl0;
         ms=ms0;
         //getUserInfo();

@@ -12,7 +12,7 @@ public class SeleniumMethods {
     private WebDriver driver;
 
     //Open first Time
-    public SeleniumMethods() {
+    SeleniumMethods() {
         FirefoxOptions options = new FirefoxOptions();
         ProfilesIni allProfiles = new ProfilesIni();
         FirefoxProfile selenium_profile = allProfiles.getProfile("Default");
@@ -22,7 +22,7 @@ public class SeleniumMethods {
     }
 
     //Open rest of the Times and pass in the cookies from the previous SeleniumMethods Object
-    public SeleniumMethods(Set<Cookie> cookies) {
+    SeleniumMethods(Set<Cookie> cookies) {
         FirefoxOptions options = new FirefoxOptions();
         ProfilesIni allProfiles = new ProfilesIni();
         FirefoxProfile selenium_profile = allProfiles.getProfile("Default");
