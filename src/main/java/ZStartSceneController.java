@@ -26,10 +26,6 @@ public class ZStartSceneController implements Initializable{
     PropertiesHandler prop;
 
 
-    // TODO : Set the values from the Property file
-    // TODO : change Property if anything has Changed
-    // TODO : Add User Agent Selection
-    // TODO : Add Calibration Option on Startup of Program
     @FXML
     public void startButton(ActionEvent event) {
         getValuesFromFields();
@@ -49,6 +45,7 @@ public class ZStartSceneController implements Initializable{
     }
 
     // Initializes the Scene Values note: controller must implement Initializable
+    // If we Need to Add more User Agents here we Come
     public void initialize(URL location, ResourceBundle resources) {
         usrAgent.getItems().addAll("Firefox","Chrome");
         prop = new PropertiesHandler();
