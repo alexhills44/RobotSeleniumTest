@@ -8,13 +8,14 @@ public class PropertiesHandler {
 
     private static String usrNameD,usrNameB,pswD,pswB;
     private static int betSize =0;
+    private static int YOffset = 0;
     // usrAgent=0 is Firefox, usrAgent=1 is Chrome
     private static int usrAgent =0;
     private static boolean calibrate=true;
     private static boolean rememberMe = false;
-    private OutputStream output = null;
+    private static OutputStream output = null;
     private InputStream input = null;
-    private Properties prop;
+    private static Properties prop;
 
     // Once a new Instance of the Class is Created it automatically put the Properties in the Variables
     PropertiesHandler () {
@@ -22,13 +23,8 @@ public class PropertiesHandler {
         getProp();
     }
 
-    // Has to be Called to Set the values on the Properties File
-    public void endProp() {
-        setProp();
-    }
-
     // Sets the Properties on the .propertie File
-    private void setProp() {
+    private static void setProp() {
         try {
             output = new FileOutputStream("config");
             prop.setProperty("USER_NAME_DUNKMAN",usrNameD);
@@ -39,6 +35,7 @@ public class PropertiesHandler {
             prop.setProperty("USER_AGENT",String.valueOf(usrAgent));
             prop.setProperty("CALIBRATION",String.valueOf(calibrate));
             prop.setProperty("REMEMBER_ME",String.valueOf(rememberMe));
+            prop.setProperty("Y_OFFSET",String.valueOf(YOffset));
             prop.store(output, null);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -62,6 +59,7 @@ public class PropertiesHandler {
             betSize = Integer.parseInt(prop.getProperty("BET_SIZE"));
             calibrate=Boolean.parseBoolean(prop.getProperty("CALIBRATION"));
             rememberMe=Boolean.parseBoolean(prop.getProperty("REMEMBER_ME"));
+            YOffset=Integer.parseInt(prop.getProperty("Y_OFFSET"));
         }  catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -90,32 +88,47 @@ public class PropertiesHandler {
     public static int getUsrAgent() {
         return usrAgent;
     }
+    public static int getYOffset() {
+        return YOffset;
+    }
     public static boolean isCalibrate() {
         return calibrate;
     }
     public static boolean isRememberMe() {return rememberMe;}
     public static void setUsrNameD(String usrNameD) {
         PropertiesHandler.usrNameD = usrNameD;
+        setProp();
     }
     public static void setUsrNameB(String usrNameB) {
         PropertiesHandler.usrNameB = usrNameB;
+        setProp();
     }
     public static void setPswD(String pswD) {
         PropertiesHandler.pswD = pswD;
+        setProp();
     }
     public static void setPswB(String pswB) {
         PropertiesHandler.pswB = pswB;
+        setProp();
     }
     public static void setBetSize(int betSize) {
         PropertiesHandler.betSize = betSize;
+        setProp();
     }
     public static void setUsrAgent(int usrAgent) {
         PropertiesHandler.usrAgent = usrAgent;
+        setProp();
+    }
+    public static void setYOffset(int YOffset) {
+        PropertiesHandler.YOffset=YOffset;
+        setProp();
     }
     public static void setCalibrate(boolean calibrate) {
         PropertiesHandler.calibrate = calibrate;
+        setProp();
     }
     public static void setRememberMe(boolean rememberMe) {
         PropertiesHandler.rememberMe = rememberMe;
+        setProp();
     }
 }

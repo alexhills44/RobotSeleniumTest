@@ -7,17 +7,21 @@ public class MainProgram implements Runnable {
     private SeleniumMethods sl;
     private MouseMovement ms;
     private ActionSequence as;
-    private int yOffset=77;
+    private int yOffset=PropertiesHandler.getYOffset();
 
-    MainProgram(){
+    MainProgram() {
 
     }
 
-    // TODO : has to be moved in an other Class
+    public void run() {
+        screenCalibrationChecker();
+        testJunk();
+    }
+
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
     // until it hits the button and redirects to another page
     // then does a simple subtraction finish-start and gets the YOffset
-    public void screenCalibration() throws Exception{
+    private void screenCalibration() throws Exception {
         sl=new SeleniumMethods();
         sl.pageOpener("https://www.example.com");
         Robot robot=new Robot();
@@ -38,8 +42,21 @@ public class MainProgram implements Runnable {
         yOffset=y-y1;
     }
 
-    // TODO : the run() method has to be clean coded
-    public void run(){
+    // Checks if  the user wants to calibrate or no calibration has been done before
+    // and then sets the properties value to false and sets the YOffset Propertie
+    private void screenCalibrationChecker() {
+        if (PropertiesHandler.isCalibrate() || PropertiesHandler.getYOffset()==0) {
+            try {
+                screenCalibration();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            PropertiesHandler.setCalibrate(false);
+            PropertiesHandler.setYOffset(yOffset);
+        }
+    }
+
+    private void testJunk () {
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);

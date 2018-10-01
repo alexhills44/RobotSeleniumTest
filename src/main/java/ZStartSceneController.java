@@ -23,7 +23,6 @@ public class ZStartSceneController implements Initializable{
     private PasswordField pswDT,pswB;
     @FXML
     private CheckBox rememberMe,calibrate;
-    PropertiesHandler prop;
 
 
     @FXML
@@ -33,22 +32,11 @@ public class ZStartSceneController implements Initializable{
 //        MainProgram mainProgram=new MainProgram();
 //        mainProgram.run();
     }
-    public void blabla() {
-        if (!PropertiesHandler.isRememberMe()) {
-            usrDT.setText(PropertiesHandler.getUsrNameD());
-            usrB.setText(PropertiesHandler.getUsrNameB());
-            pswB.setText(PropertiesHandler.getPswB());
-            pswDT.setText(PropertiesHandler.getPswD());
-            betSizeField.setText(String.valueOf(PropertiesHandler.getBetSize()));
-            rememberMe.indeterminateProperty().setValue(PropertiesHandler.isRememberMe());
-        }
-    }
 
     // Initializes the Scene Values note: controller must implement Initializable
     // If we Need to Add more User Agents here we Come
     public void initialize(URL location, ResourceBundle resources) {
         usrAgent.getItems().addAll("Firefox","Chrome");
-        prop = new PropertiesHandler();
         setValuesOnFields();
     }
 
@@ -73,7 +61,7 @@ public class ZStartSceneController implements Initializable{
 
     // Set the Properties Values According to the TextField values
     private void getValuesFromFields () {
-        if (PropertiesHandler.isRememberMe()) {
+        if (rememberMe.isSelected()) {
             PropertiesHandler.setUsrNameD(usrDT.getText());
             PropertiesHandler.setUsrNameB(usrB.getText());
             PropertiesHandler.setPswD(pswDT.getText());
@@ -88,7 +76,6 @@ public class ZStartSceneController implements Initializable{
                 PropertiesHandler.setUsrAgent(1);
             }
             // Must always be called
-            prop.endProp();
         }
     }
 
