@@ -25,12 +25,14 @@ public class ZStartSceneController implements Initializable{
     private CheckBox rememberMe,calibrate;
 
 
+
+
     @FXML
     public void startButton(ActionEvent event) {
         getValuesFromFields();
 
-//        MainProgram mainProgram=new MainProgram();
-//        mainProgram.run();
+        MainProgram mainProgram=new MainProgram();
+        mainProgram.run();
     }
 
     // Initializes the Scene Values note: controller must implement Initializable
@@ -75,7 +77,8 @@ public class ZStartSceneController implements Initializable{
             }else if (usrAgent.getValue().equals("Chrome")) {
                 PropertiesHandler.setUsrAgent(1);
             }
-            // Must always be called
+            // Must always be called when changes on Prop file have been made
+            PropertiesHandler.endProp();
         }
     }
 

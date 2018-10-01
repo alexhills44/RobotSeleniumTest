@@ -41,7 +41,7 @@ public class Main extends Application{
     }
 
     private static void Initialization () {
-        System.setProperty("webdriver.gecko.driver", "src/geckodriver/geckodriver.exe");
+
         properties = new PropertiesHandler();
     }
 }

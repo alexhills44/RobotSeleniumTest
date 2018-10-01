@@ -10,12 +10,13 @@ public class TipHandler extends Thread{
     private String tourName;
     private String xpath="";
     private String value;
-    int betSize;
+    private int betSize = PropertiesHandler.getBetSize();
+    private int betMulty =1;
 
 
     private int teamNumber,tourNumber,matchOfTour,constant;
-
-    TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0,String teamName0,String tourName0,String value0,int betSize0) {
+    // TODO : Decide whether or not it will be a Thread
+    TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0,String teamName0,String tourName0,String value0) {
         tip=tip0;
         sl=sl0;
         ms=ms0;
@@ -23,7 +24,6 @@ public class TipHandler extends Thread{
         teamName=teamName0;
         tourName=tourName0;
         value=value0;
-        betSize=betSize0;
     }
 
     // Splits the String to an Array by '---'
@@ -68,7 +68,8 @@ public class TipHandler extends Thread{
             MouseMovement ms = new MouseMovement(sl);
             ms.scrollToView(xpath);
             ms.onLeftClick();
-            betSize=1;
+            betMulty=Integer.valueOf(tipArray[2]);
+            betSize = betSize*betMulty;
             as.placeBetSize(betSize);
         }
     }

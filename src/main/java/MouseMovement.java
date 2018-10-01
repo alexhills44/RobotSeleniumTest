@@ -9,9 +9,8 @@ public class MouseMovement {
     private SeleniumMethods sl;
     private Robot robot;
     private Random rand;
-    private int yOffset=77;
+    private int yOffset=PropertiesHandler.getYOffset();
 
-    // TODO : get YOffset from the File with the user Constants
     // TODO : Move the mouse more random
     // TODO : Check if the Random Class is really random
     // TODO : Scroll Randomly until it finds the Element
@@ -29,7 +28,7 @@ public class MouseMovement {
 
     // Left clicks and release the mouse button with a start delay of 30-60
     public void onLeftClick() {
-        randomDelay(30,60);
+        randomDelay(300,600);
         robot.mousePress(InputEvent.BUTTON1_MASK);
         robot.delay(rand.nextInt(300)+50);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);

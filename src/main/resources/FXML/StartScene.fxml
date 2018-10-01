@@ -33,7 +33,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usrDT">
+                  <TextField fx:id="usrDT" text=" ">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -108,7 +108,7 @@
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="343.0" prefHeight="100.0" prefWidth="200.0" spacing="10">
                <children>
                   <ChoiceBox fx:id="usrAgent" prefWidth="150.0" />
-                  <CheckBox mnemonicParsing="false" text="Calibrate" fx:id="calibrate">
+                  <CheckBox fx:id="calibrate" mnemonicParsing="false" text="Calibrate">
                      <font>
                         <Font size="18.0" />
                      </font>

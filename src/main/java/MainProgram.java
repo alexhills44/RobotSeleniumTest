@@ -15,7 +15,7 @@ public class MainProgram implements Runnable {
 
     public void run() {
         screenCalibrationChecker();
-        testJunk();
+        testSkroutz();
     }
 
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
@@ -36,10 +36,8 @@ public class MainProgram implements Runnable {
             robot.mouseRelease(InputEvent.BUTTON1_MASK);
             System.out.println(y);
             y++;
-            // save y so we can get it at startup
-            //get distance
+            yOffset=y-y1;
         }
-        yOffset=y-y1;
     }
 
     // Checks if  the user wants to calibrate or no calibration has been done before
@@ -53,6 +51,7 @@ public class MainProgram implements Runnable {
             }
             PropertiesHandler.setCalibrate(false);
             PropertiesHandler.setYOffset(yOffset);
+            PropertiesHandler.endProp();
         }
     }
 
@@ -77,5 +76,21 @@ public class MainProgram implements Runnable {
         System.out.println("basket category");
 
 
+    }
+
+    private void testSkroutz() {
+        try {
+            sl.pageCloser();
+        } catch (Exception e) {
+            System.out.println("No page to Close");
+        }
+        sl=new SeleniumMethods();
+        ms=new MouseMovement(sl);
+        as = new ActionSequence(sl,ms);
+        sl.pageOpener("https://www.skroutz.gr/");
+        ms.scrollToView("//*[@id=\"search-bar-input\"]");
+        ms.onLeftClick();
+        ms.scrollToView("/html/body/header/div/form/p/button");
+        ms.onLeftClick();
     }
 }

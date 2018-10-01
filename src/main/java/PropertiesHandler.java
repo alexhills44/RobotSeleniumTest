@@ -15,6 +15,7 @@ public class PropertiesHandler {
     private static boolean rememberMe = false;
     private static OutputStream output = null;
     private InputStream input = null;
+    private static String chromeProfilePath="";
     private static Properties prop;
 
     // Once a new Instance of the Class is Created it automatically put the Properties in the Variables
@@ -22,11 +23,15 @@ public class PropertiesHandler {
         prop = new Properties();
         getProp();
     }
+    // Has to be Called to Set the values on the Properties File
+    public static void endProp() {
+        setProp();
+    }
 
     // Sets the Properties on the .propertie File
     private static void setProp() {
         try {
-            output = new FileOutputStream("config");
+            output = new FileOutputStream("config.properties");
             prop.setProperty("USER_NAME_DUNKMAN",usrNameD);
             prop.setProperty("USER_NAME_BET",usrNameB);
             prop.setProperty("PASSWORD_DUNKMAN",pswD);
@@ -36,21 +41,29 @@ public class PropertiesHandler {
             prop.setProperty("CALIBRATION",String.valueOf(calibrate));
             prop.setProperty("REMEMBER_ME",String.valueOf(rememberMe));
             prop.setProperty("Y_OFFSET",String.valueOf(YOffset));
+            prop.setProperty("CHROME_PROFILE_PATH",chromeProfilePath);
             prop.store(output, null);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            if (output != null) {
+                try {
+                    output.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
     // Gets the Properties from the .propertie File
     private void getProp() {
         try {
-            input = new FileInputStream(new File("config"));
+            input = new FileInputStream(new File("config.properties"));
             //Load Properties File
             prop.load(input);
-
             usrNameD=prop.getProperty("USER_NAME_DUNKMAN");
             usrNameB=prop.getProperty("USER_NAME_BET");
             pswD=prop.getProperty("PASSWORD_DUNKMAN");
@@ -60,12 +73,21 @@ public class PropertiesHandler {
             calibrate=Boolean.parseBoolean(prop.getProperty("CALIBRATION"));
             rememberMe=Boolean.parseBoolean(prop.getProperty("REMEMBER_ME"));
             YOffset=Integer.parseInt(prop.getProperty("Y_OFFSET"));
+            chromeProfilePath=prop.getProperty("CHROME_PROFILE_PATH");
         }  catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -97,38 +119,45 @@ public class PropertiesHandler {
     public static boolean isRememberMe() {return rememberMe;}
     public static void setUsrNameD(String usrNameD) {
         PropertiesHandler.usrNameD = usrNameD;
-        setProp();
+
     }
     public static void setUsrNameB(String usrNameB) {
         PropertiesHandler.usrNameB = usrNameB;
-        setProp();
+
     }
     public static void setPswD(String pswD) {
         PropertiesHandler.pswD = pswD;
-        setProp();
+
     }
     public static void setPswB(String pswB) {
         PropertiesHandler.pswB = pswB;
-        setProp();
+
     }
     public static void setBetSize(int betSize) {
         PropertiesHandler.betSize = betSize;
-        setProp();
+
     }
     public static void setUsrAgent(int usrAgent) {
         PropertiesHandler.usrAgent = usrAgent;
-        setProp();
+
     }
     public static void setYOffset(int YOffset) {
         PropertiesHandler.YOffset=YOffset;
-        setProp();
+
     }
     public static void setCalibrate(boolean calibrate) {
         PropertiesHandler.calibrate = calibrate;
-        setProp();
+
     }
     public static void setRememberMe(boolean rememberMe) {
         PropertiesHandler.rememberMe = rememberMe;
-        setProp();
+
+    }
+    public static String getChromeProfilePath() {
+        return chromeProfilePath;
+    }
+    public static void setChromeProfilePath(String chromeProfilePath) {
+        PropertiesHandler.chromeProfilePath = chromeProfilePath;
+
     }
 }
