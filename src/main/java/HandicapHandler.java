@@ -3,7 +3,7 @@ import java.awt.*;
 public class HandicapHandler {
 
     private SeleniumMethods sl;
-    private String tourName,teamName,value;
+    private String tourName,teamName,value,matchTime,matchPeriod;
     private int CONSTANT=1;
     private boolean success=true;
     private int tourNumber=1,teamNumber=1,matchOfTour=1;
@@ -13,6 +13,8 @@ public class HandicapHandler {
     private String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     private String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     private String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
+    private String xpathMatchTime = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[1]";
+    private String xpathMatchPeriod = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[2]";
 
     HandicapHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
         sl=sl0;
@@ -20,12 +22,18 @@ public class HandicapHandler {
         teamName=teamName0;
         value=value0;
     }
-
+    // TODO : Make Xpaths Constants (set Property File)
     // combines all three methods in to one
     public String findTip() {
+        findTime();
         findTour();
         findTeam();
         return findHandicap();
+    }
+
+    private void findTime() {
+        matchPeriod=sl.getText(xpathMatchPeriod);
+        matchTime=sl.getText(xpathMatchTime);
     }
 
     // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
@@ -104,7 +112,7 @@ public class HandicapHandler {
                 readValue=0;
             }
             if (inputValue!=100000) {
-                while(inputValue<readValue || readValue==0) {
+                while(inputValue<=readValue || readValue==0) {
                     try {
                         readValue = Float.parseFloat(sl.getText(xpathConstant));
                         inputValue = Float.parseFloat(value);
@@ -136,6 +144,12 @@ public class HandicapHandler {
     }
 
     //These are getter Methods
+    public String getMatchTime() {
+        return matchTime;
+    }
+    public String getMatchPeriod() {
+        return matchPeriod;
+    }
     public int getCONSTANT() {
         return CONSTANT;
     }

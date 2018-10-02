@@ -3,7 +3,7 @@ import java.awt.*;
 public class WinHandler {
 
     private SeleniumMethods sl;
-    private String tourName,teamName,value;
+    private String tourName,teamName,value,matchPeriod,matchTime;
     private int CONSTANT=3;
     private boolean success=true;
     private int tourNumber=1,teamNumber=1,matchOfTour=1;
@@ -13,6 +13,8 @@ public class WinHandler {
     private String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     private String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
     private String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
+    private String xpathMatchTime = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[1]";
+    private String xpathMatchPeriod = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[2]";
 
     WinHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
         sl=sl0;
@@ -23,10 +25,17 @@ public class WinHandler {
 
     // combines all three methods in to one
     public String findTip() {
+        findTime();
         findTour();
         findTeam();
         return findOdd();
     }
+
+    private void findTime() {
+        matchPeriod=sl.getText(xpathMatchPeriod);
+        matchTime=sl.getText(xpathMatchTime);
+    }
+
 
     // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
     // if it loops more than 300 times it throws an ERROR
@@ -120,6 +129,12 @@ public class WinHandler {
 
 
     //These are getter Methods
+    public String getMatchTime() {
+        return matchTime;
+    }
+    public String getMatchPeriod() {
+        return matchPeriod;
+    }
     public int getCONSTANT() {
         return CONSTANT;
     }

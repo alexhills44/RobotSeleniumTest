@@ -1,4 +1,4 @@
-public class TipHandler extends Thread{
+public class TipHandler {
 
     private String tip;
     private String[] tipArray;
@@ -14,8 +14,7 @@ public class TipHandler extends Thread{
     private int betMulty =1;
 
 
-    private int teamNumber,tourNumber,matchOfTour,constant;
-    // TODO : Decide whether or not it will be a Thread
+    private int teamNumber,tourNumber,matchOfTour,constant,matchStartTime;
     TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0,String teamName0,String tourName0,String value0) {
         tip=tip0;
         sl=sl0;
@@ -40,6 +39,7 @@ public class TipHandler extends Thread{
             matchOfTour = winHandler.getMatchOfTour();
             constant = winHandler.getCONSTANT();
             xpath = winHandler.findTip();
+            matchTimeSet(winHandler.getMatchTime(),winHandler.getMatchPeriod());
 
         }else if ((tipArray[3].equals("Χάντικαπ") ||tipArray[3].equals("Χαντικαπ")) && (tipArray[4].contains("-")||tipArray[4].contains("+"))) {
             HandicapHandler handicapHandler = new HandicapHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
@@ -48,6 +48,7 @@ public class TipHandler extends Thread{
             matchOfTour = handicapHandler.getMatchOfTour();
             constant = handicapHandler.getCONSTANT();
             xpath = handicapHandler.findTip();
+            matchTimeSet(handicapHandler.getMatchTime(),handicapHandler.getMatchPeriod());
 
         }else if ((tipArray[3].equals("Συνολικά") || tipArray[3].equals("Συνολικα")) &&(tipArray[4].contains("O")||tipArray[4].contains("U"))) {
             OverUnderHandler overUnderHandler = new OverUnderHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
@@ -56,21 +57,56 @@ public class TipHandler extends Thread{
             matchOfTour = overUnderHandler.getMatchOfTour();
             constant = overUnderHandler.getCONSTANT();
             xpath = overUnderHandler.findTip();
+            matchTimeSet(overUnderHandler.getMatchTime(),overUnderHandler.getMatchPeriod());
 
         }
     }
 
-    // TODO : Take Xpath Place Bet
-    @Override
+    private void matchTimeSet (String matchTime,String matchPeriod) {
+        //sets matchStartTime to amount of seconds played
+        if(matchPeriod.contains("1")) {
+            String[] matchTimeArray = matchTime.split(":");
+            matchStartTime = Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]);
+        }else if (matchPeriod.contains("2")) {
+            String[] matchTimeArray = matchTime.split(":");
+            matchStartTime = (Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]))+600;
+        }else if (matchPeriod.contains("3")) {
+            String[] matchTimeArray = matchTime.split(":");
+            matchStartTime = (Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]))+1200;
+        }else if (matchPeriod.contains("3")) {
+            String[] matchTimeArray = matchTime.split(":");
+            matchStartTime = (Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]))+1800;
+        }
+    }
+
+    // Searches for the tip if it finds it then tries to play it if it succeeds then sets the autobet condition
+    // if it doesnt succeed then removes bet by clicking on the element on the main bet page and tries again
+    // if it doesnt find it
     public void run() {
-        tipHandler();
-        if (!xpath.equals("")) {
-            MouseMovement ms = new MouseMovement(sl);
-            ms.scrollToView(xpath);
-            ms.onLeftClick();
-            betMulty=Integer.valueOf(tipArray[2]);
-            betSize = betSize*betMulty;
-            as.placeBetSize(betSize);
+        boolean hasBeenPlayed=false;
+        while (!hasBeenPlayed) {
+            tipHandler();
+            if (!xpath.equals("")) {
+                MouseMovement ms = new MouseMovement(sl);
+                ms.scrollToView(xpath);
+                ms.onLeftClick();
+                betMulty=Integer.valueOf(tipArray[2]);
+                betSize = betSize*betMulty;
+                as.placeBetSize(betSize);
+                if (as.betStatus()) {
+                    as.autoClose(teamName,constant,betSize);
+                    hasBeenPlayed=true;
+                }else {
+                    // check if values are in the ranges we want them to be
+                    // we do that by tipArray[4] with
+                    // else click the button again and start the search again
+                    ms.scrollToView(xpath);
+                    ms.onLeftClick();
+                }
+            }else {
+                hasBeenPlayed=true;
+                System.out.println("ERROR TipHandler/run() : xpath=null");
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ public class Main extends Application{
     // TODO : Get Tip from Dunkmantips.com
     // TODO : Move Project to Proper Folder
     // TODO : Create JAR
-    // TODO : Add autoClose Bet
     // TODO : Add LogFile
     // TODO : When we search to play 2 or more bets simultaneously open on a new browser window and load with cookies (autoLogin)
 
