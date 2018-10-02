@@ -12,6 +12,7 @@ public class Main extends Application{
     // TODO : Create JAR
     // TODO : Add LogFile
     // TODO : When we search to play 2 or more bets simultaneously open on a new browser window and load with cookies (autoLogin)
+    // TODO : Handle Exception Φραφμένο
 
     static PropertiesHandler properties;
 

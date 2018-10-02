@@ -52,8 +52,10 @@ public class ActionSequence {
     // Finds the "Σε-Εξέλιξη" button and clicks it
     public void inPlay() {
         // Σε-Εξέλιξη element
-        ms.scrollToViewForZero(PropertiesXpath.getProp("IN_PLAY"));
+//        ms.scrollToViewForZero(PropertiesXpath.getProp("IN_PLAY"));
+        ms.scrollToView("//*[contains(text(), 'Σε-Εξξέλιξη')]");
         ms.onLeftClick();
+
     }
 
     // Searches for the button that contains the text "Μπάσκετ"
@@ -64,7 +66,8 @@ public class ActionSequence {
         boolean isRunning=true;
         while (isRunning) {
             try {
-                ms.scrollToView(PropertiesXpath.getProp("BASKET_CATEGORY"));
+//                ms.scrollToView(PropertiesXpath.getProp("BASKET_CATEGORY"));
+                ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
                 ms.onLeftClick();
                 isRunning=false;
             }catch (Exception e) {
