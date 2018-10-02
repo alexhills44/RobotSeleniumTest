@@ -20,10 +20,10 @@ public class SeleniumMethods {
         if (PropertiesHandler.getUsrAgent()==0) {
             System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
             FirefoxOptions options = new FirefoxOptions();
-            ProfilesIni allProfiles = new ProfilesIni();
-            FirefoxProfile selenium_profile = allProfiles.getProfile("default");
-            options.setProfile(selenium_profile);
-            options.addPreference("dom.ipc.plugins.enabled.libflashplayer.so",true);
+//            ProfilesIni allProfiles = new ProfilesIni();
+//            FirefoxProfile selenium_profile = allProfiles.getProfile("default");
+//            options.setProfile(selenium_profile);
+//            options.addPreference("dom.ipc.plugins.enabled.libflashplayer.so",true);
             driver = new FirefoxDriver(options);
         }else if(PropertiesHandler.getUsrAgent()==1){
             System.setProperty("webdriver.chrome.driver", "src/drivers/chromedriver.exe");

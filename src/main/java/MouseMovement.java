@@ -12,10 +12,6 @@ public class MouseMovement {
     private int yOffset=PropertiesHandler.getYOffset();
 
     // TODO : Move the mouse more random
-    // TODO : Check if the Random Class is really random
-    // TODO : Scroll Randomly until it finds the Element
-    // TODO : Add "HotSpot" on randomRectPoint
-
     MouseMovement(SeleniumMethods sl0){
         rand = new Random();
         sl=sl0;
@@ -32,7 +28,7 @@ public class MouseMovement {
         robot.mousePress(InputEvent.BUTTON1_MASK);
         robot.delay(rand.nextInt(300)+50);
         robot.mouseRelease(InputEvent.BUTTON1_MASK);
-    }
+        }
 
     // Delays the program for min-max miliseconds
     public void randomDelay(int min,int max) {
@@ -56,9 +52,30 @@ public class MouseMovement {
     //Checks if the element is on the Screen , else scrolls by 30 with a delay of 500-1000ms
     public void scrollToView(String xpath) {
         randomDelay(30,60);
+        long x = -1;
+        // multiply by -1 to change direction
+        int directionScrolled=1;
+        int scrollValue;
+        // The higher the value the lower the speed
+        int scrollSpeed =1;
+        //while element isn't on screen
         while(!elementOnScreen(xpath)) {
-            robot.mouseWheel(30);
-            randomDelay(500,1000);
+            if(sl.getScrolledY()==x) {
+                directionScrolled=directionScrolled*(-1);
+                scrollSpeed = scrollSpeed*2;
+                System.out.println("****************");
+                System.out.println(scrollSpeed);
+                System.out.println("Changed Direction");
+                System.out.println("****************");
+            }
+            scrollValue = ((rand.nextInt(130)/scrollSpeed)+1)*directionScrolled;
+            System.out.println(scrollValue);
+            x=sl.getScrolledY();
+            robot.mouseWheel(scrollValue);
+            randomDelay(500,700);
+            if (scrollSpeed==128) {
+                scrollSpeed=1;
+            }
         }
         randomCursorMoveMethod1(xpath);
     }
@@ -135,10 +152,33 @@ public class MouseMovement {
     private Point randomRectPoint(String xpath)  {
         Point destinationPoint=sl.getCoordinates(xpath);
         Point point = sl.getElementSurface(xpath);
+        Double hotSpot;
         Double pointX = point.getX()-4;
         int randomX = rand.nextInt(pointX.intValue())+2;
         Double pointY = point.getY()-4;
         int randomY = rand.nextInt(pointY.intValue())+2;
+        int chances = rand.nextInt(100)+1;
+        //60% chance
+        if(chances>40) {
+            //get point
+            pointX = pointX/2;
+            pointY = pointY/2;
+            hotSpot = point.getX() / 4;
+            randomX = rand.nextInt(pointX.intValue()) + hotSpot.intValue();
+            hotSpot = point.getY() / 4;
+            randomY = rand.nextInt(pointY.intValue()) + hotSpot.intValue();
+        //30% chance
+        }else if (chances>10) {
+            pointX = pointX*0.7;
+            pointY = pointY*0.7;
+            hotSpot = point.getX()*0.15;
+            randomX = rand.nextInt(pointX.intValue()) + hotSpot.intValue();
+            hotSpot = point.getY() *0.15;
+            randomY = rand.nextInt(pointY.intValue()) + hotSpot.intValue();
+        }
+        //10% chance leave as it is
+
+
         Double xd = destinationPoint.getX();
         Double yd = destinationPoint.getY();
         Long scrolledPixels = sl.getScrolledY();

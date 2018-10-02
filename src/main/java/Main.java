@@ -10,8 +10,6 @@ public class Main extends Application{
     // TODO : Get Tip from Dunkmantips.com
     // TODO : Move Project to Proper Folder
     // TODO : Create JAR
-    // TODO : Add Chrome Capabilities and give the user the choice
-    // TODO : On first time launch do a calibration
     // TODO : Add autoClose Bet
     // TODO : Add userFile
     // TODO : Add LogFile
@@ -20,7 +18,6 @@ public class Main extends Application{
     static PropertiesHandler properties;
 
     public static void main(String[] args) throws Exception{
-        // TODO : UnComment
         Initialization();
         launch(args);
     }

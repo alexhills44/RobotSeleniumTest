@@ -28,7 +28,7 @@ public class MainProgram implements Runnable {
         int y= sl.getCoordinatesY("/html/body/div/p[2]/a");
         int y1=sl.getCoordinatesY("/html/body/div/p[2]/a");
         int x= sl.getCoordinatesX("/html/body/div/p[2]/a");
-
+        //sl.getText("/html/body/div/p[2]/a").equals("More information...")
         while (sl.getText("/html/body/div/p[2]/a").equals("More information...")) {
             robot.mouseMove(x,y);
             robot.mousePress(InputEvent.BUTTON1_MASK);
@@ -52,6 +52,7 @@ public class MainProgram implements Runnable {
             PropertiesHandler.setCalibrate(false);
             PropertiesHandler.setYOffset(yOffset);
             PropertiesHandler.endProp();
+            sl.pageCloser();
         }
     }
 
@@ -79,18 +80,21 @@ public class MainProgram implements Runnable {
     }
 
     private void testSkroutz() {
-        try {
-            sl.pageCloser();
-        } catch (Exception e) {
-            System.out.println("No page to Close");
-        }
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
         sl.pageOpener("https://www.skroutz.gr/");
-        ms.scrollToView("//*[@id=\"search-bar-input\"]");
-        ms.onLeftClick();
-        ms.scrollToView("/html/body/header/div/form/p/button");
-        ms.onLeftClick();
+//        ms.scrollToView("//*[@id=\"search-bar-input\"]");
+//        ms.onLeftClick();
+//        ms.scrollToView("/html/body/header/div/form/p/button");
+//        ms.onLeftClick();
+        while (true) {
+//            System.out.println(sl.getScrolledY());
+//            ms.randomDelay(2000,2500);
+//            System.out.println(sl.getScrolledY());
+//            ms.randomDelay(2000,2500);
+            ms.scrollToView("/html/body/footer/div/div[7]/p/a[4]");
+        }
+
     }
 }
