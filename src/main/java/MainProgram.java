@@ -84,17 +84,18 @@ public class MainProgram implements Runnable {
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
         sl.pageOpener("https://www.skroutz.gr/");
-//        ms.scrollToView("//*[@id=\"search-bar-input\"]");
-//        ms.onLeftClick();
+        ms.scrollToView("//*[@id=\"search-bar-input\"]");
+        ms.onLeftClick();
+        ms.typeString(PropertiesHandler.getPswB());
 //        ms.scrollToView("/html/body/header/div/form/p/button");
 //        ms.onLeftClick();
-        while (true) {
-//            System.out.println(sl.getScrolledY());
-//            ms.randomDelay(2000,2500);
-//            System.out.println(sl.getScrolledY());
-//            ms.randomDelay(2000,2500);
-            ms.scrollToView("/html/body/footer/div/div[7]/p/a[4]");
-        }
+//        while (true) {
+////            System.out.println(sl.getScrolledY());
+////            ms.randomDelay(2000,2500);
+////            System.out.println(sl.getScrolledY());
+////            ms.randomDelay(2000,2500);
+//            ms.scrollToView("/html/body/footer/div/div[7]/p/a[4]");
+//        }
 
     }
 }

@@ -69,7 +69,7 @@ public class ZStartSceneController implements Initializable{
             PropertiesHandler.setPswD(pswDT.getText());
             PropertiesHandler.setPswB(pswB.getText());
             PropertiesHandler.setRememberMe(rememberMe.isSelected());
-            PropertiesHandler.setBetSize(Integer.valueOf(betSizeField.getText()));
+            PropertiesHandler.setBetSize(Float.valueOf(betSizeField.getText()));
             PropertiesHandler.setCalibrate(calibrate.isSelected());
             // Firefox is chosen then se Value to 0, if Chrome is chosen then set the value to 1
             if (usrAgent.getValue().equals("Firefox")) {

@@ -134,7 +134,7 @@ public class PropertiesHandler {
         PropertiesHandler.pswB = pswB;
 
     }
-    public static void setBetSize(int betSize) {
+    public static void setBetSize(float betSize) {
         PropertiesHandler.betSize = betSize;
 
     }
