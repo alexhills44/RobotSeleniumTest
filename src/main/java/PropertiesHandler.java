@@ -23,6 +23,7 @@ public class PropertiesHandler {
         prop = new Properties();
         getProp();
     }
+
     // Has to be Called to Set the values on the Properties File
     public static void endProp() {
         setProp();
