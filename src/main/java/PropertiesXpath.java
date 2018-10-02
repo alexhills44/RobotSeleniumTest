@@ -13,7 +13,7 @@ public class PropertiesXpath {
 
     public static String getProp(String key) {
         try {
-            input = new FileInputStream(new File("config.properties"));
+            input = new FileInputStream(new File("xpathConstants.properties"));
             prop.load(input);
         } catch (IOException e) {
             e.printStackTrace();
