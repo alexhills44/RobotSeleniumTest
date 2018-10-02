@@ -7,7 +7,7 @@ public class PropertiesHandler {
     // So we have to Store the Data temporarely
 
     private static String usrNameD,usrNameB,pswD,pswB;
-    private static int betSize =0;
+    private static float betSize =0;
     private static int YOffset = 0;
     // usrAgent=0 is Firefox, usrAgent=1 is Chrome
     private static int usrAgent =0;
@@ -70,7 +70,7 @@ public class PropertiesHandler {
             pswD=prop.getProperty("PASSWORD_DUNKMAN");
             pswB=prop.getProperty("PASSWORD_BET");
             usrAgent=Integer.parseInt(prop.getProperty("USER_AGENT"));
-            betSize = Integer.parseInt(prop.getProperty("BET_SIZE"));
+            betSize = Float.parseFloat(prop.getProperty("BET_SIZE"));
             calibrate=Boolean.parseBoolean(prop.getProperty("CALIBRATION"));
             rememberMe=Boolean.parseBoolean(prop.getProperty("REMEMBER_ME"));
             YOffset=Integer.parseInt(prop.getProperty("Y_OFFSET"));
@@ -105,7 +105,7 @@ public class PropertiesHandler {
     public static String getPswB() {
         return pswB;
     }
-    public static int getBetSize() {
+    public static float getBetSize() {
         return betSize;
     }
     public static int getUsrAgent() {

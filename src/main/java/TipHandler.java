@@ -10,7 +10,7 @@ public class TipHandler extends Thread{
     private String tourName;
     private String xpath="";
     private String value;
-    private int betSize = PropertiesHandler.getBetSize();
+    private float betSize = PropertiesHandler.getBetSize();
     private int betMulty =1;
 
 

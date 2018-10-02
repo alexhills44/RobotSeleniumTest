@@ -82,7 +82,7 @@ public class ActionSequence {
 
     // Searches for the textView and enters the amount of money to be played
     // then clicks the button for the bet to be placed
-    public void placeBetSize(int betSize) {
+    public void placeBetSize(float betSize) {
         // TextInput betSize
         ms.scrollToView("html/body/div[1]/div/ul/li[3]/ul/li/div[3]/div[1]/div[1]/input");
         ms.onLeftClick();
