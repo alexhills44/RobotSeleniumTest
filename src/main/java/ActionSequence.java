@@ -5,9 +5,9 @@ public class ActionSequence {
     private SeleniumMethods sl;
     private MouseMovement ms;
 
-    private static String username = "pietrospan";
-    private static String password = "captainhook13";
-    private static float BET_SIZE = 0.25f;
+    private static String username =PropertiesHandler.getUsrNameB();
+    private static String password =PropertiesHandler.getPswD();
+    private static float BET_SIZE =PropertiesHandler.getBetSize();
 
     ActionSequence(SeleniumMethods sl0,MouseMovement ms0) {
         sl=sl0;

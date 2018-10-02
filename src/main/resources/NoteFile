@@ -84,11 +84,84 @@
 
 
 
+Go Button
+/html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/button
+
+Αποδοχή Αλλαγών Button
+/html/body/div[1]/div/ul/li[9]/a[1]/div
+
+Στήλες
+/html/body/div[1]/div/ul/li[3]/ul/li/div[3]/div[1]/div[1]/input
+
+Επιστρεφει Τιμη
+/html/body/div[1]/div/ul/li[3]/ul/li/div[3]/div[1]/div[2]/span
+
+Παραθυρο ομαδας με ολες τις πληροφοριες (handicap) εκτοσ αποδοσης
+/html/body/div[1]/div/ul/li[3]/ul/li/div[1]/div[3]
+
+Παραθυρο αποδοσης
+/html/body/div[1]/div/ul/li[3]/ul/li/div[1]/div[4]
+
+Ολο το παραθυρο πληροφοριων
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[2]
+
+Στοιχηματιστε
+/html/body/div[1]/div/ul/li[9]/a[2]/div
+
+Μετα το Στοιχημα το νεο παραθυρο
+/html/body/div[1]/div/ul
+
+    -ΟΚ Button αφου παιχτηκε
+    /html/body/div[1]/div/ul/li[3]/span
+
+Δελτιο
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[1]/div[1]
+
+Στοιχηματα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[1]/div[2]
+
+Κλεισε Στοιχημα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[1]
+
+Ζωντανα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[2]
+
+Ανοιχτα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]
+
+Διευθερημενα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[4]
+
+Βελακι-Δεξια
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[3]
+
+Βελακι-Αριστερα
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[1]
+
+Αυτοματο Κλεισιμο-Γραναζι
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div
+
+Ποσο Αυτοματου Κλεισιματος
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input
+
+Δημιουργησε Συνθηκη Button
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]/span
+
+ONLINE CLOCK
+/html/body/div[1]/div/div[1]/div/div[2]/div[1]/time
 
 
+Top Element
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div
+Down Element
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[2]/div[3]/div/div[3]/div[2]/div/div
 
 
+Box 1
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[1]
 
+Box 2
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[2]
 
-
-
+Box 3
+/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[3]
