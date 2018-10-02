@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.util.Scanner;
 
 
 public class MainProgram implements Runnable {
@@ -75,6 +76,13 @@ public class MainProgram implements Runnable {
         ms.randomDelay(2000,5000);
         as.basketCategory();
         System.out.println("basket category");
+        ms.randomDelay(5000,10000);
+        TipHandler tipHandler;
+        Scanner scan = new Scanner(System.in);
+        while(scan.hasNext()) {
+            tipHandler = new TipHandler(scan.nextLine(),sl,ms,as);
+            tipHandler.run();
+        }
 
 
     }
@@ -88,6 +96,8 @@ public class MainProgram implements Runnable {
         ms.onLeftClick();
 //        System.out.println(PropertiesHandler.getPswB());
         ms.typeString(PropertiesHandler.getPswB());
+
+
 //        ms.scrollToView("/html/body/header/div/form/p/button");
 //        ms.onLeftClick();
 //        while (true) {

@@ -123,6 +123,7 @@ public class MouseMovement {
             Double yd1 = destinationPoint.getY();
             int y1=yd1.intValue();
             int x1=xd1.intValue();
+            // has a 90% chance to go where it is expected to go
             while (!(x==x1 && y==y1+yOffset)) {
                 if(x<x1) {
                     x++;

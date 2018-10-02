@@ -3,7 +3,6 @@ public class TipHandler {
     private String tip;
     private String[] tipArray;
     private SeleniumMethods sl;
-    private PlayTip playTip;
     private MouseMovement ms;
     private ActionSequence as;
     private String teamName;
@@ -15,14 +14,11 @@ public class TipHandler {
 
 
     private int teamNumber,tourNumber,matchOfTour,constant,matchStartTime;
-    TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0,String teamName0,String tourName0,String value0) {
+    TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0) {
         tip=tip0;
         sl=sl0;
         ms=ms0;
         as=as0;
-        teamName=teamName0;
-        tourName=tourName0;
-        value=value0;
     }
 
     // Splits the String to an Array by '---'
