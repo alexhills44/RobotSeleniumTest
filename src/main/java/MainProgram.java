@@ -86,6 +86,7 @@ public class MainProgram implements Runnable {
         sl.pageOpener("https://www.skroutz.gr/");
         ms.scrollToView("//*[@id=\"search-bar-input\"]");
         ms.onLeftClick();
+//        System.out.println(PropertiesHandler.getPswB());
         ms.typeString(PropertiesHandler.getPswB());
 //        ms.scrollToView("/html/body/header/div/form/p/button");
 //        ms.onLeftClick();

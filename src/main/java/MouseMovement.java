@@ -299,7 +299,7 @@ public class MouseMovement {
             case '-': doType(VK_MINUS); break;
             case '=': doType(VK_EQUALS); break;
             case '~': doType(VK_SHIFT, VK_BACK_QUOTE); break;
-            case '!': doType(VK_EXCLAMATION_MARK); break;
+            case '!': doType(VK_SHIFT,VK_1); break;
             case '@': doType(VK_AT); break;
             case '#': doType(VK_NUMBER_SIGN); break;
             case '$': doType(VK_DOLLAR); break;
