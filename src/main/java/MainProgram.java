@@ -88,14 +88,19 @@ public class MainProgram implements Runnable {
     }
 
     private void testSkroutz() {
-        sl=new SeleniumMethods();
-        ms=new MouseMovement(sl);
-        as = new ActionSequence(sl,ms);
-        sl.pageOpener("https://www.skroutz.gr/");
-        ms.scrollToView("//*[@id=\"search-bar-input\"]");
-        ms.onLeftClick();
-//        System.out.println(PropertiesHandler.getPswB());
-        ms.typeString(PropertiesHandler.getPswB());
+//        sl=new SeleniumMethods();
+//        ms=new MouseMovement(sl);
+//        as = new ActionSequence(sl,ms);
+//        sl.pageOpener("https://www.skroutz.gr/");
+//        ms.scrollToView("//*[@id=\"search-bar-input\"]");
+//        ms.onLeftClick();
+////        System.out.println(PropertiesHandler.getPswB());
+//        ms.typeString(PropertiesHandler.getPswB());
+
+        System.out.println(new PropertiesXpath().getProp("SET_USERNAME"));
+
+
+
 
 
 //        ms.scrollToView("/html/body/header/div/form/p/button");

@@ -22,7 +22,8 @@ public class ActionSequence {
 
     // Scrolls the mouse to the "Ελληνικά" button
     public void languageScreen () {
-        ms.scrollToView(PropertiesXpath.getProp("ELLINIKA"));
+//        ms.scrollToView(PropertiesXpath.getProp("ELLINIKA"));
+        ms.scrollToView("//*[contains(text(), 'Ελληνικά')]");
         ms.onLeftClick();
     }
 
@@ -53,7 +54,7 @@ public class ActionSequence {
     public void inPlay() {
         // Σε-Εξέλιξη element
 //        ms.scrollToViewForZero(PropertiesXpath.getProp("IN_PLAY"));
-        ms.scrollToView("//*[contains(text(), 'Σε-Εξξέλιξη')]");
+        ms.scrollToView("//*[contains(text(), 'Σε-Εξέλιξη')]");
         ms.onLeftClick();
 
     }
