@@ -60,12 +60,17 @@
      ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]
      //place the bet size
      ///html/body/div[1]/div/ul/li[3]/ul/li/div[3]/div[1]/div[1]/input
+
      // Apodoxh allagwn
      ///html/body/div[1]/div/ul/li[9]/a[1]/div
+
      // diagrafh tou bet
      ///html/body/div[1]/div/ul/li[1]/div[3]/a
+
      //value at place bet window handicap and over
      ///html/body/div[1]/div/ul/li[3]/ul/li/div[1]/div[3]/div[1]/div
+
+
      //paix8hke
      ///html/body/div[1]/div/ul/li[2]/span
      //stoiximathse
@@ -81,8 +86,6 @@
 
  xxxxxxxxxxxxxx XPATH FOR BUTTONS xxxxxxxxxxxxxxxxxxxx
  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
 
 Go Button
 /html/body/div[1]/div/div[1]/div/div[1]/div[2]/div/div[2]/button
