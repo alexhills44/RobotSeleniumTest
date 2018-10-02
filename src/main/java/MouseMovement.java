@@ -63,13 +63,8 @@ public class MouseMovement {
             if(sl.getScrolledY()==x) {
                 directionScrolled=directionScrolled*(-1);
                 scrollSpeed = scrollSpeed*2;
-                System.out.println("****************");
-                System.out.println(scrollSpeed);
-                System.out.println("Changed Direction");
-                System.out.println("****************");
             }
             scrollValue = ((rand.nextInt(130)/scrollSpeed)+1)*directionScrolled;
-            System.out.println(scrollValue);
             x=sl.getScrolledY();
             robot.mouseWheel(scrollValue);
             randomDelay(500,700);
