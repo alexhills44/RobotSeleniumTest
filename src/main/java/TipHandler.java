@@ -36,10 +36,11 @@ public class TipHandler {
         // Tour0---Team1---BetSize2---BetType3---Value4---Comments5
         tipArray = tip.split("---");
 
-        if(tipArray[3].equals("Νίκη")||tipArray[3].equals("Νικη")) {
+        if(tipArray[3].contains("-") || tipArray[3].contains("+")) {
             System.out.println("Found that tip is Handicap");
-            WinHandler winHandler = new WinHandler(tipArray,sl);
-            xpath = winHandler.getWin();
+
+            HandicapHandler handicapHandler = new HandicapHandler(tipArray,sl);
+            xpath = handicapHandler.getHandicap();
 //            tourNumber = winHandler.getTourNumber();
 //            teamNumber = winHandler.getTeamNumber();
 //            matchOfTour = winHandler.getMatchOfTour();
@@ -47,10 +48,10 @@ public class TipHandler {
 //            xpath = winHandler.findTip();
 //            matchTimeSet(winHandler.getMatchTime(),winHandler.getMatchPeriod());
 
-        }else if ((tipArray[3].equals("Χάντικαπ") ||tipArray[3].equals("Χαντικαπ")) && (tipArray[4].contains("-")||tipArray[4].contains("+"))) {
+        }else {
             System.out.println("Found that tip is Win");
-            HandicapHandler handicapHandler = new HandicapHandler(tipArray,sl);
-            xpath = handicapHandler.getHandicap();
+            WinHandler winHandler = new WinHandler(tipArray,sl);
+            xpath = winHandler.getWin();
 //            tourNumber = handicapHandler.getTourNumber();
 //            teamNumber = handicapHandler.getTeamNumber();
 //            matchOfTour = handicapHandler.getMatchOfTour();
@@ -93,21 +94,29 @@ public class TipHandler {
     // if it doesnt find it
     public void run() {
         boolean hasBeenPlayed=false;
+        int flag=0;
         while (!hasBeenPlayed) {
+            flag++;
             tipHandler();
             if (!xpath.equals("")) {
                 // Open Window to bet in
                 ms.scrollToView(xpath);
                 ms.onLeftClick();
-                // Bet multy*betSize  betMulty==tipArray[2] ex.  Διπλο Πονταρισμα
-                betMulty=Integer.valueOf(tipArray[2]);
-                betSize = betSize*betMulty;
+
+
                 // Place bet and press confirm bet
+                ms.randomDelay(2000,4000);
+                if (flag==1) {
+                    // Bet multy*betSize  betMulty==tipArray[2] ex.  Διπλο Πονταρισμα
+                    betMulty=Integer.valueOf(tipArray[2]);
+                    betSize = betSize*betMulty;
+                }
                 as.placeBetSize(betSize);
 
                 // check if the bet has been played
                 if (as.betStatus()) {
                     hasBeenPlayed=true;
+                    ms.randomDelay(3000,6000);
                     ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
                     ms.onLeftClick();
                 }else {

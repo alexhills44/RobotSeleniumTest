@@ -65,54 +65,26 @@ public class MainProgram implements Runnable {
         ms.moveMouseToMain();
         as.openBet();
         System.out.println("opened bet");
-        ms.randomDelay(2000,5000);
+        ms.randomDelay(4000,9000);
         as.languageScreen();
         System.out.println("ellinika");
-        ms.randomDelay(2000,5000);
+        ms.randomDelay(4000,9000);
         as.setCredentials();
         System.out.println("log in");
-        ms.randomDelay(3000,7000);
+        ms.randomDelay(5000,9000);
         as.inPlay();
-        ms.randomDelay(2000,5000);
+        ms.randomDelay(4000,9000);
         as.basketCategory();
         System.out.println("basket category");
-        ms.randomDelay(5000,10000);
+        ms.randomDelay(7000,12000);
         TipHandler tipHandler;
         Scanner scan = new Scanner(System.in);
         while(scan.hasNext()) {
+            ms.randomDelay(7000,12000);
             tipHandler = new TipHandler(scan.nextLine(),sl,ms,as);
             tipHandler.run();
         }
 
-
-    }
-
-    private void testSkroutz() {
-//        sl=new SeleniumMethods();
-//        ms=new MouseMovement(sl);
-//        as = new ActionSequence(sl,ms);
-//        sl.pageOpener("https://www.skroutz.gr/");
-//        ms.scrollToView("//*[@id=\"search-bar-input\"]");
-//        ms.onLeftClick();
-////        System.out.println(PropertiesHandler.getPswB());
-//        ms.typeString(PropertiesHandler.getPswB());
-
-        System.out.println(PropertiesXpath.getProp("SET_USERNAME"));
-        PropertiesXpath.setProp();
-
-
-
-
-
-//        ms.scrollToView("/html/body/header/div/form/p/button");
-//        ms.onLeftClick();
-//        while (true) {
-////            System.out.println(sl.getScrolledY());
-////            ms.randomDelay(2000,2500);
-////            System.out.println(sl.getScrolledY());
-////            ms.randomDelay(2000,2500);
-//            ms.scrollToView("/html/body/footer/div/div[7]/p/a[4]");
-//        }
 
     }
 }

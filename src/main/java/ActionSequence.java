@@ -62,7 +62,7 @@ public class ActionSequence {
     void inPlay() {
         // Σε-Εξέλιξη element
 //        ms.scrollToViewForZero(PropertiesXpath.getProp("IN_PLAY"));
-        ms.scrollToViewForZero("//*[contains(text(), 'Σε-Εξέλιξη')]");
+        ms.scrollToViewForZero("/html/body/div[1]/div/div[1]/div/div[1]/div[1]/nav/a[2]");
         ms.onLeftClick();
 
     }
@@ -93,13 +93,25 @@ public class ActionSequence {
     // then clicks the button for the bet to be placed
     void placeBetSize(float betSize) {
         // Place the value we want to bet
+        ms.moveMouseToXIframe();
+        PropertiesHandler.setiFramePoint(sl.getCoordinates(PropertiesXpath.getProp("IFRAME")));
+        PropertiesHandler.setiFramePointY(sl.getCoordinatesY(PropertiesXpath.getProp("IFRAME")));
+        PropertiesHandler.setiFramePointX(sl.getCoordinatesX(PropertiesXpath.getProp("IFRAME")));
         sl.switchFrame(PropertiesXpath.getProp("IFRAME_ID"));
-        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BETSIZE_INPUT"));
-        ms.onLeftClick();
-        ms.typeString(String.valueOf(betSize));
+
+        try {
+            ms.scrollToViewIFRAME(PropertiesXpath.getProp("BETSIZE_INPUT"));
+            ms.onLeftClick();
+            ms.typeString(String.valueOf(betSize));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Bet Input Not Found");
+        }
+        //TODO MoveMouse to Iframe Random
         // Press to confirm the bet
         // TODO : Change so it Accepts Greek
         try {
+            ms.randomDelay(1000,2000);
             ms.scrollToViewIFRAME("//*[contains(text(),'Στοιχηματίστε')]");
             ms.onLeftClick();
         } catch (Exception e) {

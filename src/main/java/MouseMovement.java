@@ -33,7 +33,9 @@ public class MouseMovement {
     // Delays the program for min-max miliseconds
     public void randomDelay(int min,int max) {
         try {
-            robot.delay(rand.nextInt(max-1-min)+min);
+            int delayTime=rand.nextInt(max-1-min)+min;
+            System.out.println("Delay for "+delayTime);
+            robot.delay(delayTime);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("randomDelay : min has to be smaller than max");
@@ -182,8 +184,8 @@ public class MouseMovement {
             Double yd = point.getY();
             int y=yd.intValue();
             int x=xd.intValue();
-            Double xd1 = destinationPoint.getX()+sl.getCoordinates(PropertiesXpath.getProp("IFRAME")).getX();
-            Double yd1 = destinationPoint.getY()+sl.getCoordinates(PropertiesXpath.getProp("IFRAME")).getY();
+            Double xd1 = destinationPoint.getX()+PropertiesHandler.getiFramePointX();
+            Double yd1 = destinationPoint.getY()+PropertiesHandler.getiFramePointY();
             int y1=yd1.intValue();
             int x1=xd1.intValue();
             while (!(x==x1 && y==y1+yOffset)) {
@@ -212,6 +214,7 @@ public class MouseMovement {
         Point point = sl.getElementSurface(xpath);
         Double hotSpot;
         Double pointX = point.getX()-4;
+        System.out.println("PointX Value is: "+pointX.intValue());
         int randomX = rand.nextInt(pointX.intValue())+2;
         Double pointY = point.getY()-4;
         int randomY = rand.nextInt(pointY.intValue())+2;
@@ -252,23 +255,15 @@ public class MouseMovement {
     private boolean elementOnScreen (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
-        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()+1) {
-            isDisplayed=true;
-        }else {
-            isDisplayed=false;
-        }
+        isDisplayed = sl.getScrolledY() + 650 >= point && point >= sl.getScrolledY() + 1;
         return isDisplayed;
     }
 
     // Checks if the element in the specified Xpath is on the web screen (1-500 pixels) and return boolean FOR IFRAME
     private boolean elementOnScreenIFrame (String xPathIframe) {
         boolean isDisplayed;
-        int point = sl.getCoordinatesY(PropertiesXpath.getProp("IFRAME"))+sl.getCoordinatesY(xPathIframe);
-        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()+1) {
-            isDisplayed=true;
-        }else {
-            isDisplayed=false;
-        }
+        int point = PropertiesHandler.getiFramePointY()+sl.getCoordinatesY(xPathIframe);
+        isDisplayed = sl.getScrolledY() + 600 >= point && point >= sl.getScrolledY() + 1;
         return isDisplayed;
     }
 
@@ -276,11 +271,7 @@ public class MouseMovement {
     private boolean elementOnScreenForZero (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
-        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()) {
-            isDisplayed=true;
-        }else {
-            isDisplayed=false;
-        }
+        isDisplayed = sl.getScrolledY() + 500 >= point && point >= sl.getScrolledY();
         return isDisplayed;
     }
 
@@ -408,5 +399,14 @@ public class MouseMovement {
             default:
                 throw new IllegalArgumentException("Cannot type character " + character);
         }
+    }
+
+    public void moveMouseToXIframe() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        double x = screenSize.getWidth() * 95 / 100;
+        PointerInfo a=MouseInfo.getPointerInfo();
+        Point point=new Point();
+        point.setLocation(x,a.getLocation().getY());
+        cursorMoveMethod1(point);
     }
 }

@@ -93,7 +93,7 @@ public class HandicapHandler {
         columnBets=1;
         rowBets=teamNumber;
         ABBets=2;
-        float handicap = Float.parseFloat(inputMessage[2]);
+        float handicap = Float.parseFloat(inputMessage[3]);
         try {
             float handicapNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]"));
             if (handicap>0) {

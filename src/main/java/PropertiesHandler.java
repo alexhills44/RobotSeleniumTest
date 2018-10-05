@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.*;
 import java.util.Properties;
 
@@ -5,7 +6,9 @@ public class PropertiesHandler {
 
     // The Properties File cannot be Edited,we can only read or replace it
     // So we have to Store the Data temporarely
-
+    private static Point iFramePoint;
+    private static int iFramePointX;
+    private static int iFramePointY;
     private static String usrNameD,usrNameB,pswD,pswB;
     private static float betSize =0;
     private static int YOffset = 0;
@@ -160,5 +163,29 @@ public class PropertiesHandler {
     public static void setChromeProfilePath(String chromeProfilePath) {
         PropertiesHandler.chromeProfilePath = chromeProfilePath;
 
+    }
+
+    public static Point getiFramePoint() {
+        return iFramePoint;
+    }
+
+    public static void setiFramePoint(Point iFramePoint) {
+        PropertiesHandler.iFramePoint = iFramePoint;
+    }
+
+    public static int getiFramePointX() {
+        return iFramePointX;
+    }
+
+    public static void setiFramePointX(int iFramePointX) {
+        PropertiesHandler.iFramePointX = iFramePointX;
+    }
+
+    public static int getiFramePointY() {
+        return iFramePointY;
+    }
+
+    public static void setiFramePointY(int iFramePointY) {
+        PropertiesHandler.iFramePointY = iFramePointY;
     }
 }
