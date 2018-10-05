@@ -97,7 +97,8 @@ public class MainProgram implements Runnable {
 ////        System.out.println(PropertiesHandler.getPswB());
 //        ms.typeString(PropertiesHandler.getPswB());
 
-        System.out.println(new PropertiesXpath().getProp("SET_USERNAME"));
+        System.out.println(PropertiesXpath.getProp("SET_USERNAME"));
+        PropertiesXpath.setProp();
 
 
 

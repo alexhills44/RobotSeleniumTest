@@ -1,12 +1,11 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Properties;
 
 public class PropertiesXpath {
     private static Properties prop;
     private static FileInputStream input;
+    private static FileOutputStream output;
 
     PropertiesXpath () {
         prop = new Properties();
@@ -15,7 +14,7 @@ public class PropertiesXpath {
     public static String getProp(String key) {
         try {
             input = new FileInputStream(new File("xpathConstants.properties"));
-            prop.load(input);
+            prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
             return prop.getProperty(key);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -33,5 +32,15 @@ public class PropertiesXpath {
             }
         }
         return null;
+    }
+
+    public static void setProp() {
+        try {
+            output = new FileOutputStream("xpathConstants.properties");
+            prop.setProperty("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","/html/body/div[1]/div/div[1]/div/div[1]/div[1]/nav/a[2]");
+            prop.store(output, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
