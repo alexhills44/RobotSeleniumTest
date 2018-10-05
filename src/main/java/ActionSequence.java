@@ -130,61 +130,50 @@ public class ActionSequence {
     // constant = defines where the request came from
     // valueCatched = get the Value that Success bet Window says we placed it at
     // betSize = get amount of money placed on that bet (BET_SIZE*betMulty)
-    void autoClose(String teamName,int constant,float betsize) {
-        // Change window Stoixhmata/Anoixta
+    void autoClose(float odds,float betsize) {
+        sl.switchToDefaultFrame();
         ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
         ms.onLeftClick();
-        ms.randomDelay(400,700);
+        ms.randomDelay(2000,5000);
         ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
         ms.onLeftClick();
-        boolean running=true;
-        // points on which element of the table we are looking
-        int i=0;
-        // Runs until it finds exception or until it finds what it is looking for
-        while (running) {
-            i++;
-            try {
-                //if match contains team name
-                if (sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains(teamName)) {
-                    // Checks where the request came from
-                    // HandicapHandler
-                    if (constant==1) {
-                        // Χάντικαπ 2πλής επιλογής
-                        if (sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains("Χάντικαπ 2πλής επιλογής") &&
-                                //Checks if we are talking about the same bet by comparing the value that it has been played at
-                                sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains(valueCatched) ) {
-                            //Perform standard mouse movement and clicks and type in the value
-                            //Closing Condition has been Placed
-                            autoCloseActions(getOddFromAnoiktaBox(i),betsize,i);
-                            running=false;
-                        }
-                        //OverUnderHandler
-                    } else if (constant==2) {
-                        // Συνολικά 2πλης επιλογής
-                        if (sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains("Συνολικά 2πλης επιλογής") &&
-                                //Checks if we are talking about the same bet by comparing the value that it has been played at
-                                sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains(valueCatched) ) {
-                            //Perform standard mouse movement and clicks and type in the value
-                            //Closing Condition has been Placed
-                            autoCloseActions(getOddFromAnoiktaBox(i),betsize,i);
-                            running=false;
-                        }
-                        //WinHandler
-                    }else if (constant==3) {
-                        // Να Νικήσει τον Αγώνα
-                        if (sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains("Να Νικήσει τον Αγώνα") &&
-                                //Checks if we are talking about the same bet by comparing the value that it has been played at
-                                sl.getText(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1")+ i+PropertiesXpath.getProp("BW_BOX_MATCH_PART_2")).contains(valueCatched) ) {
-                            //Perform standard mouse movement and clicks and type in the value
-                            //Closing Condition has been Placed
-                            autoCloseActions(getOddFromAnoiktaBox(i),betsize,i);
-                            running=false;
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                running=false;
+        ms.randomDelay(2000,5000);
+
+        // Try to close Match if it is single
+        try {
+            sl.getText(PropertiesXpath.getProp("BOX_SINGLE_ANOIXTA"));
+            //Press Cog
+            ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+            ms.onLeftClick();
+            ms.randomDelay(2000,4000);
+            // Press the textBox to enter close Statement
+            ms.scrollToView(PropertiesXpath.getProp("PLACE_CLOSE_STATEMENT_SINGLE"));
+            ms.onLeftClick();
+            ms.randomDelay(2000,4000);
+            // Type close Amount
+            if (odds<0) {
+                String closeStatement = String.valueOf(setClosingAmount("1.8",betsize));
+                ms.typeString(closeStatement);
+            }else {
+                String closeStatement = String.valueOf(setClosingAmount(String.valueOf(odds),betsize));
+                ms.typeString(closeStatement);
             }
+            ms.randomDelay(2000,4000);
+            // confirm the Close Statement
+            ms.scrollToView(PropertiesXpath.getProp("DIMIOURGISTE_SINTHIKH_SINGLE"));
+            ms.onLeftClick();
+            ms.randomDelay(2000,4000);
+            // press the cog again to close the popup window
+            ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+            ms.onLeftClick();
+            ms.randomDelay(2000,4000);
+            // Make statement
+            ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div[2]/div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[4]/span
+            ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[4]/span
+            //
+        }catch(Exception e) {
+            System.out.println("More Matches are Open");
+            sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div[1]");
         }
     }
 
@@ -208,15 +197,7 @@ public class ActionSequence {
 
     //Contains all the actions to place the Close Condition
     private void autoCloseActions (String odd,float betSize,int xpathTableNumber) {
-        ms.scrollToView(PropertiesXpath.getProp("BW_BOX_MATCH_PART_1") + xpathTableNumber + PropertiesXpath.getProp("BW_BOX_MATCH_PART_2") + PropertiesXpath.getProp("KLEISE_STOIXHMA_ATTACHMENT"));
-        ms.onLeftClick();
-        ms.randomDelay(500,1000);
-        ms.scrollToView(PropertiesXpath.getProp("AYTO_CLOSE_AMOUNT"));
-        ms.onLeftClick();
-        ms.typeString(String.valueOf(setClosingAmount(odd,betSize)));
-        ms.randomDelay(500,1000);
-        ms.scrollToView(PropertiesXpath.getProp("CREATE_CONDITION_BUTTON"));
-        ms.onLeftClick();
+
     }
 
     //Gets the odd for the given table Element
