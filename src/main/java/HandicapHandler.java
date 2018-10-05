@@ -31,9 +31,9 @@ public class HandicapHandler {
 
     public String getHandicap() {
         competitionMatchFinder();
-        while (!betFound) {
+//        while (!betFound) {
             handicapChecker();
-        }
+//        }
         System.out.println("5. Finished");
         return xpathToReturn;
     }
@@ -98,7 +98,7 @@ public class HandicapHandler {
             float handicapNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]"));
             if (handicap>0) {
                 if(handicapNow>=(handicap-1) && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[3]")!=null)) {
-                    betFound=true;
+//                    betFound=true;
                     xpathToReturn ="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]";
                 }
             }else if(handicap<0 ) {

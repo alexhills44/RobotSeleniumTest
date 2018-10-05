@@ -65,18 +65,18 @@ public class MainProgram implements Runnable {
         ms.moveMouseToMain();
         as.openBet();
         System.out.println("opened bet");
-        ms.randomDelay(4000,9000);
+        ms.randomDelay(2000,5000);
         as.languageScreen();
         System.out.println("ellinika");
-        ms.randomDelay(4000,9000);
+        ms.randomDelay(2000,5000);
         as.setCredentials();
         System.out.println("log in");
-        ms.randomDelay(5000,9000);
+        ms.randomDelay(2000,5000);
         as.inPlay();
-        ms.randomDelay(4000,9000);
+        ms.randomDelay(2000,5000);
         as.basketCategory();
         System.out.println("basket category");
-        ms.randomDelay(7000,12000);
+        ms.randomDelay(3000,7000);
         TipHandler tipHandler;
         Scanner scan = new Scanner(System.in);
         while(scan.hasNext()) {

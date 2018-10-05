@@ -1,13 +1,9 @@
-public class WinHandler {
-
-    // TODO : 4 : Get Xpath for the Element to open Bet Window
-    // TODO : 6 : Solve the autoclose Method
-    // TODO : 5 : Try the placeBet
-
-
+public class OverUnderHandler {
 
     private String[] inputMessage;
     private SeleniumMethods sl;
+
+    // TODO : Set Time Constraint
 
     private boolean betFound = false;
     private int competitionNumber = 1;
@@ -17,24 +13,26 @@ public class WinHandler {
     private int rowBets=1;
     private int columnBets =1;
     private String xpathToReturn="";
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 //////////
     String match = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]";
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 /////////////////////////////// WINNER //////////////////////////// SET WINNER //////////// IF NO HANDICAP OR OVER THEN SPAN=2 //////
     String bets  = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 //////////////////////////////// GET TEAM NAME //////////////////// (SPLITS WITH TIME, POINTS ,ETC)
     String names = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span";
-    ///////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div                                       /div[3]/div                                 /div/div[2]/div[3]                             /div[1]                          /span[2]
+    private String xpathMatchTime = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[1]";
+    private String xpathMatchPeriod = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[2]";
 
-    public WinHandler(String[] inputMessage0, SeleniumMethods sl0) {
-        inputMessage = inputMessage0;
+
+    OverUnderHandler (String[] inputMessage0, SeleniumMethods sl0) {
+        inputMessage=inputMessage0;
         sl = sl0;
     }
 
-    
-    public String getWin() {
+    public String getOverUnder() {
         competitionMatchFinder();
 //        while (!betFound) {
-           winOddChecker();
+        overUnderChecker();
 //        }
         System.out.println("5. Finished");
         return xpathToReturn;
@@ -91,19 +89,23 @@ public class WinHandler {
         }
     }
     // compare the handicap numbers
-    private void winOddChecker() {
-        columnBets=3;
+    private void overUnderChecker() {
+        columnBets=2;
         rowBets=teamNumber;
         ABBets=2;
-        Float winOdds = Float.parseFloat(inputMessage[3]);
+        float handicap = Float.parseFloat(inputMessage[3]);
         try {
-            Float winOddsNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]"));
-            if(winOddsNow>=winOdds && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]")!=null)) {
-                System.out.println("PLAY THE FUCKING WIN NOW YOU MORON!!!!");
-                System.out.println("PLAY THE FUCKING WIN NOW YOU MORON!!!!");
-//                betFound=true;
-                // pass xpath to click on it
-                xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
+            float handicapNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]"));
+            if (handicap>0) {
+                if(handicapNow>=(handicap-1) && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[3]")!=null)) {
+//                    betFound=true;
+                    xpathToReturn ="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]";
+                }
+            }else if(handicap<0 ) {
+                if (handicapNow>=(handicap-1) && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[3]")!=null)) {
+                    betFound=true;
+                    xpathToReturn ="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]";
+                }
             }
         }catch (Exception e) {
             System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker");

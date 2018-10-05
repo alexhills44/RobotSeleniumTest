@@ -48,6 +48,10 @@ public class TipHandler {
 //            xpath = winHandler.findTip();
 //            matchTimeSet(winHandler.getMatchTime(),winHandler.getMatchPeriod());
 
+        }else if (tipArray[3].contains("O") || tipArray[3].contains("U")||tipArray[3].contains("Ο") || tipArray[3].contains("υ")) {
+            System.out.println("Found Over/Under");
+            OverUnderHandler overUnderHandler = new OverUnderHandler(tipArray,sl);
+            xpath = overUnderHandler.getOverUnder();
         }else {
             System.out.println("Found that tip is Win");
             WinHandler winHandler = new WinHandler(tipArray,sl);
@@ -126,23 +130,22 @@ public class TipHandler {
                     ms.onLeftClick();
                 }
 
-                // check if the bet has been played
-                if (as.betStatus()) {
-                    hasBeenPlayed=true;
-                    ms.randomDelay(3000,6000);
-                    ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
-                }else {
-                    // check if values are in the ranges we want them to be
-                    // we do that by tipArray[4] with
-                    // else click the button again and start the search again
-                    sl.switchToDefaultFrame();
-                    ms.scrollToView(xpath);
-                    ms.onLeftClick();
-                }
+//                // check if the bet has been played
+//                if (as.betStatus()) {
+//                    hasBeenPlayed=true;
+//                    ms.randomDelay(3000,6000);
+//                    ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+//                }else {
+//                    // check if values are in the ranges we want them to be
+//                    // we do that by tipArray[4] with
+//                    // else click the button again and start the search again
+//                    sl.switchToDefaultFrame();
+//                    ms.scrollToView(xpath);
+//                    ms.onLeftClick();
+//                }
 
             }else {
-                hasBeenPlayed=true;
-                System.out.println("ERROR TipHandler/run() : xpath=null");
+                System.out.println("ERROR TipHandler/run() : xpath=null   OR BET HAS NO VALUE");
             }
         }
     }
