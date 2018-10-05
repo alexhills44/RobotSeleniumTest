@@ -1,150 +1,111 @@
-import java.awt.*;
-
 public class WinHandler {
 
+    // TODO : 4 : Get Xpath for the Element to open Bet Window
+    // TODO : 6 : Solve the autoclose Method
+    // TODO : 5 : Try the placeBet
+
+
+
+    private String[] inputMessage;
     private SeleniumMethods sl;
-    private String tourName,teamName,value,matchPeriod,matchTime;
-    private int CONSTANT=3;
-    private boolean success=true;
-    private int tourNumber=1,teamNumber=1,matchOfTour=1;
 
-    // Sets the xpath for each attribute to take :: Look at NoteFile for more info
-    private String xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
-    private String xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    private String xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-    private String xpathConstant = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[3]/div["+matchOfTour +"]/div/div[2]/div["+CONSTANT+"]/div["+teamNumber+"]/span[2]";
-    private String xpathMatchTime = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[1]";
-    private String xpathMatchPeriod = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+teamNumber+"]/div[3]/div/div/div[1]/div/div[2]";
+    private boolean betFound = false;
+    private int competitionNumber = 1;
+    private int matchNumber =1;
+    private int teamNumber =1;
+    private int ABBets =1; //span[2] handicap , span[3] odds
+    private int rowBets=1;
+    private int columnBets =1;
+    private String xpathToReturn="";
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 //////////
+    String match = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]";
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 /////////////////////////////// WINNER //////////////////////////// SET WINNER //////////// IF NO HANDICAP OR OVER THEN SPAN=2 //////
+    String bets  = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////// US OPEN ///////////////////////////////////////////// FIRST MATCH =1 //////////////////////////////// GET TEAM NAME //////////////////// (SPLITS WITH TIME, POINTS ,ETC)
+    String names = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span";
+    ///////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div                                       /div[3]/div                                 /div/div[2]/div[3]                             /div[1]                          /span[2]
 
-    WinHandler(SeleniumMethods sl0,String tourName0,String teamName0,String value0){
-        sl=sl0;
-        tourName=tourName0;
-        teamName=teamName0;
-        value=value0;
+    public WinHandler(String[] inputMessage0, SeleniumMethods sl0) {
+        inputMessage = inputMessage0;
+        sl = sl0;
     }
 
-    // combines all three methods in to one
-    public String findTip() {
-        findTime();
-        findTour();
-        findTeam();
-        return findOdd();
-    }
-
-    private void findTime() {
-        matchPeriod=sl.getText(xpathMatchPeriod);
-        matchTime=sl.getText(xpathMatchTime);
-    }
-
-
-    // Searches for the tourName by looping throught the elements of the table (increments tourNumber)
-    // if it loops more than 300 times it throws an ERROR
-    private void findTour() {
-        while (!sl.getText(xpathTour).equals(tourName)) {
-            tourNumber++;
-            xpathTour = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber+"]/div[1]/div[1]";
-
-            // Check for Error
-            if(tourNumber>300) {
-                success=false;
-                break;
-            }
+    
+    public String getWin() {
+        competitionMatchFinder();
+        while (!betFound) {
+           winOddChecker();
         }
-        //Print Error Message
-        if(success) {
-            System.out.println("Found Tournament");
-        }else {
-            System.out.println("Error : HandicapHandler/findTour == Tournament NOT Found!");
-        }
+        System.out.println("5. Finished");
+        return xpathToReturn;
     }
-
-    // Searches for the teamName with the same logic as the tournament ,
-    // it also checks if the tournament table only contains one match
-    // if it does it changes the xpath later the findOdd classes searches correctly
-    private void findTeam() {
-        if(success) {
+    //sets the proper competition ,match and team pointer
+    private void competitionMatchFinder() {
+        boolean isRunning = true;
+        boolean doesntExist =true;
+        while (isRunning) {
             try {
-                while (!sl.getText(xpathTeamForZero).equals(teamName)) {
-                    teamNumber++;
-                    xpathTeamForZero = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-                    // Check for Error
-                    if (teamNumber ==3) {
-                        success=false;
-                        break;
-                    }
+                if(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]").contains(inputMessage[0])) {
+                    isRunning=false;
+                    doesntExist=false;
+                    System.out.println("1. FOUND COMPETITION");
                 }
-                xpathTeam =xpathTeamForZero;
-            }catch (Exception e) {
-                while(!sl.getText(xpathTeam).equals(teamName)) {
-                    teamNumber++;
-                    if (teamNumber==3) {
-                        teamNumber=1;
-                        matchOfTour++;
-                    }
-                    // Check for Error
-                    if (matchOfTour>100) {
-                        success=false;
-                        break;
-                    }
-                    xpathTeam = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+tourNumber +"]/div[3]/div["+matchOfTour +"]/div/div[1]/div/div[3]/div["+teamNumber +"]/span";
-                }
+            } catch (Exception e) {
+                //e.printStackTrace();
+                System.out.println("Error 1");
             }
-            //Print Error Message
-            if(success) {
-                System.out.println("Found Team");
-            }else {
-                System.out.println("Error : HandicapHandler/findTeam == Match NOT Found!");
-            }
+            competitionNumber++;
         }
-    }
-
-    //Searches for the value continuously until it finds it
-    //if it the inputValue from the tip cant be read then it stays at the default value 100000 and throws error
-    private String findOdd() {
-        // if findOdd Fails then it return xpath=""
-        String xpath="";
-        if (success) {
-            float readValue;
-            float inputValue =100000;
+        if (!doesntExist) {
+            isRunning=true;
+            competitionNumber--;
+            while(isRunning) {
                 try {
-                    inputValue = Float.parseFloat(value);
-                    readValue = Float.parseFloat(sl.getText(xpathConstant));
-                } catch (NumberFormatException e) {
-                    readValue=0;
-                }
-            if (inputValue!=100000) {
-                while(inputValue<readValue || readValue==0) {
-                    try {
-                        readValue = Float.parseFloat(sl.getText(xpathConstant));
-                        inputValue = Float.parseFloat(value);
-                    } catch (NumberFormatException e) {
-                        readValue=0;
+                    if (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]").contains(inputMessage[1])) {
+                        isRunning=false;
+                        System.out.println("2. FOUND MATCH");
                     }
+                } catch (Exception e) {
+                    //e.printStackTrace();
+                    System.out.println("Error 2");
                 }
-                xpath = xpathConstant;
+                matchNumber++;
             }
+            isRunning=true;
+            matchNumber--;
+            while(isRunning) {
+                try {
+                    System.out.println(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span"));
+                    if(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span").equals(inputMessage[1])) {
+                        isRunning=false;
+                        System.out.println("3. FOUND TEAM");
+                        System.out.println("4. TEAM NUMBER IS : "+teamNumber);
+                    }
+                } catch (Exception e) {
+//                    e.printStackTrace();
+                    System.out.println("Error 3");
+                }
+                teamNumber++;
+            }
+            teamNumber--;
         }
-        return xpath;
     }
-
-
-    //These are getter Methods
-    public String getMatchTime() {
-        return matchTime;
-    }
-    public String getMatchPeriod() {
-        return matchPeriod;
-    }
-    public int getCONSTANT() {
-        return CONSTANT;
-    }
-    public int getTourNumber() {
-        return tourNumber;
-    }
-    public int getTeamNumber() {
-        return teamNumber;
-    }
-    public int getMatchOfTour() {
-        return matchOfTour;
+    // compare the handicap numbers
+    private void winOddChecker() {
+        columnBets=3;
+        rowBets=teamNumber;
+        ABBets=2;
+        Float winOdds = Float.parseFloat(inputMessage[3]);
+        try {
+            Float winOddsNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]"));
+            if(winOddsNow>=winOdds && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]")!=null)) {
+                System.out.println("PLAY THE FUCKING WIN NOW YOU MORON!!!!");
+                betFound=true;
+                // pass xpath to click on it
+                xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
+            }
+        }catch (Exception e) {
+            System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker");
+        }
     }
 }

@@ -111,6 +111,14 @@ public class SeleniumMethods {
         return pointAwt;
     }
 
+    public void switchFrame(String id) {
+        driver.switchTo().frame(id);
+    }
+
+    public void switchToDefaultFrame() {
+        driver.switchTo().defaultContent();
+    }
+
     // Gets Cookies
     public Set<Cookie> getCookies() {
         return driver.manage().getCookies();

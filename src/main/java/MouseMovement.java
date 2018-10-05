@@ -75,6 +75,32 @@ public class MouseMovement {
         randomCursorMoveMethod1(xpath);
     }
 
+    //Checks if the element is on the Screen , else scrolls by 30 with a delay of 500-1000ms FOR IFRAME
+    public void scrollToViewIFRAME(String xpath) {
+        randomDelay(30,60);
+        long x = -1;
+        // multiply by -1 to change direction
+        int directionScrolled=1;
+        int scrollValue;
+        // The higher the value the lower the speed
+        int scrollSpeed =1;
+        //while element isn't on screen
+        while(!elementOnScreenIFrame(xpath)) {
+            if(sl.getScrolledY()==x) {
+                directionScrolled=directionScrolled*(-1);
+                scrollSpeed = scrollSpeed*2;
+            }
+            scrollValue = ((rand.nextInt(130)/scrollSpeed)+1)*directionScrolled;
+            x=sl.getScrolledY();
+            robot.mouseWheel(scrollValue);
+            randomDelay(500,700);
+            if (scrollSpeed==128) {
+                scrollSpeed=1;
+            }
+        }
+        randomCursorMoveMethod1IFrame(xpath);
+    }
+
     // Same as Scroll to view but checks the screen from 0-500 pixes
     public void scrollToViewForZero(String xpath) {
         randomDelay(30,60);
@@ -88,6 +114,11 @@ public class MouseMovement {
     // Combines the randomRectPoint and the CursorMoveMethod1
     public void randomCursorMoveMethod1(String xpath) {
         cursorMoveMethod1(randomRectPoint(xpath));
+    }
+
+    // Combines the randomRectPoint and the CursorMoveMethod1 FOR IFRAME
+    public void randomCursorMoveMethod1IFrame(String xpath) {
+        cursorMoveMethod1IFrame(randomRectPoint(xpath));
     }
 
     // A method that presses Enter key
@@ -123,7 +154,38 @@ public class MouseMovement {
             Double yd1 = destinationPoint.getY();
             int y1=yd1.intValue();
             int x1=xd1.intValue();
-            // has a 90% chance to go where it is expected to go
+            while (!(x==x1 && y==y1+yOffset)) {
+                if(x<x1) {
+                    x++;
+                }else if(x>x1) {
+                    x--;
+                }
+                if(y<y1+yOffset) {
+                    y++;
+                }else if (y>y1+yOffset) {
+                    y--;
+                }
+                robot.mouseMove(x,y);
+                Thread.sleep(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // gets the starting point and the destination for the mouse and adds the YOffset value FOR IFRAME
+    private void cursorMoveMethod1IFrame(Point destinationPoint){
+        try {
+            Point point=getMousePosition();
+            Double xd = point.getX();
+            Double yd = point.getY();
+            int y=yd.intValue();
+            int x=xd.intValue();
+            Double xd1 = destinationPoint.getX()+sl.getCoordinates(PropertiesXpath.getProp("IFRAME")).getX();
+            Double yd1 = destinationPoint.getY()+sl.getCoordinates(PropertiesXpath.getProp("IFRAME")).getY();
+            int y1=yd1.intValue();
+            int x1=xd1.intValue();
             while (!(x==x1 && y==y1+yOffset)) {
                 if(x<x1) {
                     x++;
@@ -190,6 +252,18 @@ public class MouseMovement {
     private boolean elementOnScreen (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
+        if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()+1) {
+            isDisplayed=true;
+        }else {
+            isDisplayed=false;
+        }
+        return isDisplayed;
+    }
+
+    // Checks if the element in the specified Xpath is on the web screen (1-500 pixels) and return boolean FOR IFRAME
+    private boolean elementOnScreenIFrame (String xPathIframe) {
+        boolean isDisplayed;
+        int point = sl.getCoordinatesY(PropertiesXpath.getProp("IFRAME"))+sl.getCoordinatesY(xPathIframe);
         if (sl.getScrolledY()+500>=point && point>=sl.getScrolledY()+1) {
             isDisplayed=true;
         }else {

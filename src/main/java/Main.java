@@ -12,9 +12,9 @@ public class Main extends Application{
     // TODO : Create JAR
     // TODO : Add LogFile
     // TODO : When we search to play 2 or more bets simultaneously open on a new browser window and load with cookies (autoLogin)
-    // TODO : Handle Exception Φραφμένο
 
-    static PropertiesHandler properties;
+    // TODO : Create O/U handler
+
 
     public static void main(String[] args) throws Exception{
         Initialization();
@@ -37,7 +37,7 @@ public class Main extends Application{
     }
 
     private static void Initialization () {
-
-        properties = new PropertiesHandler();
+        new PropertiesXpath();
+        new PropertiesHandler();
     }
 }

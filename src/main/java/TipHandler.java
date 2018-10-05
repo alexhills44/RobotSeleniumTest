@@ -1,4 +1,7 @@
 public class TipHandler {
+    /**
+     * This Class holds all the Classes and the Methods needed to play the
+     */
 
     private String tip;
     private String[] tipArray;
@@ -12,6 +15,11 @@ public class TipHandler {
     private float betSize = PropertiesHandler.getBetSize();
     private int betMulty =1;
 
+    /////////////////League---TeamName---Bet---Odds///////////////
+    /////////////////League---TeamName---Bet---Odds///////////////
+    /////////////////League---TeamName---Bet---Odds///////////////
+    /////////////////League---TeamName---Bet---Odds///////////////
+    /////////////////League---TeamName---Bet---Odds///////////////
 
     private int teamNumber,tourNumber,matchOfTour,constant,matchStartTime;
     TipHandler(String tip0,SeleniumMethods sl0,MouseMovement ms0,ActionSequence as0) {
@@ -29,33 +37,38 @@ public class TipHandler {
         tipArray = tip.split("---");
 
         if(tipArray[3].equals("Νίκη")||tipArray[3].equals("Νικη")) {
-            WinHandler winHandler = new WinHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
-            tourNumber = winHandler.getTourNumber();
-            teamNumber = winHandler.getTeamNumber();
-            matchOfTour = winHandler.getMatchOfTour();
-            constant = winHandler.getCONSTANT();
-            xpath = winHandler.findTip();
-            matchTimeSet(winHandler.getMatchTime(),winHandler.getMatchPeriod());
+            System.out.println("Found that tip is Handicap");
+            WinHandler winHandler = new WinHandler(tipArray,sl);
+            xpath = winHandler.getWin();
+//            tourNumber = winHandler.getTourNumber();
+//            teamNumber = winHandler.getTeamNumber();
+//            matchOfTour = winHandler.getMatchOfTour();
+//            constant = winHandler.getCONSTANT();
+//            xpath = winHandler.findTip();
+//            matchTimeSet(winHandler.getMatchTime(),winHandler.getMatchPeriod());
 
         }else if ((tipArray[3].equals("Χάντικαπ") ||tipArray[3].equals("Χαντικαπ")) && (tipArray[4].contains("-")||tipArray[4].contains("+"))) {
-            HandicapHandler handicapHandler = new HandicapHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
-            tourNumber = handicapHandler.getTourNumber();
-            teamNumber = handicapHandler.getTeamNumber();
-            matchOfTour = handicapHandler.getMatchOfTour();
-            constant = handicapHandler.getCONSTANT();
-            xpath = handicapHandler.findTip();
-            matchTimeSet(handicapHandler.getMatchTime(),handicapHandler.getMatchPeriod());
-
-        }else if ((tipArray[3].equals("Συνολικά") || tipArray[3].equals("Συνολικα")) &&(tipArray[4].contains("O")||tipArray[4].contains("U"))) {
-            OverUnderHandler overUnderHandler = new OverUnderHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
-            tourNumber = overUnderHandler.getTourNumber();
-            teamNumber = overUnderHandler.getTeamNumber();
-            matchOfTour = overUnderHandler.getMatchOfTour();
-            constant = overUnderHandler.getCONSTANT();
-            xpath = overUnderHandler.findTip();
-            matchTimeSet(overUnderHandler.getMatchTime(),overUnderHandler.getMatchPeriod());
+            System.out.println("Found that tip is Win");
+            HandicapHandler handicapHandler = new HandicapHandler(tipArray,sl);
+            xpath = handicapHandler.getHandicap();
+//            tourNumber = handicapHandler.getTourNumber();
+//            teamNumber = handicapHandler.getTeamNumber();
+//            matchOfTour = handicapHandler.getMatchOfTour();
+//            constant = handicapHandler.getCONSTANT();
+//            xpath = handicapHandler.findTip();
+//            matchTimeSet(handicapHandler.getMatchTime(),handicapHandler.getMatchPeriod());
 
         }
+//        else if ((tipArray[3].equals("Συνολικά") || tipArray[3].equals("Συνολικα")) &&(tipArray[4].contains("O")||tipArray[4].contains("U"))) {
+//            OverUnderHandler overUnderHandler = new OverUnderHandler(sl,tipArray[0],tipArray[1],tipArray[4]);
+//            tourNumber = overUnderHandler.getTourNumber();
+//            teamNumber = overUnderHandler.getTeamNumber();
+//            matchOfTour = overUnderHandler.getMatchOfTour();
+//            constant = overUnderHandler.getCONSTANT();
+//            xpath = overUnderHandler.findTip();
+//            matchTimeSet(overUnderHandler.getMatchTime(),overUnderHandler.getMatchPeriod());
+//
+//        }
     }
 
     private void matchTimeSet (String matchTime,String matchPeriod) {
@@ -69,7 +82,7 @@ public class TipHandler {
         }else if (matchPeriod.contains("3")) {
             String[] matchTimeArray = matchTime.split(":");
             matchStartTime = (Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]))+1200;
-        }else if (matchPeriod.contains("3")) {
+        }else if (matchPeriod.contains("4")) {
             String[] matchTimeArray = matchTime.split(":");
             matchStartTime = (Integer.valueOf(matchTimeArray[0])*60 + Integer.valueOf(matchTimeArray[1]))+1800;
         }
@@ -83,22 +96,29 @@ public class TipHandler {
         while (!hasBeenPlayed) {
             tipHandler();
             if (!xpath.equals("")) {
-                MouseMovement ms = new MouseMovement(sl);
+                // Open Window to bet in
                 ms.scrollToView(xpath);
                 ms.onLeftClick();
+                // Bet multy*betSize  betMulty==tipArray[2] ex.  Διπλο Πονταρισμα
                 betMulty=Integer.valueOf(tipArray[2]);
                 betSize = betSize*betMulty;
+                // Place bet and press confirm bet
                 as.placeBetSize(betSize);
+
+                // check if the bet has been played
                 if (as.betStatus()) {
-                    as.autoClose(teamName,constant,betSize);
                     hasBeenPlayed=true;
+                    ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+                    ms.onLeftClick();
                 }else {
                     // check if values are in the ranges we want them to be
                     // we do that by tipArray[4] with
                     // else click the button again and start the search again
+                    sl.switchToDefaultFrame();
                     ms.scrollToView(xpath);
                     ms.onLeftClick();
                 }
+
             }else {
                 hasBeenPlayed=true;
                 System.out.println("ERROR TipHandler/run() : xpath=null");
