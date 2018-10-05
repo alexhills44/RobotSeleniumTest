@@ -109,6 +109,7 @@ public class HandicapHandler {
                         //                    e.printStackTrace();
                         System.out.println("Error 3");
                     }
+                    teamNumber++;
                 }
             }
             teamNumber--;

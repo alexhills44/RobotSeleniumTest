@@ -100,6 +100,7 @@ public class TipHandler {
         boolean hasBeenPlayed=false;
         int flag=0;
         while (!hasBeenPlayed) {
+            System.out.println("Entered Looooop");
             flag++;
             tipHandler();
             if (!xpath.equals("")) {
@@ -122,27 +123,16 @@ public class TipHandler {
                 try {
                     ms.randomDelay(3000,6000);
                     ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+                    ms.onLeftClick();
                     hasBeenPlayed=true;
+                    System.out.println("bet has been placed");
                 } catch (Exception e) {
                     e.printStackTrace();
                     sl.switchToDefaultFrame();
                     ms.scrollToView(xpath);
                     ms.onLeftClick();
+                    System.out.println("Retry to place bet");
                 }
-
-//                // check if the bet has been played
-//                if (as.betStatus()) {
-//                    hasBeenPlayed=true;
-//                    ms.randomDelay(3000,6000);
-//                    ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
-//                }else {
-//                    // check if values are in the ranges we want them to be
-//                    // we do that by tipArray[4] with
-//                    // else click the button again and start the search again
-//                    sl.switchToDefaultFrame();
-//                    ms.scrollToView(xpath);
-//                    ms.onLeftClick();
-//                }
 
             }else {
                 System.out.println("ERROR TipHandler/run() : xpath=null   OR BET HAS NO VALUE");

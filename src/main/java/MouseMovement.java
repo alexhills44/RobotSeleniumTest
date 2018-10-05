@@ -262,8 +262,9 @@ public class MouseMovement {
     // Checks if the element in the specified Xpath is on the web screen (1-500 pixels) and return boolean FOR IFRAME
     private boolean elementOnScreenIFrame (String xPathIframe) {
         boolean isDisplayed;
+        // TODO : Find bar Height so that = pint>= ScreenSize.height-barHeight
         int point = PropertiesHandler.getiFramePointY()+sl.getCoordinatesY(xPathIframe);
-        isDisplayed = sl.getScrolledY() + 600 >= point && point >= sl.getScrolledY() + 1;
+        isDisplayed = sl.getScrolledY() + 675 >= point && point >= sl.getScrolledY() + 1;
         return isDisplayed;
     }
 

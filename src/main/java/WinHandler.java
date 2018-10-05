@@ -64,7 +64,7 @@ public class WinHandler {
                 try {
                     if (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div").contains(inputMessage[1])) {
                         isRunning=false;
-                        System.out.println("2. FOUND MATCH");
+                        System.out.println("2. FOUND MATCH , MATCH IS SINGLE");
                         isSingle=true;
                     }
                 }catch (Exception e) {
@@ -104,13 +104,14 @@ public class WinHandler {
                         System.out.println(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span"));
                         if(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[1]/div/div[3]/div["+String.valueOf(teamNumber)+"]/span").equals(inputMessage[1])) {
                             isRunning=false;
-                            System.out.println("3. FOUND TEAM");
-                            System.out.println("4. TEAM NUMBER IS : "+teamNumber);
+                            System.out.println("3. FOUND TEAM, MATCH IS SINGLE");
+                            System.out.println("4. TEAM NUMBER IS : "+teamNumber+", MATCH IS SINGLE");
                         }
                     } catch (Exception e) {
                         //                    e.printStackTrace();
                         System.out.println("Error 3");
                     }
+                    teamNumber++;
                 }
             }
             teamNumber--;
@@ -121,6 +122,7 @@ public class WinHandler {
         if (!isSingle) {
             columnBets=3;
             rowBets=teamNumber;
+            System.out.println("Colum Bets "+columnBets+"  RowBets "+rowBets);
             ABBets=2;
             Float winOdds = Float.parseFloat(inputMessage[3]);
             try {
@@ -133,15 +135,17 @@ public class WinHandler {
                     xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker");
+                System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker  More than two Matches");
             }
         } else {
+            System.out.println("Match is Single"+isSingle);
             columnBets=3;
             rowBets=teamNumber;
             ABBets=2;
             Float winOdds = Float.parseFloat(inputMessage[3]);
             try {
                 Float winOddsNow = Float.parseFloat(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]"));
+                System.out.println("Try Single Match 1");
                 if(winOddsNow>=winOdds && (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]")!=null)) {
                     System.out.println("PLAY THE FUCKING WIN NOW YOU MORON!!!!");
                     System.out.println("PLAY THE FUCKING WIN NOW YOU MORON!!!!");
@@ -150,7 +154,7 @@ public class WinHandler {
                     xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker");
+                System.out.println("Xpath Problem : HandicapHandler ----> HandicapChecker Single Match");
             }
         }
     }

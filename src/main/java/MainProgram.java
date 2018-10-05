@@ -71,7 +71,7 @@ public class MainProgram implements Runnable {
         ms.randomDelay(2000,5000);
         as.setCredentials();
         System.out.println("log in");
-        ms.randomDelay(2000,5000);
+        ms.randomDelay(4000,5000);
         as.inPlay();
         ms.randomDelay(2000,5000);
         as.basketCategory();
