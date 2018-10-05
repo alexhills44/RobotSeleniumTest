@@ -105,20 +105,32 @@ public class TipHandler {
 
 
                 // Place bet and press confirm bet
-                ms.randomDelay(2000,4000);
-                if (flag==1) {
+                ms.randomDelay(2000, 4000);
+                if (flag == 1) {
                     // Bet multy*betSize  betMulty==tipArray[2] ex.  Διπλο Πονταρισμα
-                    betMulty=Integer.valueOf(tipArray[2]);
-                    betSize = betSize*betMulty;
+                    betMulty = Integer.valueOf(tipArray[2]);
+                    betSize = betSize * betMulty;
                 }
                 as.placeBetSize(betSize);
+                ms.randomDelay(4000, 7000);
+
+
+                try {
+                    ms.randomDelay(3000,6000);
+                    ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+                    hasBeenPlayed=true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    sl.switchToDefaultFrame();
+                    ms.scrollToView(xpath);
+                    ms.onLeftClick();
+                }
 
                 // check if the bet has been played
                 if (as.betStatus()) {
                     hasBeenPlayed=true;
                     ms.randomDelay(3000,6000);
                     ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
-                    ms.onLeftClick();
                 }else {
                     // check if values are in the ranges we want them to be
                     // we do that by tipArray[4] with
