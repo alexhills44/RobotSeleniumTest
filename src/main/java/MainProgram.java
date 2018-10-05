@@ -16,7 +16,7 @@ public class MainProgram implements Runnable {
 
     public void run() {
         screenCalibrationChecker();
-        testSkroutz();
+        testJunk();
     }
 
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
