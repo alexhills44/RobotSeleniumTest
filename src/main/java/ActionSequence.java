@@ -181,20 +181,25 @@ public class ActionSequence {
                     // Get text from the box that betPointer is pointing
                     String boxInfo = sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]");
                     // Xpath for the Cog button according to betPointer
+                    System.out.println("has passed this point");
                     String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
                     //if it is in here it means it is a HANDICAP
                     if ((tipArray[3].contains("+")|tipArray[3].contains("-"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
                         pressSetConfirmCogMultiple(xpathCog);
+                        System.out.println("---------------- A -----------------");
                     //if it is in here it means it is a O/U
                     }else if ((tipArray[3].contains("O")|tipArray[3].contains("U"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
                         pressSetConfirmCogMultiple(xpathCog);
+                        System.out.println("---------------- B -----------------");
                      //if it is in here it means it is a WIN
                     }else if (boxInfo.contains(oddsCatched)&&boxInfo.contains(tipArray[1])){
                         pressSetConfirmCogMultiple(xpathCog);
+                        System.out.println("---------------- C -----------------");
                     }
 
                 }catch (Exception ex) {
                     // if there is no box in that position stop looking
+                    System.out.println("has passed this point and exited");
                     isRunning=false;
                 }
             }
@@ -223,6 +228,7 @@ public class ActionSequence {
     public void getOddAndValueFromBetPlacedIFRAME() {
         // Box that displays text when the bet is succesful
         String[] betInfo = sl.getText("/html/body/div[1]/div/ul/li[7]").split("\n");
+        System.out.println("---------------- 1 -----------------");
 
         for(String s:betInfo) {
             if (s.contains("Νικητής Αγώνα")) {
@@ -242,6 +248,7 @@ public class ActionSequence {
     }
 
     private void getOddFromBet(String[] betInfo) {
+        System.out.println("---------------- 2 -----------------");
         String[] lineArray = betInfo[0].split(" ");
         try {
             oddsCatched = lineArray[lineArray.length-1];
@@ -251,6 +258,7 @@ public class ActionSequence {
     }
 
     private void getValueFromBet(String[] betInfo) {
+        System.out.println("---------------- 3 -----------------");
         String[] lineArray = betInfo[0].split(" ");
         try {
             valueCatched = lineArray[lineArray.length-2];
@@ -260,6 +268,7 @@ public class ActionSequence {
     }
 
     private void pressSetConfirmCogMultiple(String xpathCog) {
+        System.out.println("---------------- 4 -----------------");
         // cogInput extension xpath
         String cogInput="/div/div[4]/div[1]/div[1]/span/input";
         // cogConfirm extension xpath
@@ -268,9 +277,11 @@ public class ActionSequence {
         ms.onLeftClick();
         ms.randomDelay(1000,2000);
         ms.scrollToView(xpathCog+cogInput);
+        System.out.println("---------------- 5 -----------------");
         ms.onLeftClick();
         ms.typeString(String.valueOf(setClosingAmount(oddsCatched,betSize)));
         ms.randomDelay(1000,2000);
+        System.out.println("---------------- 6 -----------------");
         ms.scrollToView(xpathCog+cogConfirm);
         ms.onLeftClick();
     }
