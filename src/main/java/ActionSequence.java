@@ -84,7 +84,6 @@ public class ActionSequence {
                 ms.onLeftClick();
                 isRunning=false;
             }catch (Exception e) {
-                new PropertiesXpath();
                 System.out.println("Not in View");
                 ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
                 ms.onLeftClick();
@@ -136,7 +135,7 @@ public class ActionSequence {
             ms.randomDelay(2000,4000);
             ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
         } catch (Exception e) {
-            ms.scrollToView(PropertiesXpath.getProp("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]"));
+            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
         }
         ms.onLeftClick();
         ms.randomDelay(1000,2000);
@@ -262,9 +261,9 @@ public class ActionSequence {
 
     private void pressSetConfirmCogMultiple(String xpathCog) {
         // cogInput extension xpath
-        String cogInput="/div/div[3]/div[1]/div[1]/span/input";
+        String cogInput="/div/div[4]/div[1]/div[1]/span/input";
         // cogConfirm extension xpath
-        String cogConfirm="/div/div[3]/div[3]/span";
+        String cogConfirm="/div/div[4]/div[3]/span";
         ms.scrollToView(xpathCog);
         ms.onLeftClick();
         ms.randomDelay(1000,2000);
