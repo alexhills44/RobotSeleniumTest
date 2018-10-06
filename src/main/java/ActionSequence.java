@@ -132,8 +132,12 @@ public class ActionSequence {
         sl.switchToDefaultFrame();
         ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
         ms.onLeftClick();
-        ms.randomDelay(2000,4000);
-        ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
+        try {
+            ms.randomDelay(2000,4000);
+            ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
+        } catch (Exception e) {
+            ms.scrollToView(PropertiesXpath.getProp("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]"));
+        }
         ms.onLeftClick();
         ms.randomDelay(1000,2000);
         // Try to close Match if it is single
