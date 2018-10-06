@@ -234,16 +234,22 @@ public class ActionSequence {
     private int setClosingAmount (String odd,float betSize) {
         float odds = Float.valueOf(odd);
         if (odds>=8) {
+            System.out.println("--8");
             return (int)(3*betSize);
         }else if(odds>=6) {
+            System.out.println("--6");
             return (int)(2.5*betSize);
         }else if (odds>2.6) {
+            System.out.println("--2.6");
             return (int)(2.3*betSize);
         }else if (odds>2) {
+            System.out.println("--2");
             return (int)(2*betSize);
         }else if (odds>=1.8) {
+            System.out.println("--1.8");
             return (int)(1.7*betSize);
         }else {
+            System.out.println("--else");
             return (int)(1.5*betSize);
         }
     }
@@ -294,17 +300,15 @@ public class ActionSequence {
         System.out.println("---------------- 4 -----------------");
         // cogInput extension xpath
         String cogInput = "/div/div[4]/div[1]/div[1]/span/input";
-        //////////////////div/div[4]/div[1]/div[1]/span/input
         // cogConfirm extension xpath
         String cogConfirm = "/div/div[4]/div[3]/span";
-//        ms.scrollToView(xpathCog);
         ms.scrollToView("html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input");
         ms.onLeftClick();
         ms.randomDelay(1000, 2000);
-//        ms.scrollToView(xpathCog+cogInput);
         ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
         System.out.println("---------------- 5 -----------------");
         ms.onLeftClick();
+        System.out.println(String.valueOf(setClosingAmount(oddsCatched, betSize)));
         ms.typeString(String.valueOf(setClosingAmount(oddsCatched, betSize)));
         ms.randomDelay(1000, 2000);
         System.out.println("---------------- 6 -----------------");
