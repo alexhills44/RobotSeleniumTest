@@ -179,7 +179,7 @@ public class ActionSequence {
                 betPointer++;
                 try {
                     // Get text from the box that betPointer is pointing
-                    String boxInfo = sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]");
+                    String boxInfo = sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div["+betPointer+"]");
                     // Xpath for the Cog button according to betPointer
                     System.out.println("has passed this point");
                     String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
@@ -207,6 +207,18 @@ public class ActionSequence {
         }
     }
 
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[2]
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[3]
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[4]
+
+
+
+
+
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[1]/div[3]/div
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]"
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[2]/div[3]
     // Passes the Closing amount according to the odd Catched
     private int setClosingAmount (String odd,float betSize) {
         float odds = Float.valueOf(odd);

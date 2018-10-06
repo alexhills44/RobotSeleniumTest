@@ -18,6 +18,10 @@ public class MainProgram implements Runnable {
         testJunk();
     }
 
+
+
+
+
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
     // until it hits the button and redirects to another page
     // then does a simple subtraction finish-start and gets the YOffset

@@ -54,6 +54,7 @@ public class WinHandler {
             } catch (Exception e) {
                 //e.printStackTrace();
                 System.out.println("Error 1");
+                TipHandler.stopTipHandler();
             }
             competitionNumber++;
         }
@@ -79,6 +80,7 @@ public class WinHandler {
                 } catch (Exception e) {
                     //e.printStackTrace();
                     System.out.println("Error 2");
+                    TipHandler.stopTipHandler();
                 }
                 matchNumber++;
             }
@@ -97,6 +99,7 @@ public class WinHandler {
                     } catch (Exception e) {
     //                    e.printStackTrace();
                         System.out.println("Error 3");
+                        TipHandler.stopTipHandler();
                     }
                     teamNumber++;
                 } else {
@@ -110,6 +113,7 @@ public class WinHandler {
                     } catch (Exception e) {
                         //                    e.printStackTrace();
                         System.out.println("Error 3");
+                        TipHandler.stopTipHandler();
                     }
                     teamNumber++;
                 }

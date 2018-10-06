@@ -16,7 +16,7 @@ public class TipHandler {
     private String value;
     private float betSize = PropertiesHandler.getBetSize();
     private int betMulty =1;
-    boolean hasBeenPlayed=false;
+    public static boolean hasBeenPlayed=false;
 
     /////////////////League---TeamName---Bet---Odds///////////////
     /////////////////League---TeamName---Bet---Odds///////////////
@@ -145,7 +145,7 @@ public class TipHandler {
         }
     }
 
-    public void stopTipHandler() {
+    public static void stopTipHandler() {
         hasBeenPlayed=true;
     }
 }
