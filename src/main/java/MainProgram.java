@@ -9,7 +9,7 @@ public class MainProgram implements Runnable {
     private MouseMovement ms;
     private ActionSequence as;
     private int yOffset=PropertiesHandler.getYOffset();
-
+    public static Scanner scan = new Scanner(System.in);
     MainProgram() {
 
     }
@@ -78,16 +78,11 @@ public class MainProgram implements Runnable {
         System.out.println("basket category");
         ms.randomDelay(3000,7000);
         TipHandler tipHandler;
-        Scanner scan = new Scanner(System.in);
+
         while(scan.hasNext()) {
             ms.randomDelay(7000,12000);
             tipHandler = new TipHandler(scan.nextLine(),sl,ms,as);
             tipHandler.run();
-            if (scan.nextLine().equals("stop")) {
-                tipHandler.stopTipHandler();
-                System.out.println("Bet has been Canceled");
-            }
-
 
         }
 

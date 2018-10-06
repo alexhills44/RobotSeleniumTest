@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class TipHandler {
     /**
      * This Class holds all the Classes and the Methods needed to play the
@@ -101,6 +103,10 @@ public class TipHandler {
         hasBeenPlayed=false;
         boolean flag=true;
         while (!hasBeenPlayed) {
+            if (MainProgram.scan.nextLine().equals("stop")) {
+                hasBeenPlayed=true;
+                System.out.println("Bet has been Canceled");
+            }
             System.out.println("Entered Looooop");
             tipHandler();
             if (!xpath.equals("")) {
