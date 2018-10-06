@@ -132,7 +132,7 @@ public class ActionSequence {
         sl.switchToDefaultFrame();
         ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
         ms.onLeftClick();
-        ms.randomDelay(1000,2000);
+        ms.randomDelay(2000,4000);
         ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
         ms.onLeftClick();
         ms.randomDelay(1000,2000);
@@ -165,10 +165,6 @@ public class ActionSequence {
             ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
             ms.onLeftClick();
             ms.randomDelay(1000,2000);
-            // Make statement
-            ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div[2]/div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[4]/span
-            ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div/div/div[3]/div[4]/span
-            //
         }catch(Exception e) {
             System.out.println("More Matches are Open");
             // shows us which bet we are looking at
@@ -181,6 +177,7 @@ public class ActionSequence {
                 try {
                     // Get text from the box that betPointer is pointing
                     String boxInfo = sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]");
+                    // Xpath for the Cog button according to betPointer
                     String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
                     //if it is in here it means it is a HANDICAP
                     if ((tipArray[3].contains("+")|tipArray[3].contains("-"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
@@ -221,6 +218,7 @@ public class ActionSequence {
     }
 
     public void getOddAndValueFromBetPlacedIFRAME() {
+        // Box that displays text when the bet is succesful
         String[] betInfo = sl.getText("/html/body/div[1]/div/ul/li[7]").split("\n");
 
         for(String s:betInfo) {
@@ -259,7 +257,9 @@ public class ActionSequence {
     }
 
     private void pressSetConfirmCogMultiple(String xpathCog) {
+        // cogInput extension xpath
         String cogInput="/div/div[3]/div[1]/div[1]/span/input";
+        // cogConfirm extension xpath
         String cogConfirm="/div/div[3]/div[3]/span";
         ms.scrollToView(xpathCog);
         ms.onLeftClick();
