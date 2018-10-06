@@ -119,7 +119,7 @@ public class TipHandler {
                     as.setBetSize(betSize);
                 }
                 as.placeBetSize();
-                ms.randomDelay(4000, 7000);
+                ms.randomDelay(2000, 4000);
 
                 try {
                     ms.randomDelay(3000,6000);

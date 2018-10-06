@@ -186,18 +186,24 @@ public class ActionSequence {
                         String boxInfo = sl.getText("html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div["+viewPointer+"]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div["+betPointer+"]");
                         // Xpath for the Cog button according to betPointer
                         System.out.println("has passed this point");
-                        String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
+                        String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div["+viewPointer+"]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
+                        /////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[2]/div[3]/div/div[3]/div/div[3]/div[2]/div/div
+                        System.out.println("view Pointer == "+viewPointer);
+                        System.out.println("bet Pointer == "+betPointer);
+                        System.out.println(boxInfo);
+                        System.out.println(oddsCatched);
+                        System.out.println(valueCatched);
                         //if it is in here it means it is a HANDICAP
                         if ((tipArray[3].contains("+")|tipArray[3].contains("-"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
-                            pressSetConfirmCogMultiple(xpathCog);
+                            pressSetConfirmCogMultiple(xpathCog,viewPointer,betPointer);
                             System.out.println("---------------- A -----------------");
                         //if it is in here it means it is a O/U
                         }else if ((tipArray[3].contains("O")|tipArray[3].contains("U"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
-                            pressSetConfirmCogMultiple(xpathCog);
+                            pressSetConfirmCogMultiple(xpathCog,viewPointer,betPointer);
                             System.out.println("---------------- B -----------------");
                          //if it is in here it means it is a WIN
-                        }else if (boxInfo.contains(oddsCatched)&&boxInfo.contains(tipArray[1])){
-                            pressSetConfirmCogMultiple(xpathCog);
+                        }else if (boxInfo.contains(oddsCatched)){
+                            pressSetConfirmCogMultiple(xpathCog,viewPointer,betPointer);
                             System.out.println("---------------- C -----------------");
                         }
 
@@ -248,17 +254,17 @@ public class ActionSequence {
         System.out.println("---------------- 1 -----------------");
 
         for(String s:betInfo) {
-            if (s.contains("Νικητής Αγώνα")) {
-                getOddFromBet(betInfo);
-                valueCatched="";
-                break;
-            }else if(s.contains("Χάντικαπ 2πλής επιλογής")) {
+            if(s.contains("Χάντικαπ 2πλής επιλογής")) {
                 getOddFromBet(betInfo);
                 getValueFromBet(betInfo);
                 break;
             }else if (s.contains("Συνολικά 2πλής επιλογής")) {
                 getOddFromBet(betInfo);
                 getValueFromBet(betInfo);
+                break;
+            }else {
+                getOddFromBet(betInfo);
+                valueCatched="";
                 break;
             }
         }
@@ -284,22 +290,25 @@ public class ActionSequence {
         }
     }
 
-    private void pressSetConfirmCogMultiple(String xpathCog) {
+    private void pressSetConfirmCogMultiple(String xpathCog,int viewPointer,int betPointer) {
         System.out.println("---------------- 4 -----------------");
         // cogInput extension xpath
-        String cogInput="/div/div[4]/div[1]/div[1]/span/input";
+        String cogInput = "/div/div[4]/div[1]/div[1]/span/input";
+        //////////////////div/div[4]/div[1]/div[1]/span/input
         // cogConfirm extension xpath
-        String cogConfirm="/div/div[4]/div[3]/span";
-        ms.scrollToView(xpathCog);
+        String cogConfirm = "/div/div[4]/div[3]/span";
+//        ms.scrollToView(xpathCog);
+        ms.scrollToView("html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input");
         ms.onLeftClick();
-        ms.randomDelay(1000,2000);
-        ms.scrollToView(xpathCog+cogInput);
+        ms.randomDelay(1000, 2000);
+//        ms.scrollToView(xpathCog+cogInput);
+        ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
         System.out.println("---------------- 5 -----------------");
         ms.onLeftClick();
-        ms.typeString(String.valueOf(setClosingAmount(oddsCatched,betSize)));
-        ms.randomDelay(1000,2000);
+        ms.typeString(String.valueOf(setClosingAmount(oddsCatched, betSize)));
+        ms.randomDelay(1000, 2000);
         System.out.println("---------------- 6 -----------------");
-        ms.scrollToView(xpathCog+cogConfirm);
+        ms.scrollToView(xpathCog + cogConfirm);
         ms.onLeftClick();
     }
 
