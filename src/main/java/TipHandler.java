@@ -14,6 +14,7 @@ public class TipHandler {
     private String value;
     private float betSize = PropertiesHandler.getBetSize();
     private int betMulty =1;
+    boolean hasBeenPlayed=false;
 
     /////////////////League---TeamName---Bet---Odds///////////////
     /////////////////League---TeamName---Bet---Odds///////////////
@@ -97,7 +98,7 @@ public class TipHandler {
     // if it doesnt succeed then removes bet by clicking on the element on the main bet page and tries again
     // if it doesnt find it
     public void run() {
-        boolean hasBeenPlayed=false;
+        hasBeenPlayed=false;
         boolean flag=true;
         while (!hasBeenPlayed) {
             System.out.println("Entered Looooop");
@@ -140,5 +141,9 @@ public class TipHandler {
                 System.out.println("ERROR TipHandler/run() : xpath=null   OR BET HAS NO VALUE");
             }
         }
+    }
+
+    public void stopTipHandler() {
+        hasBeenPlayed=true;
     }
 }
