@@ -98,34 +98,36 @@ public class TipHandler {
     // if it doesnt find it
     public void run() {
         boolean hasBeenPlayed=false;
-        int flag=0;
+        boolean flag=true;
         while (!hasBeenPlayed) {
             System.out.println("Entered Looooop");
-            flag++;
             tipHandler();
             if (!xpath.equals("")) {
-                // Open Window to bet in
+                // Open Window to bet in -- Press the bet found
                 ms.scrollToView(xpath);
                 ms.onLeftClick();
-
-
                 // Place bet and press confirm bet
                 ms.randomDelay(2000, 4000);
-                if (flag == 1) {
+                if (flag) {
                     // Bet multy*betSize  betMulty==tipArray[2] ex.  Διπλο Πονταρισμα
+                    flag=false;
                     betMulty = Integer.valueOf(tipArray[2]);
                     betSize = betSize * betMulty;
+                    as.setBetSize(betSize);
                 }
-                as.placeBetSize(betSize);
+                as.placeBetSize();
                 ms.randomDelay(4000, 7000);
-
 
                 try {
                     ms.randomDelay(3000,6000);
+                    as.getOddAndValueFromBetPlacedIFRAME();
                     ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
                     ms.onLeftClick();
                     hasBeenPlayed=true;
+                    ms.randomDelay(1000,2000);
                     System.out.println("bet has been placed");
+                    as.autoClose(tipArray);
+                    System.out.println("autoClose has been placed");
                 } catch (Exception e) {
                     e.printStackTrace();
                     sl.switchToDefaultFrame();
