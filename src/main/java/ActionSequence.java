@@ -177,36 +177,41 @@ public class ActionSequence {
             // Runs until there is no other bet to look for
             while (isRunning) {
                 betPointer++;
-                try {
-                    // Get text from the box that betPointer is pointing
-                    String boxInfo = sl.getText("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div["+betPointer+"]");
-                    // Xpath for the Cog button according to betPointer
-                    System.out.println("has passed this point");
-                    String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
-                    //if it is in here it means it is a HANDICAP
-                    if ((tipArray[3].contains("+")|tipArray[3].contains("-"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
-                        pressSetConfirmCogMultiple(xpathCog);
-                        System.out.println("---------------- A -----------------");
-                    //if it is in here it means it is a O/U
-                    }else if ((tipArray[3].contains("O")|tipArray[3].contains("U"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
-                        pressSetConfirmCogMultiple(xpathCog);
-                        System.out.println("---------------- B -----------------");
-                     //if it is in here it means it is a WIN
-                    }else if (boxInfo.contains(oddsCatched)&&boxInfo.contains(tipArray[1])){
-                        pressSetConfirmCogMultiple(xpathCog);
-                        System.out.println("---------------- C -----------------");
-                    }
+                boolean foundView=false;
+                int viewPointer=0;
+                while (!foundView && viewPointer<10) {
+                    viewPointer++;
+                    try {
+                        // Get text from the box that betPointer is pointing
+                        String boxInfo = sl.getText("html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div["+viewPointer+"]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div["+betPointer+"]");
+                        // Xpath for the Cog button according to betPointer
+                        System.out.println("has passed this point");
+                        String xpathCog = "/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]/div/div[3]/div[2]/div/div";
+                        //if it is in here it means it is a HANDICAP
+                        if ((tipArray[3].contains("+")|tipArray[3].contains("-"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
+                            pressSetConfirmCogMultiple(xpathCog);
+                            System.out.println("---------------- A -----------------");
+                        //if it is in here it means it is a O/U
+                        }else if ((tipArray[3].contains("O")|tipArray[3].contains("U"))&&boxInfo.contains(oddsCatched)&&boxInfo.contains(valueCatched)&&boxInfo.contains(tipArray[1])) {
+                            pressSetConfirmCogMultiple(xpathCog);
+                            System.out.println("---------------- B -----------------");
+                         //if it is in here it means it is a WIN
+                        }else if (boxInfo.contains(oddsCatched)&&boxInfo.contains(tipArray[1])){
+                            pressSetConfirmCogMultiple(xpathCog);
+                            System.out.println("---------------- C -----------------");
+                        }
 
-                }catch (Exception ex) {
-                    // if there is no box in that position stop looking
-                    System.out.println("has passed this point and exited");
-                    isRunning=false;
+                    }catch (Exception ex) {
+                        // if there is no box in that position stop looking
+                        System.out.println("has passed this point and exited");
+                        isRunning=false;
+                    }
                 }
             }
 
         }
     }
-
+    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[1]
     ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]
     ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[2]
     ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[3]
