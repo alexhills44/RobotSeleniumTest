@@ -15,12 +15,9 @@ public class MainProgram implements Runnable {
 
     public void run() {
         screenCalibrationChecker();
+//
         testJunk();
     }
-
-
-
-
 
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
     // until it hits the button and redirects to another page
@@ -90,5 +87,25 @@ public class MainProgram implements Runnable {
         }
 
 
+    }
+
+    private void testSkroutz() {
+        //sl= new SeleniumMethods();
+        ms = new MouseMovement(sl);
+        as = new ActionSequence(sl,ms);
+        //sl.pageOpener("https://www.google.gr/");
+        Scanner scan = new Scanner(System.in);
+        while (scan.hasNext()) {
+            if (scan.nextLine().equals("go")) {
+//                ms.randomDelay(3000, 5000);
+                float a = 5;
+                String odds="1.8";
+                ActionSequence.setBetSize(a);
+                String s =as.setClosingAmount(odds);
+                System.out.println(s);
+                ms.randomDelay(4000,5000);
+                ms.typeString(as.setClosingAmount(odds));
+            }
+        }
     }
 }

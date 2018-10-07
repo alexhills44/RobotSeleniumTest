@@ -116,7 +116,7 @@ public class TipHandler {
                     flag=false;
                     betMulty = Integer.valueOf(tipArray[2]);
                     betSize = betSize * betMulty;
-                    as.setBetSize(betSize);
+                    ActionSequence.setBetSize(betSize);
                 }
                 as.placeBetSize();
                 ms.randomDelay(2000, 4000);

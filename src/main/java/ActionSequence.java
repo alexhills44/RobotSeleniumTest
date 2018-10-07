@@ -14,7 +14,7 @@ public class ActionSequence {
     private static String username =PropertiesHandler.getUsrNameB();
     private static String password =PropertiesHandler.getPswB();
 
-    private float betSize;
+    private static float betSize;
     private String oddsCatched,valueCatched;
 
 
@@ -153,11 +153,11 @@ public class ActionSequence {
             ms.randomDelay(1000,2000);
             // Type close Amount
             if (tipArray[3].contains("+")|tipArray[3].contains("-")|tipArray[3].contains("O")|tipArray[3].contains("U")) {
-                String closeStatement = String.valueOf(setClosingAmount("1.8",betSize));
-                ms.typeString(closeStatement);
+//                String closeStatement = String.valueOf(setClosingAmount("1.8",betSize));
+//                ms.typeString(closeStatement);
             }else {
-                String closeStatement = String.valueOf(setClosingAmount(tipArray[3],betSize));
-                ms.typeString(closeStatement);
+//                String closeStatement = String.valueOf(setClosingAmount(tipArray[3],betSize));
+//                ms.typeString(closeStatement);
             }
             ms.randomDelay(1000,2000);
             // confirm the Close Statement
@@ -217,21 +217,8 @@ public class ActionSequence {
 
         }
     }
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[1]
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[1]
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[2]
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[3]
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div[4]
-
-
-
-
-
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[1]/div[3]/div
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[7]/div/div/div/div[2]/div[3]/div["+betPointer+"]/div[3]"
-    ///html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[3]/div[2]/div[3]
     // Passes the Closing amount according to the odd Catched
-    private int setClosingAmount (String odd,float betSize) {
+    public int setClosingAmount (String odd,float betSize) {
         float odds = Float.valueOf(odd);
         if (odds>=8) {
             System.out.println("--8");
@@ -250,7 +237,7 @@ public class ActionSequence {
             return (int)(1.7*betSize);
         }else {
             System.out.println("--else");
-            return (int)(1.5*betSize);
+            return 7;
         }
     }
 
@@ -308,16 +295,50 @@ public class ActionSequence {
         ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
         System.out.println("---------------- 5 -----------------");
         ms.onLeftClick();
-        System.out.println(String.valueOf(setClosingAmount(oddsCatched, betSize)));
-        ms.typeString(String.valueOf(setClosingAmount(oddsCatched, betSize)));
+        System.out.println("aaaaaaaaaaaaaaaaa"+setClosingAmount(oddsCatched));
+        ms.randomDelay(2500,3000);
+        ms.typeString(setClosingAmount(oddsCatched));
         ms.randomDelay(1000, 2000);
         System.out.println("---------------- 6 -----------------");
         ms.scrollToView(xpathCog + cogConfirm);
         ms.onLeftClick();
     }
 
-    public void setBetSize(float betSize0) {
-        betSize=betSize0;
+    static void setBetSize(float betSize0) {
+        try {
+            betSize=betSize0;
+            System.out.println(betSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public String setClosingAmount (String odd0) {
+
+        float odds = Float.valueOf(odd0);
+
+        System.out.println("Bet Odds : " + odds);
+        System.out.println("Bet Size : " + betSize);
+        if (odds >= 7.99) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(3 * betSize));
+            return String.valueOf(3 * betSize);
+        } else if (odds >= 5.99) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(2.5 * betSize));
+            return String.valueOf(2.5 * betSize);
+        } else if (odds > 2.59) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(2.3 * betSize));
+            return String.valueOf(2.3 * betSize);
+        } else if (odds > 1.99) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(1.8 * betSize));
+            return String.valueOf(1.8 * betSize);
+        } else if (odds >= 1.79) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(1.7 * betSize));
+            return String.valueOf(1.7 * betSize);
+        } else {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(1.5 * betSize));
+            return String.valueOf(1.5 * betSize);
+        }
+    }
+
 
 }
