@@ -16,7 +16,7 @@ public class MainProgram implements Runnable {
     public void run() {
         screenCalibrationChecker();
 //
-        testJunk();
+        testSkroutz();
     }
 
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
@@ -100,10 +100,10 @@ public class MainProgram implements Runnable {
                 float a = 5;
                 String odds="1.8";
                 ActionSequence.setBetSize(a);
-                String s =as.setClosingAmount(odds);
-                System.out.println(s);
+                as.setClosingAmount(odds);
+                System.out.println(odds);
                 ms.randomDelay(4000,5000);
-                ms.typeString(as.setClosingAmount(odds));
+                as.setClosingAmount(odds);
             }
         }
     }

@@ -289,7 +289,12 @@ public class ActionSequence {
         String cogInput = "/div/div[4]/div[1]/div[1]/span/input";
         // cogConfirm extension xpath
         String cogConfirm = "/div/div[4]/div[3]/span";
-        ms.scrollToView("html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input");
+        ///////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]                   /div/div/div/div[2]/div[3]/div[2]                 /div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input
+        ///////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]                   /div/div/div/div[2]/div[3]/div[1]                 /div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input
+        ///////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]                   /div/div/div/div[2]/div[3]/div                    /div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input
+        ///////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]                   /div/div/div/div[2]/div[3]/div                    /div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]/div[1]/span/input
+        ///////////////////////html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]                   /div/div/div/div[2]/div[3]/div[2]                 /div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]/div[1]/span/input
+        ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[1]/div[1]/span/input");
         ms.onLeftClick();
         ms.randomDelay(1000, 2000);
         ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
