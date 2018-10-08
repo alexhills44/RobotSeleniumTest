@@ -295,9 +295,9 @@ public class ActionSequence {
         ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
         System.out.println("---------------- 5 -----------------");
         ms.onLeftClick();
-        System.out.println("aaaaaaaaaaaaaaaaa"+setClosingAmount(oddsCatched));
+//        System.out.println("aaaaaaaaaaaaaaaaa"+setClosingAmount(oddsCatched));
         ms.randomDelay(2500,3000);
-        ms.typeString(setClosingAmount(oddsCatched));
+        setClosingAmount(oddsCatched);
         ms.randomDelay(1000, 2000);
         System.out.println("---------------- 6 -----------------");
         ms.scrollToView(xpathCog + cogConfirm);
@@ -313,7 +313,7 @@ public class ActionSequence {
         }
     }
 
-    public String setClosingAmount (String odd0) {
+    public void setClosingAmount (String odd0) {
 
         float odds = Float.valueOf(odd0);
 
@@ -321,22 +321,22 @@ public class ActionSequence {
         System.out.println("Bet Size : " + betSize);
         if (odds >= 7.99) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(3 * betSize));
-            return String.valueOf(3 * betSize);
+            ms.typeString(String.valueOf(3 * betSize));
         } else if (odds >= 5.99) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(2.5 * betSize));
-            return String.valueOf(2.5 * betSize);
+            ms.typeString(String.valueOf(2.5 * betSize));
         } else if (odds > 2.59) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(2.3 * betSize));
-            return String.valueOf(2.3 * betSize);
+            ms.typeString(String.valueOf(2.3 * betSize));
         } else if (odds > 1.99) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(1.8 * betSize));
-            return String.valueOf(1.8 * betSize);
+            ms.typeString(String.valueOf(1.8 * betSize));
         } else if (odds >= 1.79) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(1.7 * betSize));
-            return String.valueOf(1.7 * betSize);
+            ms.typeString(String.valueOf(1.7 * betSize));
         } else {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(1.5 * betSize));
-            return String.valueOf(1.5 * betSize);
+            ms.typeString(String.valueOf(1.5 * betSize));
         }
     }
 

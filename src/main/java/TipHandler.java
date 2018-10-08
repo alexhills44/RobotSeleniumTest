@@ -108,6 +108,7 @@ public class TipHandler {
             if (!xpath.equals("")) {
                 // Open Window to bet in -- Press the bet found
                 ms.scrollToView(xpath);
+                ms.randomDelay(200,600);
                 ms.onLeftClick();
                 // Place bet and press confirm bet
                 ms.randomDelay(2000, 4000);

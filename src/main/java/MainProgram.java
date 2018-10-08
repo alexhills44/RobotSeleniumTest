@@ -83,7 +83,6 @@ public class MainProgram implements Runnable {
             ms.randomDelay(7000,12000);
             tipHandler = new TipHandler(scan.nextLine(),sl,ms,as);
             tipHandler.run();
-
         }
 
 

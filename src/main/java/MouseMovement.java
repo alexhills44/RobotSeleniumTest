@@ -279,21 +279,21 @@ public class MouseMovement {
     // Runs the awt.Robot method keyPress and keyRelease with a delay 50-400ms and 50-100ms
     private void doType(int value) {
         robot.keyPress(value);
-        randomDelay(50,400);
+        randomDelay(15,50);
         robot.keyRelease(value);
-        randomDelay(50,100);
+        randomDelay(15,30);
     }
 
     // Runs the awt.Robot method keyPress and keyRelease with a delay 50-400ms and 50-100ms (For Capital and Special Chars)
     private void doType(int shift,int value) {
         robot.keyPress(shift);
-        randomDelay(50,400);
+        randomDelay(15,50);
         robot.keyPress(value);
-        randomDelay(50,400);
+        randomDelay(15,50);
         robot.keyRelease(value);
-        randomDelay(50,100);
+        randomDelay(15,30);
         robot.keyRelease(shift);
-        randomDelay(50,100);
+        randomDelay(15,30);
     }
 
     //Extremely large switch statement that contains values for every char contained
