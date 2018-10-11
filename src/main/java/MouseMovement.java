@@ -2,14 +2,16 @@ import java.awt.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+
 import static java.awt.event.KeyEvent.*;
 
 
-public class MouseMovement {
+class MouseMovement {
     private SeleniumMethods sl;
     private Robot robot;
     private Random rand;
-    private int yOffset=PropertiesHandler.getYOffset();
+    private int yOffset= PropertiesHandler.getYOffset();
+    private Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 
     // TODO : Move the mouse more random
     MouseMovement(SeleniumMethods sl0){
@@ -23,7 +25,8 @@ public class MouseMovement {
     }
 
     // Left clicks and release the mouse button with a start delay of 30-60
-    public void onLeftClick() {
+    // NO DELAY NEEDED FOR THIS METHOD
+    void onLeftClick() {
         randomDelay(300,600);
         robot.mousePress(InputEvent.BUTTON1_MASK);
         robot.delay(rand.nextInt(300)+50);
@@ -31,10 +34,9 @@ public class MouseMovement {
         }
 
     // Delays the program for min-max miliseconds
-    public void randomDelay(int min,int max) {
+    void randomDelay(int min,int max) {
         try {
             int delayTime=rand.nextInt(max-1-min)+min;
-            System.out.println("Delay for "+delayTime);
             robot.delay(delayTime);
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,17 +45,19 @@ public class MouseMovement {
     }
 
     // Takes a string splits in a char array and calls the type(method) to execute right button press
-    public void typeString(String string) {
+    void typeString(String string) {
         randomDelay(30,60);
         char[] charArray = string.toCharArray();
         for (char  c:charArray) {
             type(c);
+            randomDelay(200,600);
         }
     }
 
+    @SuppressWarnings("Duplicates")
     //Checks if the element is on the Screen , else scrolls by 30 with a delay of 500-1000ms
-    public void scrollToView(String xpath) {
-        randomDelay(30,60);
+    //BETWEEN EACH SCROLL IT DELAYS 500-700MS
+    void scrollToView(String xpath) {
         long x = -1;
         // multiply by -1 to change direction
         int directionScrolled=1;
@@ -77,9 +81,9 @@ public class MouseMovement {
         randomCursorMoveMethod1(xpath);
     }
 
+    @SuppressWarnings("Duplicates")
     //Checks if the element is on the Screen , else scrolls by 30 with a delay of 500-1000ms FOR IFRAME
-    public void scrollToViewIFRAME(String xpath) {
-        randomDelay(30,60);
+    void scrollToViewIFRAME(String xpath) {
         long x = -1;
         // multiply by -1 to change direction
         int directionScrolled=1;
@@ -103,9 +107,9 @@ public class MouseMovement {
         randomCursorMoveMethod1IFrame(xpath);
     }
 
+    @SuppressWarnings("SameParameterValue")
     // Same as Scroll to view but checks the screen from 0-500 pixes
-    public void scrollToViewForZero(String xpath) {
-        randomDelay(30,60);
+    void scrollToViewForZero(String xpath) {
         while(!elementOnScreenForZero(xpath)) {
             robot.mouseWheel(30);
             randomDelay(500,1000);
@@ -114,17 +118,17 @@ public class MouseMovement {
     }
 
     // Combines the randomRectPoint and the CursorMoveMethod1
-    public void randomCursorMoveMethod1(String xpath) {
+    private void randomCursorMoveMethod1(String xpath) {
         cursorMoveMethod1(randomRectPoint(xpath));
     }
 
     // Combines the randomRectPoint and the CursorMoveMethod1 FOR IFRAME
-    public void randomCursorMoveMethod1IFrame(String xpath) {
+    private void randomCursorMoveMethod1IFrame(String xpath) {
         cursorMoveMethod1IFrame(randomRectPoint(xpath));
     }
 
     // A method that presses Enter key
-    public void pressEnter() {
+    void pressEnter() {
         randomDelay(30,60);
         robot.keyPress(KeyEvent.VK_ENTER);
         randomDelay(50,300);
@@ -133,18 +137,18 @@ public class MouseMovement {
     }
 
     // Moves the mouse at the Bar of the WebBrowser
-    public void moveMouseToMain() {
+    void moveMouseToMain() {
         robot.mouseMove(rand.nextInt(798)+1,rand.nextInt(yOffset));
     }
 
     // gets the current position of the mouse
     private Point getMousePosition() {
         PointerInfo a = MouseInfo.getPointerInfo();
-        Point b = a.getLocation();
-        return b;
+        return a.getLocation();
     }
 
     // gets the starting point and the destination for the mouse and adds the YOffset value
+    @SuppressWarnings("Duplicates")
     private void cursorMoveMethod1(Point destinationPoint){
         try {
             Point point=getMousePosition();
@@ -177,6 +181,7 @@ public class MouseMovement {
     }
 
     // gets the starting point and the destination for the mouse and adds the YOffset value FOR IFRAME
+    @SuppressWarnings("Duplicates")
     private void cursorMoveMethod1IFrame(Point destinationPoint){
         try {
             Point point=getMousePosition();
@@ -184,8 +189,8 @@ public class MouseMovement {
             Double yd = point.getY();
             int y=yd.intValue();
             int x=xd.intValue();
-            Double xd1 = destinationPoint.getX()+PropertiesHandler.getiFramePointX();
-            Double yd1 = destinationPoint.getY()+PropertiesHandler.getiFramePointY();
+            Double xd1 = destinationPoint.getX()+ PropertiesHandler.getiFramePointX();
+            Double yd1 = destinationPoint.getY()+ PropertiesHandler.getiFramePointY();
             int y1=yd1.intValue();
             int x1=xd1.intValue();
             while (!(x==x1 && y==y1+yOffset)) {
@@ -214,7 +219,6 @@ public class MouseMovement {
         Point point = sl.getElementSurface(xpath);
         Double hotSpot;
         Double pointX = point.getX()-4;
-        System.out.println("PointX Value is: "+pointX.intValue());
         int randomX = rand.nextInt(pointX.intValue())+2;
         Double pointY = point.getY()-4;
         int randomY = rand.nextInt(pointY.intValue())+2;
@@ -243,8 +247,7 @@ public class MouseMovement {
         Double xd = destinationPoint.getX();
         Double yd = destinationPoint.getY();
         Long scrolledPixels = sl.getScrolledY();
-        // Minus 2 pixels just from experience , has to be tested
-        int y=yd.intValue() + randomY - scrolledPixels.intValue()-2;
+        int y=yd.intValue() + randomY - scrolledPixels.intValue();
         int x=xd.intValue() + randomX;
         Point returnPoint = new Point();
         returnPoint.setLocation(x,y);
@@ -255,16 +258,15 @@ public class MouseMovement {
     private boolean elementOnScreen (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
-        isDisplayed = sl.getScrolledY() + 650 >= point && point >= sl.getScrolledY() + 1;
+        isDisplayed = sl.getScrolledY() + winSize.height >= point && point >= sl.getScrolledY() + 1;
         return isDisplayed;
     }
 
     // Checks if the element in the specified Xpath is on the web screen (1-500 pixels) and return boolean FOR IFRAME
     private boolean elementOnScreenIFrame (String xPathIframe) {
         boolean isDisplayed;
-        // TODO : Find bar Height so that = pint>= ScreenSize.height-barHeight
         int point = PropertiesHandler.getiFramePointY()+sl.getCoordinatesY(xPathIframe);
-        isDisplayed = sl.getScrolledY() + 675 >= point && point >= sl.getScrolledY() + 1;
+        isDisplayed = sl.getScrolledY() + winSize.height >= point && point >= sl.getScrolledY() + 1;
         return isDisplayed;
     }
 
@@ -272,7 +274,7 @@ public class MouseMovement {
     private boolean elementOnScreenForZero (String xpath) {
         boolean isDisplayed;
         int point = sl.getCoordinatesY(xpath);
-        isDisplayed = sl.getScrolledY() + 500 >= point && point >= sl.getScrolledY();
+        isDisplayed = sl.getScrolledY() + winSize.height >= point && point >= sl.getScrolledY();
         return isDisplayed;
     }
 
@@ -401,8 +403,8 @@ public class MouseMovement {
                 throw new IllegalArgumentException("Cannot type character " + character);
         }
     }
-
-    public void moveMouseToXIframe() {
+    // TODO : this has to become better its pathetic
+    void moveMouseToXIframe() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double x = screenSize.getWidth() * 95 / 100;
         PointerInfo a=MouseInfo.getPointerInfo();

@@ -9,7 +9,7 @@ public class PropertiesHandler {
     private static Point iFramePoint;
     private static int iFramePointX;
     private static int iFramePointY;
-    private static String usrNameD,usrNameB,pswD,pswB;
+    private static String usrNameB,pswB;
     private static float betSize =0;
     private static int YOffset = 0;
     // usrAgent=0 is Firefox, usrAgent=1 is Chrome
@@ -22,13 +22,13 @@ public class PropertiesHandler {
     private static Properties prop;
 
     // Once a new Instance of the Class is Created it automatically put the Properties in the Variables
-    PropertiesHandler () {
+    PropertiesHandler() {
         prop = new Properties();
         getProp();
     }
 
     // Has to be Called to Set the values on the Properties File
-    public static void endProp() {
+    static void endProp() {
         setProp();
     }
 
@@ -36,9 +36,7 @@ public class PropertiesHandler {
     private static void setProp() {
         try {
             output = new FileOutputStream("config.properties");
-            prop.setProperty("USER_NAME_DUNKMAN",usrNameD);
             prop.setProperty("USER_NAME_BET",usrNameB);
-            prop.setProperty("PASSWORD_DUNKMAN",pswD);
             prop.setProperty("PASSWORD_BET",pswB);
             prop.setProperty("BET_SIZE",String.valueOf(betSize));
             prop.setProperty("USER_AGENT",String.valueOf(usrAgent));
@@ -68,9 +66,7 @@ public class PropertiesHandler {
             input = new FileInputStream(new File("config.properties"));
             //Load Properties File
             prop.load(input);
-            usrNameD=prop.getProperty("USER_NAME_DUNKMAN");
             usrNameB=prop.getProperty("USER_NAME_BET");
-            pswD=prop.getProperty("PASSWORD_DUNKMAN");
             pswB=prop.getProperty("PASSWORD_BET");
             usrAgent=Integer.parseInt(prop.getProperty("USER_AGENT"));
             betSize = Float.parseFloat(prop.getProperty("BET_SIZE"));
@@ -96,96 +92,79 @@ public class PropertiesHandler {
     }
 
     // Getter and Setter Methods
-    public static String getUsrNameD() {
-        return usrNameD;
-    }
-    public static String getUsrNameB() {
+    static String getUsrNameB() {
         return usrNameB;
     }
-    public static String getPswD() {
-        return pswD;
-    }
-    public static String getPswB() {
+    static String getPswB() {
         return pswB;
     }
-    public static float getBetSize() {
+    static float getBetSize() {
         return betSize;
     }
-    public static int getUsrAgent() {
+    static int getUsrAgent() {
         return usrAgent;
     }
-    public static int getYOffset() {
+    static int getYOffset() {
         return YOffset;
     }
-    public static boolean isCalibrate() {
+    static boolean isCalibrate() {
         return calibrate;
     }
-    public static boolean isRememberMe() {return rememberMe;}
-    public static void setUsrNameD(String usrNameD) {
-        PropertiesHandler.usrNameD = usrNameD;
-
-    }
-    public static void setUsrNameB(String usrNameB) {
+    static boolean isRememberMe() {return rememberMe;}
+    static void setUsrNameB(String usrNameB) {
         PropertiesHandler.usrNameB = usrNameB;
 
     }
-    public static void setPswD(String pswD) {
-        PropertiesHandler.pswD = pswD;
-
-    }
-    public static void setPswB(String pswB) {
+    static void setPswB(String pswB) {
         PropertiesHandler.pswB = pswB;
 
     }
-    public static void setBetSize(float betSize) {
+    static void setBetSize(float betSize) {
         PropertiesHandler.betSize = betSize;
 
     }
-    public static void setUsrAgent(int usrAgent) {
+    static void setUsrAgent(int usrAgent) {
         PropertiesHandler.usrAgent = usrAgent;
 
     }
-    public static void setYOffset(int YOffset) {
+    static void setYOffset(int YOffset) {
         PropertiesHandler.YOffset=YOffset;
 
     }
-    public static void setCalibrate(boolean calibrate) {
+    static void setCalibrate(boolean calibrate) {
         PropertiesHandler.calibrate = calibrate;
 
     }
-    public static void setRememberMe(boolean rememberMe) {
+    static void setRememberMe(boolean rememberMe) {
         PropertiesHandler.rememberMe = rememberMe;
 
     }
+    @SuppressWarnings("unused")
     public static String getChromeProfilePath() {
         return chromeProfilePath;
     }
+    @SuppressWarnings("unused")
     public static void setChromeProfilePath(String chromeProfilePath) {
         PropertiesHandler.chromeProfilePath = chromeProfilePath;
 
     }
-
+    @SuppressWarnings("unused")
     public static Point getiFramePoint() {
         return iFramePoint;
     }
-
-    public static void setiFramePoint(Point iFramePoint) {
+    static void setiFramePoint(Point iFramePoint) {
         PropertiesHandler.iFramePoint = iFramePoint;
     }
-
-    public static int getiFramePointX() {
+    static int getiFramePointX() {
         return iFramePointX;
     }
-
-    public static void setiFramePointX(int iFramePointX) {
+    static void setiFramePointX(int iFramePointX) {
         PropertiesHandler.iFramePointX = iFramePointX;
     }
-
-    public static int getiFramePointY() {
+    static int getiFramePointY() {
         return iFramePointY;
     }
-
-    public static void setiFramePointY(int iFramePointY) {
+    static void setiFramePointY(int iFramePointY) {
         PropertiesHandler.iFramePointY = iFramePointY;
     }
 }

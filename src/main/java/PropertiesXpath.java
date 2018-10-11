@@ -5,13 +5,12 @@ import java.util.Properties;
 public class PropertiesXpath {
     private static Properties prop;
     private static FileInputStream input;
-    private static FileOutputStream output;
 
-    PropertiesXpath () {
+    PropertiesXpath() {
         prop = new Properties();
     }
 
-    public static String getProp(String key) {
+    static String getProp(String key) {
         try {
             input = new FileInputStream(new File("xpathConstants.properties"));
             prop.load(new InputStreamReader(input, Charset.forName("UTF-8")));
@@ -34,9 +33,10 @@ public class PropertiesXpath {
         return null;
     }
 
+    @SuppressWarnings("unused")
     public static void setProp() {
         try {
-            output = new FileOutputStream("xpathConstants.properties");
+            FileOutputStream output = new FileOutputStream("xpathConstants.properties");
             prop.setProperty("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","/html/body/div[1]/div/div[1]/div/div[1]/div[1]/nav/a[2]");
             prop.store(output, null);
         } catch (Exception e) {

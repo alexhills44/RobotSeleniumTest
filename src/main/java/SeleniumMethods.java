@@ -1,4 +1,7 @@
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -6,7 +9,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.ProfilesIni;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.Set;
 
 public class SeleniumMethods {
@@ -32,13 +35,14 @@ public class SeleniumMethods {
             options.addArguments("--always-authorize-plugins=true");
             driver = new ChromeDriver(options);
         }
-    }
+    }//Κροατία - A1 Λίγκα---Μπόσκο---1---12
 
     //Open rest of the Times and pass in the cookies from the previous SeleniumMethods Object
+    @SuppressWarnings("unused")
     SeleniumMethods(Set<Cookie> cookies) {
         FirefoxOptions options = new FirefoxOptions();
         ProfilesIni allProfiles = new ProfilesIni();
-        FirefoxProfile selenium_profile = allProfiles.getProfile("Default");
+        FirefoxProfile selenium_profile = allProfiles.getProfile("default");
         options.setProfile(selenium_profile);
         options.addPreference("dom.ipc.plugins.enabled.libflashplayer.so",true);
         driver = new FirefoxDriver(options);
@@ -48,39 +52,40 @@ public class SeleniumMethods {
     }
 
     // Open Website and Window at fullscreen
-    public void pageOpener (String url) {
+    void pageOpener (String url) {
         driver.get(url);
         driver.manage().window().maximize();
     }
 
     // Digital Click
-    @SuppressWarnings("Dangerous Territory")
+    // Dangerous Territory
+    @SuppressWarnings("unused")
     public void onClick(String xpath) {
         driver.findElement(By.xpath(xpath)).click();
     }
 
     // Closes Browser window
-    public void pageCloser() {
+    void pageCloser() {
         driver.close();
     }
 
     // Get Text from the element in the specified Xpath
-    public String getText(String xpath){
+    String getText(String xpath){
         return driver.findElement(By.xpath(xpath)).getText();
     }
 
     // Get the X Coordinates from the element in the specified Xpath
-    public int getCoordinatesX(String xpath){
+    int getCoordinatesX(String xpath){
         return (driver.findElement(By.xpath(xpath)).getLocation().getX());
     }
 
     // Get the Y Coordinates from the element in the specified Xpath
-    public int getCoordinatesY(String xpath){
+    int getCoordinatesY(String xpath){
         return (driver.findElement(By.xpath(xpath)).getLocation().getY());
     }
 
     // Get awt.Point from the element in the specified Xpath
-    public Point getCoordinates(String xpath) {
+    Point getCoordinates(String xpath) {
         int x = getCoordinatesX(xpath);
         int y = getCoordinatesY(xpath);
         Point pointAwt= new Point();
@@ -89,7 +94,8 @@ public class SeleniumMethods {
     }
 
     // Digitally Scroll
-    @SuppressWarnings("Dangerous Territory")
+    // Dangerous Territory
+    @SuppressWarnings("unused")
     public void scrollBy(int pixels) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,"+pixels+")");
@@ -97,13 +103,13 @@ public class SeleniumMethods {
     }
 
     // Get Long value of the amount of pixels Scrolled
-    public long getScrolledY() {
+    long getScrolledY() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         return  (Long) js.executeScript("return window.pageYOffset;");
     }
 
     // Get the surface of the element
-    public Point getElementSurface (String xpath) {
+    Point getElementSurface (String xpath) {
         int x = driver.findElement(By.xpath(xpath)).getSize().getWidth();
         int y = driver.findElement(By.xpath(xpath)).getSize().getHeight();
         Point pointAwt= new Point();
@@ -111,15 +117,16 @@ public class SeleniumMethods {
         return pointAwt;
     }
 
-    public void switchFrame(String id) {
+    void switchFrame(String id) {
         driver.switchTo().frame(id);
     }
 
-    public void switchToDefaultFrame() {
+    void switchToDefaultFrame() {
         driver.switchTo().defaultContent();
     }
 
     // Gets Cookies
+    @SuppressWarnings("unused")
     public Set<Cookie> getCookies() {
         return driver.manage().getCookies();
     }

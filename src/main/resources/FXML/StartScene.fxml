@@ -12,48 +12,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ZStartSceneController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #1b8250;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ZStartSceneController">
    <children>
       <VBox alignment="CENTER" prefHeight="1200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="476.0" prefHeight="100.0" prefWidth="200.0" />
             <HBox id="titleHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label id="title" text="Dunkman Tips">
+                  <Label id="title" text="Auto Betting Test Program">
                      <font>
                         <Font name="System Bold" size="46.0" />
                      </font>
                   </Label>
                </children></HBox>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="100.0" prefWidth="200.0" />
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Dunkman Tips Username : ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="usrDT" text=" ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="160.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Label text="Dunkman Tips Password : ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <PasswordField fx:id="pswDT">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </PasswordField>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="Bet365 Username : ">
@@ -61,7 +33,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usrB">
+                  <TextField fx:id="usrB" promptText="username" style="-fx-background-color: #136b40;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -75,7 +47,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="pswB">
+                  <PasswordField fx:id="pswB" promptText="password" style="-fx-background-color: #136b40;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -89,7 +61,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="betSizeField" promptText="10$">
+                  <TextField fx:id="betSizeField" promptText="10$" style="-fx-background-color: #136b40;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -107,7 +79,7 @@
             </HBox>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="343.0" prefHeight="100.0" prefWidth="200.0" spacing="10">
                <children>
-                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" />
+                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" style="-fx-background-color: #136b40;" />
                   <CheckBox fx:id="calibrate" mnemonicParsing="false" text="Calibrate">
                      <font>
                         <Font size="18.0" />
@@ -122,7 +94,7 @@
                </opaqueInsets></HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" text="      Start      ">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" style="-fx-background-color: #136b40;" text="      Start      ">
                      <font>
                         <Font size="24.0" />
                      </font>

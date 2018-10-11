@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
-import java.util.Scanner;
+import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class MainProgram implements Runnable {
@@ -8,15 +10,18 @@ public class MainProgram implements Runnable {
     private SeleniumMethods sl;
     private MouseMovement ms;
     private ActionSequence as;
-    private int yOffset=PropertiesHandler.getYOffset();
+    private int yOffset= PropertiesHandler.getYOffset();
+    boolean removeFromList =false;
+    static boolean isBeingPlayed=true;
+
     MainProgram() {
 
     }
+    // Σουηδία - Basketligan Γυναίκες---Χόμπσο Μπάσκετ Γυναικών---2---U 160.5
 
     public void run() {
         screenCalibrationChecker();
-//
-        testSkroutz();
+        testJunk();
     }
 
     // Goes to example.com set the cursor at the element positions and adds at the Y Axis 1 pixel
@@ -33,7 +38,7 @@ public class MainProgram implements Runnable {
         while (sl.getText("/html/body/div/p[2]/a").equals("More information...")) {
             robot.mouseMove(x,y);
             robot.mousePress(InputEvent.BUTTON1_MASK);
-            robot.delay(1000);
+            robot.delay(2000);
             robot.mouseRelease(InputEvent.BUTTON1_MASK);
             System.out.println(y);
             y++;
@@ -57,11 +62,32 @@ public class MainProgram implements Runnable {
         }
     }
 
+    // TODO : Fix the array list and tip handling and que
     private void testJunk () {
+        // Allows only one thread to be active at any given time
+        ExecutorService x = Executors.newFixedThreadPool(1);
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
+        openToBasket();
 
+        while(!ReadTerminal.stopProgram) {
+            // tipList isnt empty
+            if (!Main.tipList.isEmpty()) {
+                // For every tip in the list do
+                Vector<String> tempTipList= Main.tipList;
+                for (String tip :tempTipList) {
+                    x.execute(new TipHandler(tip,sl,ms,this));
+                    while(isBeingPlayed) {
+
+                    }
+                }
+
+            }
+        }
+    }
+
+    private void openToBasket(){
         ms.moveMouseToMain();
         as.openBet();
         System.out.println("opened bet");
@@ -77,34 +103,13 @@ public class MainProgram implements Runnable {
         as.basketCategory();
         System.out.println("basket category");
         ms.randomDelay(3000,7000);
-        TipHandler tipHandler;
-        Scanner scan = new Scanner(System.in);
-        while(scan.hasNext()) {
-            ms.randomDelay(7000,12000);
-            tipHandler = new TipHandler(scan.nextLine(),sl,ms,as);
-            tipHandler.run();
-        }
-
-
+        as.moveMouseToMatchesPane();
+        ms.randomDelay(2000,5000);
     }
 
     private void testSkroutz() {
-        //sl= new SeleniumMethods();
-        ms = new MouseMovement(sl);
-        as = new ActionSequence(sl,ms);
-        //sl.pageOpener("https://www.google.gr/");
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNext()) {
-            if (scan.nextLine().equals("go")) {
-//                ms.randomDelay(3000, 5000);
-                float a = 5;
-                String odds="1.8";
-                ActionSequence.setBetSize(a);
-                as.setClosingAmount(odds);
-                System.out.println(odds);
-                ms.randomDelay(4000,5000);
-                as.setClosingAmount(odds);
-            }
-        }
+
     }
+
+
 }

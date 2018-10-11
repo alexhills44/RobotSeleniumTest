@@ -4,19 +4,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Vector;
+
 
 public class Main extends Application{
 
+    static Vector<String> tipList = new Vector<String>();
+    static Vector<Long> tipSendTime = new Vector<Long>();
+
+    // TODO : Create SeleniumMethod to Handle Elements not found and log erros
     // TODO : Get Tip from Dunkmantips.com
-    // TODO : Move Project to Proper Folder
     // TODO : Create JAR
     // TODO : Add LogFile
-    // TODO : When we search to play 2 or more bets simultaneously open on a new browser window and load with cookies (autoLogin)
+    // TODO : Add YDiaforesHandler
 
-    // TODO : Create O/U handler
-
-
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         Initialization();
         launch(args);
     }
@@ -25,16 +27,16 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/StartScene.fxml"));
-//            loader.setController(new ZStartSceneController());
             Parent root = loader.load();
-            primaryStage.setTitle("Dunkman Tips");
-            primaryStage.setScene(new Scene(root, 600, 600));
+            primaryStage.setTitle("Lazy Bet");
+            primaryStage.setScene(new Scene(root, 800, 600));
             primaryStage.show();
 
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
+    //C:\Users\Costas\Desktop\Alex TeamViewr\AutoPlayBet365\src\main\resources\FXML\StartScene.fxml
 
     private static void Initialization () {
         new PropertiesXpath();

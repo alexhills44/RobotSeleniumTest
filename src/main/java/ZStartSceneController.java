@@ -1,4 +1,3 @@
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
@@ -7,20 +6,19 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class ZStartSceneController implements Initializable{
     
     @FXML
-    private TextField usrDT,usrB,betSizeField;
+    private TextField usrB,betSizeField;
     @FXML
     private ChoiceBox<String> usrAgent;
-    private ResourceBundle resourceBundle;
-    private Locale locale;
     @FXML
-    private PasswordField pswDT,pswB;
+    private PasswordField pswB;
     @FXML
     private CheckBox rememberMe,calibrate;
 
@@ -28,11 +26,11 @@ public class ZStartSceneController implements Initializable{
 
 
     @FXML
-    public void startButton(ActionEvent event) {
+    public void startButton() {
         getValuesFromFields();
 
-        MainProgram mainProgram=new MainProgram();
-        mainProgram.run();
+        ExecutorService x = Executors.newFixedThreadPool(1);
+        x.execute(new ReadTerminal());
     }
 
     // Initializes the Scene Values note: controller must implement Initializable
@@ -45,9 +43,7 @@ public class ZStartSceneController implements Initializable{
     // Takes the Text from the PropertiesHandler and sets the Values of the JavaFX Elements
     private void setValuesOnFields () {
         if (PropertiesHandler.isRememberMe()) {
-            usrDT.setText(PropertiesHandler.getUsrNameD());
             usrB.setText(PropertiesHandler.getUsrNameB());
-            pswDT.setText(PropertiesHandler.getPswD());
             pswB.setText(PropertiesHandler.getPswB());
             betSizeField.setText(String.valueOf(PropertiesHandler.getBetSize()));
             rememberMe.setSelected(PropertiesHandler.isRememberMe());
@@ -64,9 +60,7 @@ public class ZStartSceneController implements Initializable{
     // Set the Properties Values According to the TextField values
     private void getValuesFromFields () {
         if (rememberMe.isSelected()) {
-            PropertiesHandler.setUsrNameD(usrDT.getText());
             PropertiesHandler.setUsrNameB(usrB.getText());
-            PropertiesHandler.setPswD(pswDT.getText());
             PropertiesHandler.setPswB(pswB.getText());
             PropertiesHandler.setRememberMe(rememberMe.isSelected());
             PropertiesHandler.setBetSize(Float.valueOf(betSizeField.getText()));
