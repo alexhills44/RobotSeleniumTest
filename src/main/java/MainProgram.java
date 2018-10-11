@@ -70,16 +70,20 @@ public class MainProgram implements Runnable {
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
         openToBasket();
+        System.out.println("Started");
 
         while(!ReadTerminal.stopProgram) {
+            System.out.println("Loop 1/4");
             // tipList isnt empty
             if (!Main.tipList.isEmpty()) {
+                System.out.println("Loop 2/4");
                 // For every tip in the list do
                 Vector<String> tempTipList= Main.tipList;
                 for (String tip :tempTipList) {
+                    System.out.println("Loop 3/4");
                     x.execute(new TipHandler(tip,sl,ms,this));
                     while(isBeingPlayed) {
-
+                        System.out.println("Loop 4/4");
                     }
                 }
 
