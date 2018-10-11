@@ -65,7 +65,7 @@ public class MainProgram implements Runnable {
     // TODO : Fix the array list and tip handling and que
     private void testJunk () {
         // Allows only one thread to be active at any given time
-        ExecutorService x = Executors.newFixedThreadPool(1);
+//        ExecutorService x = Executors.newFixedThreadPool(1);
         sl=new SeleniumMethods();
         ms=new MouseMovement(sl);
         as = new ActionSequence(sl,ms);
@@ -73,15 +73,15 @@ public class MainProgram implements Runnable {
         System.out.println("Started");
 
         while(!ReadTerminal.stopProgram) {
-            System.out.println("Loop 1/4");
+
             // tipList isnt empty
             if (!Main.tipList.isEmpty()) {
-                System.out.println("Loop 2/4");
+
                 // For every tip in the list do
                 Vector<String> tempTipList= Main.tipList;
                 for (String tip :tempTipList) {
-                    System.out.println("Loop 3/4");
-                    x.execute(new TipHandler(tip,sl,ms,this));
+
+                    new TipHandler(tip,sl,ms,this);
                     while(isBeingPlayed) {
                         System.out.println("Loop 4/4");
                     }

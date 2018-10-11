@@ -94,7 +94,7 @@
                </opaqueInsets></HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" style="-fx-background-color: #136b40;" text="      Start      ">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" style="-fx-background-color: #C0C01A;" text="      Start      ">
                      <font>
                         <Font size="24.0" />
                      </font>
