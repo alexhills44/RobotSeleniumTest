@@ -26,6 +26,7 @@ public class ReadTerminal extends Thread{
             }
             try {
                 String[] lineArray = line.split("---");
+                @SuppressWarnings("unused")
                 String test = lineArray[3]; // Try to get fourth and last element of array
                 Main.tipList.add(line);
                 Main.tipSendTime.add(System.nanoTime());
