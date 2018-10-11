@@ -80,11 +80,7 @@ public class MainProgram implements Runnable {
                 // For every tip in the list do
                 Vector<String> tempTipList= Main.tipList;
                 for (String tip :tempTipList) {
-
                     new TipHandler(tip,sl,ms,this);
-                    while(isBeingPlayed) {
-                        System.out.println("Loop 4/4");
-                    }
                 }
 
             }

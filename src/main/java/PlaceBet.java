@@ -60,19 +60,26 @@ class PlaceBet {
     void closeBetWindow() {
         switch (new Random().nextInt(3)) {
             case 0:
+                // TODO : TEST IT
                 ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_DIAGRAFH"));
                 ms.randomDelay(300,1000);
                 ms.onLeftClick();
                 sl.switchToDefaultFrame();
             case  1:
+                // TODO : TEST IT
+
                 ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
                 ms.randomDelay(300,1000);
                 ms.onLeftClick();
                 sl.switchToDefaultFrame();
             case 2:
+                // TODO : TEST IT
+
                 sl.switchToDefaultFrame();
                 clickOnBet();
             case 3:
+                // TODO : TEST IT
+
                 ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_APODOXI_ALLAGWN"));
                 ms.randomDelay(300,1000);
                 ms.onLeftClick();

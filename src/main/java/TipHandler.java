@@ -1,4 +1,4 @@
-class TipHandler extends Thread{
+class TipHandler {
     /**
      * This Class holds all the Classes and the Methods needed to play the
      */
@@ -70,9 +70,7 @@ class TipHandler extends Thread{
     // Searches for the tip if it finds it then tries to play it if it succeeds then sets the autobet condition
     // if it doesnt succeed then removes bet by clicking on the element on the main bet page and tries again
     // if it doesnt find it
-    @Override
     public void run () {
-        boolean timeRunOut=false;
         int index = Main.tipList.indexOf(tip);
         tipHandler();
         if (!xpath.equals("")) {
