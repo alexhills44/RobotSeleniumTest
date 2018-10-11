@@ -11,8 +11,8 @@ public class MainProgram implements Runnable {
     private MouseMovement ms;
     private ActionSequence as;
     private int yOffset= PropertiesHandler.getYOffset();
-    boolean removeFromList =false;
     static boolean isBeingPlayed=true;
+    final long NANOSEC_TO_MIN = 1000L*1000*1000*60;
 
     MainProgram() {
 
@@ -76,15 +76,29 @@ public class MainProgram implements Runnable {
 
             // tipList isnt empty
             if (!Main.tipList.isEmpty()) {
+                System.out.println("Tip List : "+Main.tipList);
 
                 // For every tip in the list do
                 Vector<String> tempTipList= Main.tipList;
                 for (String tip :tempTipList) {
-                    new TipHandler(tip,sl,ms,this);
+
+                    // Time is up remove else try to play bet
+                    int index = Main.tipList.indexOf(tip);
+                    if(System.nanoTime()-Main.tipSendTime.get(index)>2*NANOSEC_TO_MIN) {
+                        Main.tipList.remove(tip);
+                        Main.tipSendTime.remove(index);
+                        System.out.println("Tip List : "+Main.tipList);
+                    }else {
+                        new TipHandler(tip,sl,ms,this);
+                    }
                 }
 
             }
         }
+    }
+
+    private void checkTimeOnList() {
+
     }
 
     private void openToBasket(){

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #1b8250;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ZStartSceneController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #189970;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ZStartSceneController">
    <children>
       <VBox alignment="CENTER" prefHeight="1200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -94,7 +94,7 @@
                </opaqueInsets></HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" style="-fx-background-color: #C0C01A;" text="      Start      ">
+                  <Button defaultButton="true" mnemonicParsing="false" onAction="#startButton" style="-fx-background-color: #ffdf1b;" text="      Start      ">
                      <font>
                         <Font size="24.0" />
                      </font>
