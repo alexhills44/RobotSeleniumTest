@@ -81,7 +81,8 @@ public class MainProgram implements Runnable {
                     // Time is up remove else try to play bet
                     System.out.println("List of tips : "+tempTipList);
                     int index = Main.tipList.indexOf(tip);
-                    if(System.nanoTime()-Main.tipSendTime.get(index)>2*NANOSEC_TO_MIN) {
+                    // TODO : Change it to 30 min
+                    if(System.nanoTime()-Main.tipSendTime.get(index)>5*NANOSEC_TO_MIN) {
                         Main.tipList.remove(tip);
                         Main.tipSendTime.remove(index);
                         System.out.println("Tip List : "+Main.tipList);
@@ -89,7 +90,6 @@ public class MainProgram implements Runnable {
                         new TipHandler(tip,sl,ms,this).run();
                     }
                 }
-
             }
         }
     }
