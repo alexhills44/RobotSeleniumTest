@@ -46,7 +46,6 @@ class PlaceBet {
             ms.onLeftClick();
             ms.typeString(String.valueOf(betSize));
         } catch (Exception e) {
-            e.printStackTrace();
             System.out.println("Bet Input Not Found ---->PlaceBet : setBetSizeToPlace()");
         }
     }
@@ -62,8 +61,7 @@ class PlaceBet {
                 ms.onLeftClick();
                 stop=true;
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Bet has changed or has been Blocked ----> PlaceBet : clickBetConfirm()");
+                System.out.println("Could not find Button 'Στοιχηματίστε'----> PlaceBet : clickBetConfirm()");
             }
         }
     }
@@ -85,7 +83,7 @@ class PlaceBet {
                         sl.switchToDefaultFrame();
                         stop=true;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Logger.logStringtoLogFile("Error : could not find button 'Διαγραφή' ----> closeBetWindow()");
                     }
                 }
             case  1:
@@ -99,7 +97,7 @@ class PlaceBet {
                         sl.switchToDefaultFrame();
                         stop=true;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Logger.logStringtoLogFile("Error : could not find button 'X-Διαγραφή' ----> closeBetWindow()");
                     }
                 }
             case 2:
@@ -111,7 +109,7 @@ class PlaceBet {
                         clickOnBet();
                         stop=true;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Logger.logStringtoLogFile("Error : could not find button Bet ----> closeBetWindow()");
                     }
                 }
             case 3:
@@ -125,7 +123,7 @@ class PlaceBet {
                         sl.switchToDefaultFrame();
                         stop=true;
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Logger.logStringtoLogFile("Error : could not find button 'Αποδοχή Αλλαγών' ----> closeBetWindow()");
                     }
                 }
         }

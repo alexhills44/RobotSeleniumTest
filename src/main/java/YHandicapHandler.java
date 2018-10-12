@@ -113,9 +113,11 @@ class YHandicapHandler {
                 }
                 teamNumber--;
             }else {
+                Logger.logStringtoLogFile("Error : could not find team ----> YHandicapHandler()");
                 throw new Exception("Team name : "+inputMessage[1]+" Not found!");
             }
         }else {
+            Logger.logStringtoLogFile("Error : could not find tournament ----> YHandicapHandler()");
             throw new Exception("Tournament :"+inputMessage[0]+" Not found!");
         }
     }
@@ -141,7 +143,7 @@ class YHandicapHandler {
                     }
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YHandicapHandler ----> HandicapChecker");
+                Logger.logStringtoLogFile("Error : could not read value ----> YHandicapHandler()");
             }
         } else {
             columnBets =1;
@@ -160,7 +162,7 @@ class YHandicapHandler {
                     }
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YHandicapHandler ----> HandicapChecker");
+                Logger.logStringtoLogFile("Error : could not read value ----> YHandicapHandler()");
             }
         }
     }

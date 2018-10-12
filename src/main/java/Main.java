@@ -34,6 +34,7 @@ public class Main extends Application{
 
         }catch (Exception e) {
             e.printStackTrace();
+            Logger.logStringtoLogFile("Error : Could not load GUI : "+e.getMessage());
         }
     }
     //C:\Users\Costas\Desktop\Alex TeamViewr\AutoPlayBet365\src\main\resources\FXML\StartScene.fxml

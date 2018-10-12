@@ -40,7 +40,6 @@ public class MainProgram implements Runnable {
             robot.mousePress(InputEvent.BUTTON1_MASK);
             robot.delay(2000);
             robot.mouseRelease(InputEvent.BUTTON1_MASK);
-            System.out.println(y);
             y++;
             yOffset=y-y1;
         }
@@ -53,7 +52,7 @@ public class MainProgram implements Runnable {
             try {
                 screenCalibration();
             } catch (Exception e) {
-                e.printStackTrace();
+                // Do nothing it will always throw exception
             }
             PropertiesHandler.setCalibrate(false);
             PropertiesHandler.setYOffset(yOffset);

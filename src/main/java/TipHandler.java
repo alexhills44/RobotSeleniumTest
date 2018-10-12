@@ -41,7 +41,6 @@ class TipHandler {
             } catch (Exception e) {
                 stopLoop=true;
                 System.out.println("YHandicapHandler ----> "+e.getMessage());
-                e.printStackTrace();
             }
         } else if (tipArray[3].contains("O") || tipArray[3].contains("U") || tipArray[3].contains("Ο") || tipArray[3].contains("υ")) {
             try {
@@ -51,7 +50,6 @@ class TipHandler {
             } catch (Exception e) {
                 stopLoop=true;
                 System.out.println("YOverUnderHandler ----> "+e.getMessage());
-                e.printStackTrace();
             }
         } else {
             try {
@@ -61,7 +59,6 @@ class TipHandler {
             } catch (Exception e) {
                 stopLoop=true;
                 System.out.println("YWinHandler ----> "+e.getMessage());
-                e.printStackTrace();
             }
         }
     }
@@ -69,19 +66,20 @@ class TipHandler {
     // Searches for the tip if it finds it then tries to play it if it succeeds then sets the autobet condition
     // if it doesnt succeed then removes bet by clicking on the element on the main bet page and tries again
     // if it doesnt find it
-    public void run () {
+    void run () {
         ms.randomDelay(8000,12000);
         int index = Main.tipList.indexOf(tip);
         tipHandler();
         if (!xpath.equals("")) {
             betTip(index);
         } else {
-            System.out.println("ERROR TipHandler/run() : xpath=null   OR BET HAS NO VALUE");
+            Logger.logStringtoLogFile("Error : Xpath NULL ----> TipHandler().run()");
         }
 
         // Return to main Method something to show it that the bet cannot be played or has been played
         // and move to the next tip if available
     }
+
     private void betTip (int index) {
         // Sets the bet Size once in the loop
         setBetSize();
@@ -98,11 +96,13 @@ class TipHandler {
             //Calls the autoclose Class to se the auto close amount
             new AutoClose(sl,ms,tipArray, oddsCaught, valueCaught,betSize).autoClose();
             System.out.println("autoClose has been placed");
+            Logger.logStringtoLogFile("Auto Close has been placed SUCCESSFULLY!");
             // Stops the while loop
             Main.tipSendTime.remove(index);
             Main.tipList.remove(tip);
         } catch (Exception e) {
             pb.closeBetWindow();
+            Logger.logStringtoLogFile("Retrying to place bet...");
             System.out.println("Retrying to place bet");
         }
     }
@@ -133,7 +133,7 @@ class TipHandler {
         try {
             oddsCaught = lineArray[lineArray.length-1];
         } catch (Exception e) {
-            System.out.println("Couldnt find oddCatched at lineArray[last]");
+            Logger.logStringtoLogFile("Error : could not find odd from bet ----> getOddFromBet()");
         }
     }
 
@@ -142,7 +142,7 @@ class TipHandler {
         try {
             valueCaught = lineArray[lineArray.length-2];
         } catch (Exception e) {
-            System.out.println("Couldnt find valueCaught at lineArray[last]");
+            Logger.logStringtoLogFile("Error : could not find value from bet ----> getValueFromBet()");
         }
     }
 
@@ -173,7 +173,7 @@ class TipHandler {
                 System.out.println("Bet has been placed SUCCESSFULLY!");
                 stop=true;
             } catch (Exception e) {
-                e.printStackTrace();
+                Logger.logStringtoLogFile("Error : could not find ok button ----> getTextFromSuccessWindow()");
             }
         }
     }
