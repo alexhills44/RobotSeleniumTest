@@ -35,6 +35,7 @@ class AutoClose {
                 } catch (Exception e) {
                     e.printStackTrace();
                     ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+                    stop=true;
                 }
                 ms.onLeftClick();
             } catch (Exception e) {
@@ -51,6 +52,11 @@ class AutoClose {
         while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
             try {
                 sl.getText(PropertiesXpath.getProp("BOX_SINGLE_ANOIXTA"));
+                stop=true;
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 //Press Cog
                 ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
                 ms.onLeftClick();
@@ -68,7 +74,6 @@ class AutoClose {
                 // press the cog again to close the popup window
                 ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
                 ms.onLeftClick();
-                stop=true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
