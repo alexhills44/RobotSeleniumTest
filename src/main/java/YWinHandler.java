@@ -48,7 +48,7 @@ class YWinHandler {
             isRunning=true;
             competitionNumber--;
             cycles=0;
-            while(isRunning && cycles<300) {
+            while(isRunning && cycles<50) {
                 cycles++;
                 try {
                     if (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div").contains(inputMessage[1])) {
