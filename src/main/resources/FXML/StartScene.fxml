@@ -28,12 +28,12 @@
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="460.0" prefHeight="100.0" prefWidth="200.0" />
             <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Bet365 Username : ">
+                  <Label text="Bet365 Username : " textFill="#ffdf1b">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usrB" promptText="username" style="-fx-background-color: #136b40;">
+                  <TextField fx:id="usrB" promptText="username" style="-fx-background-color: #474747;;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -42,12 +42,12 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="250.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Bet365 Password : ">
+                  <Label text="Bet365 Password : " textFill="#ffdf1b">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="pswB" promptText="password" style="-fx-background-color: #136b40;">
+                  <PasswordField fx:id="pswB" promptText="password" style="-fx-background-color: #474747;;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -56,12 +56,12 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="243.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Best Size :  ">
+                  <Label text="Best Size :  " textFill="#ffdf1b">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="betSizeField" promptText="10$" style="-fx-background-color: #136b40;">
+                  <TextField fx:id="betSizeField" promptText="10$" style="-fx-background-color: #474747;;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -70,7 +70,7 @@
             </HBox>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="556.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <CheckBox fx:id="rememberMe" mnemonicParsing="false" text="Remember Me">
+                  <CheckBox fx:id="rememberMe" mnemonicParsing="false" text="Remember Me" textFill="#ffdf1b">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -79,8 +79,8 @@
             </HBox>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="343.0" prefHeight="100.0" prefWidth="200.0" spacing="10">
                <children>
-                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" style="-fx-background-color: #136b40;" />
-                  <CheckBox fx:id="calibrate" mnemonicParsing="false" text="Calibrate">
+                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" style="-fx-background-color: #474747;;" />
+                  <CheckBox fx:id="calibrate" mnemonicParsing="false" text="Calibrate" textFill="#ffdf1b">
                      <font>
                         <Font size="18.0" />
                      </font>

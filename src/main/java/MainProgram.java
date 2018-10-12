@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.util.ArrayList;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -79,7 +80,7 @@ public class MainProgram implements Runnable {
                 System.out.println("Tip List : "+Main.tipList);
 
                 // For every tip in the list do
-                Vector<String> tempTipList= Main.tipList;
+                ArrayList<String> tempTipList= new ArrayList<String>(Main.tipList);
                 for (String tip :tempTipList) {
 
                     // Time is up remove else try to play bet
@@ -89,7 +90,7 @@ public class MainProgram implements Runnable {
                         Main.tipSendTime.remove(index);
                         System.out.println("Tip List : "+Main.tipList);
                     }else {
-                        new TipHandler(tip,sl,ms,this);
+                        new TipHandler(tip,sl,ms,this).run();
                     }
                 }
 
