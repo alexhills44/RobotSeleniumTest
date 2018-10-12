@@ -33,7 +33,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usrB" promptText="username" style="-fx-background-color: #474747;;">
+                  <TextField fx:id="usrB" promptText="username" style="-fx-background-color: #08875e;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <PasswordField fx:id="pswB" promptText="password" style="-fx-background-color: #474747;;">
+                  <PasswordField fx:id="pswB" promptText="password" style="-fx-background-color: #08875e;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -61,7 +61,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="betSizeField" promptText="10$" style="-fx-background-color: #474747;;">
+                  <TextField fx:id="betSizeField" promptText="10$" style="-fx-background-color: #08875e;">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -79,7 +79,7 @@
             </HBox>
             <HBox id="empty" alignment="CENTER" layoutX="10.0" layoutY="343.0" prefHeight="100.0" prefWidth="200.0" spacing="10">
                <children>
-                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" style="-fx-background-color: #474747;;" />
+                  <ChoiceBox fx:id="usrAgent" prefWidth="150.0" style="-fx-background-color: #08875e;" />
                   <CheckBox fx:id="calibrate" mnemonicParsing="false" text="Calibrate" textFill="#ffdf1b">
                      <font>
                         <Font size="18.0" />

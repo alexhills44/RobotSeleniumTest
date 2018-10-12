@@ -79,6 +79,7 @@ public class MainProgram implements Runnable {
                 ArrayList<String> tempTipList= new ArrayList<String>(Main.tipList);
                 for (String tip :tempTipList) {
                     // Time is up remove else try to play bet
+                    System.out.println("List of tips : "+tempTipList);
                     int index = Main.tipList.indexOf(tip);
                     if(System.nanoTime()-Main.tipSendTime.get(index)>2*NANOSEC_TO_MIN) {
                         Main.tipList.remove(tip);
