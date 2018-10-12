@@ -36,14 +36,14 @@ class TipHandler {
     // Calls the handler and gets the values
     private void tipHandler () {
         tipArray = tip.split("---");
-        if (tipArray[3].contains("-") || tipArray[3].contains("+")) {
+        if (tipArray[3].contains(",")&&tipArray[3].contains("-")) {
             try {
-                System.out.println("Found that tip is Handicap");
-                YHandicapHandler handicapHandler = new YHandicapHandler(tipArray, sl);
-                xpath = handicapHandler.getHandicap();
+                System.out.println("Found Over/Under");
+                YDiaforesHandler diaforesHandler = new YDiaforesHandler(tip,tipArray, sl);
+                xpath = diaforesHandler.getDiafores();
             } catch (Exception e) {
-                stopLoop=true;
-                System.out.println("YHandicapHandler ----> "+e.getMessage());
+                stopLoop = true;
+                System.out.println("YOverUnderHandler ----> " + e.getMessage());
             }
         } else if (tipArray[3].contains("O") || tipArray[3].contains("U") || tipArray[3].contains("Ο") || tipArray[3].contains("υ")) {
             try {
@@ -54,14 +54,14 @@ class TipHandler {
                 stopLoop=true;
                 System.out.println("YOverUnderHandler ----> "+e.getMessage());
             }
-        } else if (tipArray[3].contains(",")&&tipArray[3].contains("-")) {
+        } else if (tipArray[3].contains("-") || tipArray[3].contains("+")) {
             try {
-                System.out.println("Found Over/Under");
-                YDiaforesHandler diaforesHandler = new YDiaforesHandler(tip,tipArray, sl);
-                xpath = diaforesHandler.getDiafores();
+                System.out.println("Found that tip is Handicap");
+                YHandicapHandler handicapHandler = new YHandicapHandler(tipArray, sl);
+                xpath = handicapHandler.getHandicap();
             } catch (Exception e) {
-                stopLoop = true;
-                System.out.println("YOverUnderHandler ----> " + e.getMessage());
+                stopLoop=true;
+                System.out.println("YHandicapHandler ----> "+e.getMessage());
             }
         }else {
             try {
