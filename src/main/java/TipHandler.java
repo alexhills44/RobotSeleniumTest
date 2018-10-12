@@ -161,9 +161,20 @@ class TipHandler {
     }
 
     private void getTextFromSuccessWindow() {
-        getOddAndValueFromBetPlacedIFRAME();
-        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
-        ms.onLeftClick();
-        System.out.println("Bet has been placed SUCCESSFULLY!");
+        final long NANOSEC_PER_SEC = 1000L*1000*1000;
+        long startTime = System.nanoTime();
+        boolean stop=false;
+        // Try for 1.5 min
+        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
+            try {
+                getOddAndValueFromBetPlacedIFRAME();
+                ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+                ms.onLeftClick();
+                System.out.println("Bet has been placed SUCCESSFULLY!");
+                stop=true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
