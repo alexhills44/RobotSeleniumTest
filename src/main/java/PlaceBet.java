@@ -48,40 +48,38 @@ class PlaceBet {
     }
 
     private void clickBetConfirm() {
-        final long NANOSEC_PER_SEC = 1000L*1000*1000;
-        long startTime = System.nanoTime();
-        boolean stop=false;
-        // Try for 1.5 min
-        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
-            try {
-                ms.scrollToViewIFRAME("//*[contains(text(),'Στοιχηματίστε')]");
-                ms.onLeftClick();
-            } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Bet has changed or has been Blocked ----> PlaceBet : clickBetConfirm()");
-            }
+        try {
+            ms.scrollToViewIFRAME("//*[contains(text(),'Στοιχηματίστε')]");
+            ms.onLeftClick();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Bet has changed or has been Blocked ----> PlaceBet : clickBetConfirm()");
         }
     }
 
     void closeBetWindow() {
-        switch (new Random().nextInt(3)) {
-            case 0:
-                // TODO : TEST IT
-                ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_DIAGRAFH"));
-                ms.randomDelay(300,1000);
-                ms.onLeftClick();
-                sl.switchToDefaultFrame();
-            case  1:
-                // TODO : TEST IT
-                ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
-                ms.randomDelay(300,1000);
-                ms.onLeftClick();
-                sl.switchToDefaultFrame();
-            case 2:
-                // TODO : TEST IT
-                sl.switchToDefaultFrame();
-                clickOnBet();
-            case 3:
+        int random=new Random().nextInt(3);
+        if(random==0) {
+            // TODO : TEST IT
+            ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_DIAGRAFH"));
+            ms.randomDelay(300, 1000);
+            ms.onLeftClick();
+            sl.switchToDefaultFrame();
+        }
+        else if(random==1) {
+            // TODO : TEST IT
+
+            ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
+            ms.randomDelay(300, 1000);
+            ms.onLeftClick();
+            sl.switchToDefaultFrame();
+        }
+         else if(random==2) {
+            // TODO : TEST IT
+            sl.switchToDefaultFrame();
+            clickOnBet();
+        }
+         else{
                 // TODO : TEST IT
                 ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_APODOXI_ALLAGWN"));
                 ms.randomDelay(300,1000);
