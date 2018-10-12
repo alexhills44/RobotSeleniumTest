@@ -21,11 +21,15 @@ class PlaceBet {
     // Searches for the textView and enters the amount of money to be played
     // then clicks the button for the bet to be placed
     void placeBetSize () {
-        initializer();
-        ms.randomDelay(1000,2000);
-        setBetSizeToPlace();
-        ms.randomDelay(1000,2000);
-        clickBetConfirm();
+        try {
+            initializer();
+            ms.randomDelay(1000,2000);
+            setBetSizeToPlace();
+            ms.randomDelay(1000,2000);
+            clickBetConfirm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void initializer() {

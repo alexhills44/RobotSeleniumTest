@@ -26,6 +26,7 @@ class AutoClose {
             ms.randomDelay(2000,4000);
             ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
         } catch (Exception e) {
+            e.printStackTrace();
             ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
         }
         ms.onLeftClick();
@@ -89,6 +90,7 @@ class AutoClose {
                         }
                     }catch (Exception ex) {
                         // if there is no box in that position stop looking
+                        e.printStackTrace();
                         isRunning=false;
                     }
                 }
