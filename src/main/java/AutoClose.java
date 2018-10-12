@@ -35,9 +35,11 @@ class AutoClose {
                 } catch (Exception e) {
                     e.printStackTrace();
                     ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+                    stop=true;
                 }
                 ms.onLeftClick();
             } catch (Exception e) {
+                Logger.logStringtoLogFile("Error 404 : Element (STOIXHMATA or ANOIXTA) not found ----> navigateToClosingWindow()");
                 e.printStackTrace();
             }
         }
@@ -51,27 +53,32 @@ class AutoClose {
         while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
             try {
                 sl.getText(PropertiesXpath.getProp("BOX_SINGLE_ANOIXTA"));
-                //Press Cog
-                ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
-                ms.onLeftClick();
-                ms.randomDelay(1000, 2000);
-                // Press the textBox to enter close Statement
-                ms.scrollToView(PropertiesXpath.getProp("PLACE_CLOSE_STATEMENT_SINGLE"));
-                ms.onLeftClick();
-                ms.randomDelay(1000, 2000);
-                setClosingStatementSingle();
-                ms.randomDelay(1000, 2000);
-                // confirm the Close Statement
-                ms.scrollToView(PropertiesXpath.getProp("DIMIOURGISTE_SINTHIKH_SINGLE"));
-                ms.onLeftClick();
-                ms.randomDelay(1000, 2000);
-                // press the cog again to close the popup window
-                ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
-                ms.onLeftClick();
-                stop=true;
+                stop = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+        try {
+            //Press Cog
+            ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+            ms.onLeftClick();
+            ms.randomDelay(1000, 2000);
+            // Press the textBox to enter close Statement
+            ms.scrollToView(PropertiesXpath.getProp("PLACE_CLOSE_STATEMENT_SINGLE"));
+            ms.onLeftClick();
+            ms.randomDelay(1000, 2000);
+            setClosingStatementSingle();
+            ms.randomDelay(1000, 2000);
+            // confirm the Close Statement
+            ms.scrollToView(PropertiesXpath.getProp("DIMIOURGISTE_SINTHIKH_SINGLE"));
+            ms.onLeftClick();
+            ms.randomDelay(1000, 2000);
+            // press the cog again to close the popup window
+            ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+            ms.onLeftClick();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.logStringtoLogFile("Error 404 : Element (BOX_SINGLE_ANOIXTA) not found ----> setAutoCloseSequenceSingle()");
         }
     }
 
@@ -81,8 +88,9 @@ class AutoClose {
         // Try to close Match if it is single
         try {
             setAutoCloseSequenceSingle();
+            Logger.logStringtoLogFile("autoclose is single");
         }catch(Exception e) {
-            System.out.println("More than one Matches are Open");
+            Logger.logStringtoLogFile("autoclose is NOT single");
             // shows us which bet we are looking at
             int betPointer =0;
             // Tells the while Loop when to Stop
@@ -158,7 +166,7 @@ class AutoClose {
             ms.onLeftClick();
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error : ----> pressConfirmationButton()");
+            Logger.logStringtoLogFile("Error : ----> pressConfirmationButton()");
         }
     }
     private void enterAmountClose(int viewPointer,int betPointer) {
@@ -169,7 +177,7 @@ class AutoClose {
             setClosingAmount(oddsCatched);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Error : ----> enterAmountClose()");
+            Logger.logStringtoLogFile("Error : ----> enterAmountClose()");
         }
     }
     private void setClosingAmount (String odd0) {

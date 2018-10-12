@@ -31,6 +31,7 @@ public class ReadTerminal extends Thread{
                 Main.tipList.add(line);
                 Main.tipSendTime.add(System.nanoTime());
             }catch (ArrayIndexOutOfBoundsException e){
+                Logger.logStringtoLogFile("Tip hasnt got proper structure! IT CANNOT BE PLAYED! ----> ReadTerminal()");
                 System.out.println("Tip hasnt got proper structure! IT CANNOT BE PLAYED!");
             }
 

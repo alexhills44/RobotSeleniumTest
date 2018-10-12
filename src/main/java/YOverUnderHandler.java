@@ -104,9 +104,11 @@ class YOverUnderHandler {
                 }
                 teamNumber--;
             }else {
+                Logger.logStringtoLogFile("Error : could not find team ----> YOverUnderHandler()");
                 throw new Exception("Team name : "+inputMessage[1]+" Not found!");
             }
         }else {
+            Logger.logStringtoLogFile("Error : could not find tournament ----> YOverUnderHandler()");
             throw new Exception("Tournament :"+inputMessage[0]+" Not found!");
         }
     }
@@ -121,7 +123,6 @@ class YOverUnderHandler {
             ABBets=2;
             float overUnder = Float.parseFloat(removeLetter(inputMessage[3]));
             try {
-                // TODO : CHECK IT
                 float overUnderNow = Float.parseFloat(removeLetter(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]")));
                 if (inputMessage[3].contains("O")) {
                     rowBets=1;
@@ -135,7 +136,7 @@ class YOverUnderHandler {
                     }
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YOverUnderHandler ----> OverUnderChecker");
+                Logger.logStringtoLogFile("Error : could not read value ----> YOverUnderHandler()");
             }
         } else {
             columnBets =2;
@@ -143,7 +144,6 @@ class YOverUnderHandler {
             ABBets=2;
             float overUnder = Float.parseFloat(removeLetter(inputMessage[3]));
             try {
-                // TODO : CHECK IT
                 float overUnderNow = Float.parseFloat(removeLetter(sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span[2]")));
                 if (inputMessage[3].contains("O")) {
                     rowBets=1;
@@ -157,7 +157,7 @@ class YOverUnderHandler {
                     }
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YOverUnderHandler ----> OverUnderChecker");
+                Logger.logStringtoLogFile("Error : could not read value ----> YOverUnderHandler()");
             }
         }
     }

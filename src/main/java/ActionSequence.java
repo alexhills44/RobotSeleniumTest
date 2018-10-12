@@ -37,10 +37,11 @@ class ActionSequence {
                 ms.onLeftClick();
                 stop=true;
             } catch (Exception e) {
+                Logger.logStringtoLogFile("Error 404 : Element not found ----> languageScreen()");
                 System.out.println("Error 404 : Element not found ----> languageScreen()");
             }
         }
-    }
+    }////*[contains(text(), 'Διαφορά Νίκης')]
 
     // Scrolls the mouse at the userName textView inputs the userName,
     // does the exact same thing for the passWord
@@ -74,6 +75,7 @@ class ActionSequence {
                 }
                 stop=true;
             } catch (Exception e) {
+                Logger.logStringtoLogFile("Error 404 : Element not found ----> setCredentials()");
                 System.out.println("Error 404 : Element not found ----> setCredentials()");
             }
         }
@@ -95,6 +97,7 @@ class ActionSequence {
                 ms.onLeftClick();
                 stop=true;
             } catch (Exception e) {
+                Logger.logStringtoLogFile("Error 404 : Element not found ----> inPlay()");
                 System.out.println("Error 404 : Element not found ----> inPlay()");
             }
         }
@@ -115,6 +118,7 @@ class ActionSequence {
                 sl.getText("//*[contains(text(), 'Ποδόσφαιρο')]");
                 stop=true;
             } catch (Exception e) {
+                Logger.logStringtoLogFile("Error 404 : Element not found ----> basketCategory()");
                 System.out.println("Error 404 : Element not found ----> basketCategory()");
             }
         }
@@ -129,6 +133,7 @@ class ActionSequence {
                 System.out.println("Not in View");
                 ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
                 ms.onLeftClick();
+                Logger.logStringtoLogFile("Not in View ----> basketCategory()");
             }
         }
 

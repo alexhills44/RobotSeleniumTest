@@ -11,6 +11,7 @@ public class Main extends Application{
 
     static Vector<String> tipList = new Vector<String>();
     static Vector<Long> tipSendTime = new Vector<Long>();
+    static boolean diafores=false;
 
     // TODO : Create SeleniumMethod to Handle Elements not found and log erros
     // TODO : Get Tip from Dunkmantips.com
@@ -34,6 +35,7 @@ public class Main extends Application{
 
         }catch (Exception e) {
             e.printStackTrace();
+            Logger.logStringtoLogFile("Error : Could not load GUI : "+e.getMessage());
         }
     }
     //C:\Users\Costas\Desktop\Alex TeamViewr\AutoPlayBet365\src\main\resources\FXML\StartScene.fxml

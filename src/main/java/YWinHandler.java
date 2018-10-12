@@ -105,10 +105,12 @@ class YWinHandler {
                 }
                 teamNumber--;
             }else {
+                Logger.logStringtoLogFile("Error : could not find team ----> YWinHandler()");
                 throw new Exception("Team name : "+inputMessage[1]+" Not found!");
 
             }
         }else {
+            Logger.logStringtoLogFile("Error : could not find tournament ----> YWinHandler()");
             throw new Exception("Tournament :"+inputMessage[0]+" Not found!");
         }
     }
@@ -131,7 +133,7 @@ class YWinHandler {
                     xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YWinHandler ----> winChecker  More than two Matches");
+                Logger.logStringtoLogFile("Error : could not read odd ----> YWinHandler()");
             }
         } else {
             columnBets =3;
@@ -147,7 +149,7 @@ class YWinHandler {
                     xpathToReturn="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div/div/div[2]/div["+String.valueOf(columnBets)+"]/div["+String.valueOf(rowBets)+"]/span["+String.valueOf(ABBets)+"]";
                 }
             }catch (Exception e) {
-                System.out.println("Xpath Problem : YWinHandler ----> winChecker Single Match");
+                Logger.logStringtoLogFile("Error : could not read odd ----> YWinHandler()");
             }
         }
     }
