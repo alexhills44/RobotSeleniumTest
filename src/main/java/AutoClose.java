@@ -19,38 +19,60 @@ class AutoClose {
     // valueCatched = get the Value that Success bet Window says we placed it at
     // betSize = get amount of money placed on that bet (BET_SIZE*betMulty)
     private void navigateToClosingWindow() {
-        sl.switchToDefaultFrame();
-        ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
-        ms.onLeftClick();
-        try {
-            ms.randomDelay(2000,4000);
-            ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
-        } catch (Exception e) {
-            e.printStackTrace();
-            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+        final long NANOSEC_PER_SEC = 1000L*1000*1000;
+        long startTime = System.nanoTime();
+        boolean stop=false;
+        // Try for 1.5 min
+        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
+            try {
+                sl.switchToDefaultFrame();
+                ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
+                ms.onLeftClick();
+                try {
+                    ms.randomDelay(2000, 4000);
+                    ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
+                    stop=true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+                }
+                ms.onLeftClick();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        ms.onLeftClick();
     }
 
     private void setAutoCloseSequenceSingle() {
-        sl.getText(PropertiesXpath.getProp("BOX_SINGLE_ANOIXTA"));
-        //Press Cog
-        ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
-        ms.onLeftClick();
-        ms.randomDelay(1000,2000);
-        // Press the textBox to enter close Statement
-        ms.scrollToView(PropertiesXpath.getProp("PLACE_CLOSE_STATEMENT_SINGLE"));
-        ms.onLeftClick();
-        ms.randomDelay(1000,2000);
-        setClosingStatementSingle();
-        ms.randomDelay(1000,2000);
-        // confirm the Close Statement
-        ms.scrollToView(PropertiesXpath.getProp("DIMIOURGISTE_SINTHIKH_SINGLE"));
-        ms.onLeftClick();
-        ms.randomDelay(1000,2000);
-        // press the cog again to close the popup window
-        ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
-        ms.onLeftClick();
+        final long NANOSEC_PER_SEC = 1000L*1000*1000;
+        long startTime = System.nanoTime();
+        boolean stop=false;
+        // Try for 1.5 min
+        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
+            try {
+                sl.getText(PropertiesXpath.getProp("BOX_SINGLE_ANOIXTA"));
+                //Press Cog
+                ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+                ms.onLeftClick();
+                ms.randomDelay(1000, 2000);
+                // Press the textBox to enter close Statement
+                ms.scrollToView(PropertiesXpath.getProp("PLACE_CLOSE_STATEMENT_SINGLE"));
+                ms.onLeftClick();
+                ms.randomDelay(1000, 2000);
+                setClosingStatementSingle();
+                ms.randomDelay(1000, 2000);
+                // confirm the Close Statement
+                ms.scrollToView(PropertiesXpath.getProp("DIMIOURGISTE_SINTHIKH_SINGLE"));
+                ms.onLeftClick();
+                ms.randomDelay(1000, 2000);
+                // press the cog again to close the popup window
+                ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+                ms.onLeftClick();
+                stop=true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     void autoClose() {
