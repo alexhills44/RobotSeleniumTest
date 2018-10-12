@@ -60,7 +60,6 @@ class TipHandler {
                 xpath = winHandler.getWin();
             } catch (Exception e) {
                 stopLoop=true;
-                MainProgram.isBeingPlayed=false;
                 System.out.println("YWinHandler ----> "+e.getMessage());
                 e.printStackTrace();
             }
@@ -81,7 +80,6 @@ class TipHandler {
 
         // Return to main Method something to show it that the bet cannot be played or has been played
         // and move to the next tip if available
-        MainProgram.isBeingPlayed = false;
     }
     private void betTip (int index) {
         // Sets the bet Size once in the loop

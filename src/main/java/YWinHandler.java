@@ -105,12 +105,10 @@ class YWinHandler {
                 }
                 teamNumber--;
             }else {
-                MainProgram.isBeingPlayed=false;
                 throw new Exception("Team name : "+inputMessage[1]+" Not found!");
 
             }
         }else {
-            MainProgram.isBeingPlayed=false;
             throw new Exception("Tournament :"+inputMessage[0]+" Not found!");
         }
     }

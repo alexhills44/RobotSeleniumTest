@@ -12,7 +12,6 @@ public class MainProgram implements Runnable {
     private MouseMovement ms;
     private ActionSequence as;
     private int yOffset= PropertiesHandler.getYOffset();
-    static boolean isBeingPlayed=true;
     final long NANOSEC_TO_MIN = 1000L*1000*1000*60;
 
     MainProgram() {
@@ -63,7 +62,6 @@ public class MainProgram implements Runnable {
         }
     }
 
-    // TODO : Fix the array list and tip handling and que
     private void testJunk () {
         // Allows only one thread to be active at any given time
 //        ExecutorService x = Executors.newFixedThreadPool(1);
@@ -77,12 +75,9 @@ public class MainProgram implements Runnable {
 
             // tipList isnt empty
             if (!Main.tipList.isEmpty()) {
-                System.out.println("Tip List : "+Main.tipList);
-
                 // For every tip in the list do
                 ArrayList<String> tempTipList= new ArrayList<String>(Main.tipList);
                 for (String tip :tempTipList) {
-
                     // Time is up remove else try to play bet
                     int index = Main.tipList.indexOf(tip);
                     if(System.nanoTime()-Main.tipSendTime.get(index)>2*NANOSEC_TO_MIN) {
