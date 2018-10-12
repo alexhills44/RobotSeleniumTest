@@ -219,9 +219,9 @@ class MouseMovement {
         Point point = sl.getElementSurface(xpath);
         Double hotSpot;
         Double pointX = point.getX()-4;
-        int randomX = rand.nextInt(pointX.intValue())+2;
+        int randomX = rand.nextInt(pointX.intValue()+1)+1;
         Double pointY = point.getY()-4;
-        int randomY = rand.nextInt(pointY.intValue())+2;
+        int randomY = rand.nextInt(pointY.intValue()+1)+1;
         int chances = rand.nextInt(100)+1;
         //60% chance
         if(chances>40) {

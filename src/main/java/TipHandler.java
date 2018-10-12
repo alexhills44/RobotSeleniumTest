@@ -70,6 +70,7 @@ class TipHandler {
     // if it doesnt succeed then removes bet by clicking on the element on the main bet page and tries again
     // if it doesnt find it
     public void run () {
+        ms.randomDelay(8000,12000);
         int index = Main.tipList.indexOf(tip);
         tipHandler();
         if (!xpath.equals("")) {
@@ -82,7 +83,6 @@ class TipHandler {
         // and move to the next tip if available
     }
     private void betTip (int index) {
-        ms.randomDelay(8000,12000);
         // Sets the bet Size once in the loop
         setBetSize();
         PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
