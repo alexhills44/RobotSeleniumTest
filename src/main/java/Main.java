@@ -11,6 +11,7 @@ public class Main extends Application{
 
     static Vector<String> tipList = new Vector<String>();
     static Vector<Long> tipSendTime = new Vector<Long>();
+    static boolean diafores=false;
 
     // TODO : Create SeleniumMethod to Handle Elements not found and log erros
     // TODO : Get Tip from Dunkmantips.com

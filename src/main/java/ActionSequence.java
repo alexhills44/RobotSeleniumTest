@@ -41,7 +41,7 @@ class ActionSequence {
                 System.out.println("Error 404 : Element not found ----> languageScreen()");
             }
         }
-    }
+    }////*[contains(text(), 'Διαφορά Νίκης')]
 
     // Scrolls the mouse at the userName textView inputs the userName,
     // does the exact same thing for the passWord

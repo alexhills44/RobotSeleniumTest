@@ -20,6 +20,9 @@ class TipHandler {
     /////////////////League---TeamName---Bet---Odds///////////////
     /////////////////League---TeamName---Bet---Odds///////////////
 
+    //example of diffrrence
+    //League---TeamName---1/3---14-16,17-20,21+---comments
+
 
     TipHandler(String tip0, SeleniumMethods sl0, MouseMovement ms0, MainProgram mainProgram) {
         tip=tip0;
@@ -51,7 +54,16 @@ class TipHandler {
                 stopLoop=true;
                 System.out.println("YOverUnderHandler ----> "+e.getMessage());
             }
-        } else {
+        } else if (tipArray[3].contains(",")&&tipArray[3].contains("-")) {
+            try {
+                System.out.println("Found Over/Under");
+                YDiaforesHandler diaforesHandler = new YDiaforesHandler(tip,tipArray, sl);
+                xpath = diaforesHandler.getDiafores();
+            } catch (Exception e) {
+                stopLoop = true;
+                System.out.println("YOverUnderHandler ----> " + e.getMessage());
+            }
+        }else {
             try {
                 System.out.println("Found that tip is Win");
                 YWinHandler winHandler = new YWinHandler(tipArray, sl);
