@@ -198,7 +198,8 @@ public class YDiaforesHandler {
                         System.out.println(a);
                         //play that bet on this xpath
                         // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
-                        betTip("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        ////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]"
                         if (values[values.length-1].contains(a)) {
                             removeFromList=true;
                         }
