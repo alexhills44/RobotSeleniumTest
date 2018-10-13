@@ -71,7 +71,6 @@ class PlaceBet {
                 // Try for 1.5 min
                 while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
                     try {
-                        // TODO : TEST IT
                         ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_DIAGRAFH"));
                         ms.randomDelay(300, 1000);
                         ms.onLeftClick();
@@ -85,7 +84,6 @@ class PlaceBet {
                 // Try for 1.5 min
                 while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
                     try {
-                        // TODO : TEST IT
                         ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
                         ms.randomDelay(300, 1000);
                         ms.onLeftClick();
@@ -99,7 +97,6 @@ class PlaceBet {
                 // Try for 1.5 min
                 while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
                     try {
-                        // TODO : TEST IT
                         sl.switchToDefaultFrame();
                         clickOnBet();
                         stop=true;

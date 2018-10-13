@@ -91,7 +91,7 @@ class TipHandler {
         // Return to main Method something to show it that the bet cannot be played or has been played
         // and move to the next tip if available
     }
-
+    @SuppressWarnings("Duplicates")
     private void betTip (int index) {
         // Sets the bet Size once in the loop
         setBetSize();
@@ -118,8 +118,6 @@ class TipHandler {
                 e.printStackTrace();
             }
         }
-
-
         if (state==2) {
             // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
 //            getTextFromSuccessWindow();

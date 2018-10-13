@@ -85,12 +85,6 @@ class AutoClose {
     void autoClose() {
         navigateToClosingWindow();
         ms.randomDelay(1000,2000);
-        // Try to close Match if it is single
-//        try {
-//            setAutoCloseSequenceSingle();
-//            Logger.logStringtoLogFile("autoclose is single");
-//        }catch(Exception e) {
-        //Press Cog
         ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
         ms.onLeftClick();
         ms.randomDelay(1000, 2000);

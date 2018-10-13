@@ -18,6 +18,7 @@ public class YDiaforesHandler {
     private float betSize;
     private String oddsCaught;
     private boolean removeFromList=false;
+    private int state =0;
     String tip;
 
     ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[1]
@@ -198,7 +199,9 @@ public class YDiaforesHandler {
                         System.out.println(a);
                         //play that bet on this xpath
                         // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
-                        betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        while (state!=2) {
+                            betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        }
                         ////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]"
                         if (values[values.length-1].contains(a)) {
                             removeFromList=true;
@@ -211,38 +214,48 @@ public class YDiaforesHandler {
             }
         }
     }
-
+    @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
         System.out.println("Tryed to Bet");
         boolean stop=false;
-        System.out.println("Tryed to bet : 1");
         while (!stop) {
-            System.out.println("Tryed to bet : 2");
             // Sets the bet Size once in the loop
             int index = Main.tipList.indexOf(tip);
             PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
-            System.out.println("Tryed to bet : 3");
             pb.clickOnBet();
-            System.out.println("Tryed to bet : 4");
             ms.randomDelay(2000, 4000);
             // Place bet and press confirm bet
             pb.placeBetSize();
-            System.out.println("Tryed to bet : 5");
             ms.randomDelay(3000, 6000);
-            try {
+            final long NANOSEC_PER_SEC = 1000L*1000*1000;
+            long startTime = System.nanoTime();
+            state=0;
+            while (state==0 && (System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC) {
+                try {
+                    sl.getText("/html/body/div[1]/div/ul/li[9]/a[1]/div");
+                    state =1;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                try {
+                    getTextFromSuccessWindow();
+                    state=2;
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (state==2) {
                 // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
-                getTextFromSuccessWindow();
+//            getTextFromSuccessWindow();
                 ms.randomDelay(1000, 2000);
                 //Calls the autoclose Class to se the auto close amount
                 new AutoClose(sl,ms,inputMessage, oddsCaught, "",betSize).autoClose();
                 System.out.println("autoClose has been placed");
                 Logger.logStringtoLogFile("Auto Close has been placed SUCCESSFULLY!");
-                stop=true;
-                if (removeFromList) {
-                    Main.tipSendTime.remove(index);
-                    Main.tipList.remove(tip);
-                }
-            } catch (Exception e) {
+                // Stops the while loop
+                Main.tipSendTime.remove(index);
+                Main.tipList.remove(tip);
+            }else if (state==1){
                 pb.closeBetWindow();
                 Logger.logStringtoLogFile("Retrying to place bet...");
                 System.out.println("Retrying to place bet");
