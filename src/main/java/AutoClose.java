@@ -90,6 +90,10 @@ class AutoClose {
 //            setAutoCloseSequenceSingle();
 //            Logger.logStringtoLogFile("autoclose is single");
 //        }catch(Exception e) {
+        //Press Cog
+        ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+        ms.onLeftClick();
+        ms.randomDelay(1000, 2000);
             Logger.logStringtoLogFile("autoclose is NOT single");
             // shows us which bet we are looking at
             int betPointer =0;
