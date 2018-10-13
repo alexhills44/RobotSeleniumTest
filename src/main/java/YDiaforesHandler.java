@@ -178,6 +178,7 @@ public class YDiaforesHandler {
         try {
             values = inputMessage[3].split(",");
             betSize=betSize/values.length;
+            System.out.println("Betting amount for Diffrences is : "+betSize);
         } catch (Exception e) {
             Logger.logStringtoLogFile("Error : could not split values for YDiaforesHandsler ----> loopThroughBetCategories()");
         }
