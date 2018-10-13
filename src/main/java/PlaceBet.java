@@ -81,21 +81,21 @@ class PlaceBet {
                         Logger.logStringtoLogFile("Error : could not find button 'Διαγραφή' ----> closeBetWindow()");
                     }
                 }
-//            case  1:
-//                // Try for 1.5 min
-//                while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
-//                    try {
-//                        // TODO : TEST IT
-//                        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
-//                        ms.randomDelay(300, 1000);
-//                        ms.onLeftClick();
-//                        sl.switchToDefaultFrame();
-//                        stop=true;
-//                    } catch (Exception e) {
-//                        Logger.logStringtoLogFile("Error : could not find button 'X-Διαγραφή' ----> closeBetWindow()");
-//                    }
-//                }
-            case 1:
+            case  1:
+                // Try for 1.5 min
+                while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
+                    try {
+                        // TODO : TEST IT
+                        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_X_BUTTON_DIAGRAFH"));
+                        ms.randomDelay(300, 1000);
+                        ms.onLeftClick();
+                        sl.switchToDefaultFrame();
+                        stop=true;
+                    } catch (Exception e) {
+                        Logger.logStringtoLogFile("Error : could not find button 'X-Διαγραφή' ----> closeBetWindow()");
+                    }
+                }
+            case 2:
                 // Try for 1.5 min
                 while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
                     try {
@@ -107,20 +107,20 @@ class PlaceBet {
                         Logger.logStringtoLogFile("Error : could not find button Bet ----> closeBetWindow()");
                     }
                 }
-            case 2:
-                // Try for 1.5 min
-                while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
-                    try {
-                        // TODO : TEST IT
-                        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_APODOXI_ALLAGWN"));
-                        ms.randomDelay(300, 1000);
-                        ms.onLeftClick();
-                        sl.switchToDefaultFrame();
-                        stop=true;
-                    } catch (Exception e) {
-                        Logger.logStringtoLogFile("Error : could not find button 'Αποδοχή Αλλαγών' ----> closeBetWindow()");
-                    }
-                }
+//            case 2:
+//                // Try for 1.5 min
+//                while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
+//                    try {
+//                        // TODO : TEST IT
+//                        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_APODOXI_ALLAGWN"));
+//                        ms.randomDelay(300, 1000);
+//                        ms.onLeftClick();
+//                        sl.switchToDefaultFrame();
+//                        stop=true;
+//                    } catch (Exception e) {
+//                        Logger.logStringtoLogFile("Error : could not find button 'Αποδοχή Αλλαγών' ----> closeBetWindow()");
+//                    }
+//                }
         }
     }
 

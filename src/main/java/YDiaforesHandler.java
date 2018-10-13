@@ -213,6 +213,7 @@ public class YDiaforesHandler {
     }
 
     private void betTip (String xpath) {
+        System.out.println("Tryed to Bet");
         boolean stop=false;
         System.out.println("Tryed to bet : 1");
         while (!stop) {

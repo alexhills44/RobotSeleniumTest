@@ -38,7 +38,7 @@ class TipHandler {
         tipArray = tip.split("---");
         if (tipArray[3].contains(",")&&tipArray[3].contains("-")) {
             try {
-                System.out.println("Found Over/Under");
+                System.out.println("Found Διαφορεσ");
                 YDiaforesHandler diaforesHandler = new YDiaforesHandler(tip,tipArray, sl);
                 xpath = diaforesHandler.getDiafores();
             } catch (Exception e) {
