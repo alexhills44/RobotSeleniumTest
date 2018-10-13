@@ -213,14 +213,19 @@ public class YDiaforesHandler {
 
     private void betTip (String xpath) {
         boolean stop=false;
+        System.out.println("Tryed to bet : 1");
         while (!stop) {
+            System.out.println("Tryed to bet : 2");
             // Sets the bet Size once in the loop
             int index = Main.tipList.indexOf(tip);
             PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
+            System.out.println("Tryed to bet : 3");
             pb.clickOnBet();
+            System.out.println("Tryed to bet : 4");
             ms.randomDelay(2000, 4000);
             // Place bet and press confirm bet
             pb.placeBetSize();
+            System.out.println("Tryed to bet : 5");
             ms.randomDelay(3000, 6000);
             try {
                 // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
