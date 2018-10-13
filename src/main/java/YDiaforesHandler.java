@@ -196,13 +196,13 @@ public class YDiaforesHandler {
                 Logger.logStringtoLogFile(xPathToDiffrence+valuesXpathExtension+"/div["+i+"]");
                 for (String a: values) {
                     if (a.contains(s)) {
-                        System.out.println(s);
-                        System.out.println(a);
                         //play that bet on this xpath
                         // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
                         while (state!=2) {
+                            System.out.println("Betting on : "+a);
                             betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                         }
+                        state=0;
                         ////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]"
                         if (values[values.length-1].contains(a)) {
                             removeFromList=true;
