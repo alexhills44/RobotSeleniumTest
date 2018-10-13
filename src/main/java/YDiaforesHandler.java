@@ -79,11 +79,11 @@ public class YDiaforesHandler {
                 cycles++;
                 try {
                     if (sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div").contains(inputMessage[1])) {
-                        isRunning=false;
+                        isRunning = false;
                         System.out.println("2. FOUND MATCH");
-                        isSingle=true;
-                        doesntExist=false;
-                        xpathMatch="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div[1]/div/div[1]";
+                        isSingle = true;
+                        doesntExist = false;
+                        xpathMatch = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[" + String.valueOf(competitionNumber) + "]/div[3]/div[1]/div/div[1]";
                     }
                 }catch (Exception e) {
 //                    System.out.println("Tournament contains more than one Matches");
@@ -96,8 +96,7 @@ public class YDiaforesHandler {
                         doesntExist=false;
                         xpathMatch="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]";
                     }
-                } catch (Exception e) {///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[3]/div[3]/div[1]"
-                    //////////////////////html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[2]/div[3]/div[1]/div/div[1]
+                } catch (Exception e) {
 //                    System.out.println("YHandicapHandler ----> Could not find the match Specified");
                 }
                 matchNumber++;
@@ -157,12 +156,13 @@ public class YDiaforesHandler {
             i++;
             try {
                 String xpathCategory="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]";
+                System.out.println();
                 String textFromCategory =sl.getText(xpathCategory);
                 if (textFromCategory.contains("Περίοδος")) {
-                    i++;
-                }else if (textFromCategory.contains("Διαφορά Νίκης") && textFromCategory.contains(inputMessage[1])) {
-                    xPathToDiffrence=xpathCategory;
-                    found=true;
+                    if (textFromCategory.contains("Διαφορά Νίκης") && textFromCategory.contains(inputMessage[1])) {
+                        xPathToDiffrence=xpathCategory;
+                        found=true;
+                    }
                 }
             }catch (Exception e) {
 
