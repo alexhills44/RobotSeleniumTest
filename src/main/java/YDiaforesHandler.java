@@ -156,8 +156,6 @@ public class YDiaforesHandler {
             i++;
             try {
                 String xpathCategory="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]";
-                System.out.println(xpathCategory);
-                Logger.logStringtoLogFile(xpathCategory);
                 System.out.println();
                 String textFromCategory =sl.getText(xpathCategory);
                 if (textFromCategory.contains("Διαφορά Νίκης")) {
@@ -193,6 +191,9 @@ public class YDiaforesHandler {
             i++;
             try {
                 s =sl.getText(xPathToDiffrence+valuesXpathExtension+"/div["+i+"]");
+                System.out.println(xPathToDiffrence+valuesXpathExtension+"/div["+i+"]");
+                Logger.logStringtoLogFile(xPathToDiffrence+valuesXpathExtension+"/div["+i+"]");
+                System.out.println(values);
                 for (String a: values) {
                     if (a.contains(s)) {
                         //play that bet on this xpath
