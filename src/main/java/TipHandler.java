@@ -100,10 +100,29 @@ class TipHandler {
         ms.randomDelay(2000, 4000);
         // Place bet and press confirm bet
         pb.placeBetSize();
-        ms.randomDelay(3000, 6000);
-        try {
+        ms.randomDelay(6000,9000);
+        final long NANOSEC_PER_SEC = 1000L*1000*1000;
+        long startTime = System.nanoTime();
+        int state =0;
+        while (state==0 && (System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC) {
+            try {
+                sl.getText("/html/body/div[1]/div/ul/li[9]/a[1]/div");
+                state =1;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
+                getTextFromSuccessWindow();
+                state=2;
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        if (state==2) {
             // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
-            getTextFromSuccessWindow();
+//            getTextFromSuccessWindow();
             ms.randomDelay(1000, 2000);
             //Calls the autoclose Class to se the auto close amount
             new AutoClose(sl,ms,tipArray, oddsCaught, valueCaught,betSize).autoClose();
@@ -112,7 +131,7 @@ class TipHandler {
             // Stops the while loop
             Main.tipSendTime.remove(index);
             Main.tipList.remove(tip);
-        } catch (Exception e) {
+        }else if (state==1){
             pb.closeBetWindow();
             Logger.logStringtoLogFile("Retrying to place bet...");
             System.out.println("Retrying to place bet");
