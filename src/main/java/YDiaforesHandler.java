@@ -15,7 +15,7 @@ public class YDiaforesHandler {
     private String xpathMatch="";
     private String xPathToDiffrence="";
     private static String valuesXpathExtension="/div[2]/div/div[1]";
-    private float betSize;
+    private float betSize=PropertiesHandler.getBetSize();
     private String oddsCaught;
     private boolean removeFromList=false;
     private int state =0;
@@ -177,7 +177,7 @@ public class YDiaforesHandler {
     private void tipArrayBreak() {
         try {
             values = inputMessage[3].split(",");
-            betSize=betSize/values.length;
+            betSize=(betSize*Float.parseFloat(inputMessage[2]))/values.length;
             System.out.println("Betting amount for Diffrences is : "+betSize);
         } catch (Exception e) {
             Logger.logStringtoLogFile("Error : could not split values for YDiaforesHandsler ----> loopThroughBetCategories()");
