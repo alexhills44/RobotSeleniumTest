@@ -33,14 +33,12 @@ class AutoClose {
                     ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
                     stop=true;
                 } catch (Exception e) {
-                    e.printStackTrace();
                     ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
                     stop=true;
                 }
                 ms.onLeftClick();
             } catch (Exception e) {
                 Logger.logStringtoLogFile("Error 404 : Element (STOIXHMATA or ANOIXTA) not found ----> navigateToClosingWindow()");
-                e.printStackTrace();
             }
         }
     }
