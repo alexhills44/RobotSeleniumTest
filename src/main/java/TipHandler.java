@@ -43,7 +43,7 @@ class TipHandler {
                 xpath = diaforesHandler.getDiafores();
             } catch (Exception e) {
                 stopLoop = true;
-                System.out.println("YOverUnderHandler ----> " + e.getMessage());
+                System.out.println("YDiaforesHandler ----> " + e.getMessage());
             }
         } else if (tipArray[3].contains("O") || tipArray[3].contains("U") || tipArray[3].contains("Ο") || tipArray[3].contains("υ")) {
             try {
