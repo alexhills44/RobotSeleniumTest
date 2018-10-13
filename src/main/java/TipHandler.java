@@ -100,7 +100,7 @@ class TipHandler {
         ms.randomDelay(2000, 4000);
         // Place bet and press confirm bet
         pb.placeBetSize();
-        ms.randomDelay(6000,9000);
+        ms.randomDelay(500, 4000);
         final long NANOSEC_PER_SEC = 1000L*1000*1000;
         long startTime = System.nanoTime();
         int state =0;

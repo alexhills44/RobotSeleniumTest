@@ -86,10 +86,10 @@ class AutoClose {
         navigateToClosingWindow();
         ms.randomDelay(1000,2000);
         // Try to close Match if it is single
-        try {
-            setAutoCloseSequenceSingle();
-            Logger.logStringtoLogFile("autoclose is single");
-        }catch(Exception e) {
+//        try {
+//            setAutoCloseSequenceSingle();
+//            Logger.logStringtoLogFile("autoclose is single");
+//        }catch(Exception e) {
             Logger.logStringtoLogFile("autoclose is NOT single");
             // shows us which bet we are looking at
             int betPointer =0;
@@ -120,13 +120,13 @@ class AutoClose {
                         }
                     }catch (Exception ex) {
                         // if there is no box in that position stop looking
-                        e.printStackTrace();
+                        ex.printStackTrace();
                         isRunning=false;
                     }
                 }
             }
 
-        }
+//        }
     }
 
     // Passes the Closing amount according to the odd Catched
