@@ -122,22 +122,16 @@ class ActionSequence {
                 System.out.println("Error 404 : Element not found ----> basketCategory()");
             }
         }
-        boolean isRunning=true;
-        while (isRunning) {
-            try {
-                if(sl.getCoordinatesX("//*[contains(text(), 'Μπάσκετ')]")>sl.getElementSurface("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[2]").getX()) {
-                    System.out.println("Not in View");
-                    ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
-                    ms.onLeftClick();
-                    Logger.logStringtoLogFile("Not in View ----> basketCategory()");
-                }else {
-                    ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
-                    ms.onLeftClick();
-                    isRunning=false;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+        while (!sl.getText("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[1]").contains("Μπάσκετ")) {
+            if(sl.getCoordinatesX("//*[contains(text(), 'Μπάσκετ')]")>sl.getElementSurface("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[2]").getX()) {
+                System.out.println("Not in View");
+                ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
+                ms.onLeftClick();
+                Logger.logStringtoLogFile("Not in View ----> basketCategory()");
             }
+            ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
+            System.out.println("clicked on basket");
+            ms.onLeftClick();
         }
     }
 
