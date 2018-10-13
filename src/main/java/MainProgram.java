@@ -78,6 +78,7 @@ public class MainProgram implements Runnable {
                 ArrayList<String> tempTipList= new ArrayList<String>(Main.tipList);
                 for (String tip :tempTipList) {
                     // Time is up remove else try to play bet
+                    Logger.logStringtoLogFile("List of tips : "+tempTipList);
                     System.out.println("List of tips : "+tempTipList);
                     int index = Main.tipList.indexOf(tip);
                     // TODO : Change it to 30 min
