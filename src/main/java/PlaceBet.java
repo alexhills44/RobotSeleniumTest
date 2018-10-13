@@ -51,19 +51,14 @@ class PlaceBet {
     }
 
     private void clickBetConfirm() {
-        final long NANOSEC_PER_SEC = 1000L*1000*1000;
-        long startTime = System.nanoTime();
-        boolean stop=false;
         // Try for 1.5 min
-        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
             try {
                 ms.scrollToViewIFRAME("//*[contains(text(),'Στοιχηματίστε')]");
                 ms.onLeftClick();
-                stop=true;
+
             } catch (Exception e) {
                 System.out.println("Could not find Button 'Στοιχηματίστε'----> PlaceBet : clickBetConfirm()");
             }
-        }
     }
 
     void closeBetWindow() {
