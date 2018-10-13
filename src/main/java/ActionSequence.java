@@ -125,18 +125,20 @@ class ActionSequence {
         boolean isRunning=true;
         while (isRunning) {
             try {
-//                ms.scrollToView(PropertiesXpath.getProp("BASKET_CATEGORY"));
-                ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
-                ms.onLeftClick();
-                isRunning=false;
-            }catch (Exception e) {
-                System.out.println("Not in View");
-                ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
-                ms.onLeftClick();
-                Logger.logStringtoLogFile("Not in View ----> basketCategory()");
+                if(sl.getCoordinatesX("//*[contains(text(), 'Μπάσκετ')]")>sl.getElementSurface("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/div/div[2]").getX()) {
+                    System.out.println("Not in View");
+                    ms.scrollToView(PropertiesXpath.getProp("RIGHT_ARROW_BUTTON_CATEGORY"));
+                    ms.onLeftClick();
+                    Logger.logStringtoLogFile("Not in View ----> basketCategory()");
+                }else {
+                    ms.scrollToView("//*[contains(text(), 'Μπάσκετ')]");
+                    ms.onLeftClick();
+                    isRunning=false;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-
     }
 
     // this is done so the mouse scrolls on the MatchPane
