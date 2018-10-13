@@ -158,8 +158,8 @@ public class YDiaforesHandler {
                 String xpathCategory="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]";
                 System.out.println();
                 String textFromCategory =sl.getText(xpathCategory);
-                if (textFromCategory.contains("Περίοδος")) {
-                    if (textFromCategory.contains("Διαφορά Νίκης") && textFromCategory.contains(inputMessage[1])) {
+                if (textFromCategory.contains("Διαφορά Νίκης")) {
+                    if (!textFromCategory.contains("Περίοδος") && textFromCategory.contains(inputMessage[1])) {
                         xPathToDiffrence=xpathCategory;
                         found=true;
                     }
