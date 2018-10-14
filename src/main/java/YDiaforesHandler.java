@@ -290,6 +290,7 @@ public class YDiaforesHandler {
         while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
             try {
                 getOddAndValueFromBetPlacedIFRAME();
+                ms.randomDelay(500,700);
                 ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
                 ms.onLeftClick();
                 System.out.println("Bet has been placed SUCCESSFULLY!");
