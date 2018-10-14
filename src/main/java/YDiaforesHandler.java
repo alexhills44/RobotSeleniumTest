@@ -187,7 +187,6 @@ public class YDiaforesHandler {
 
     private void playDiafores() {
         int i;
-        try {
             for (String a: values) {
                 //play that bet on this xpath
                 // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
@@ -196,7 +195,7 @@ public class YDiaforesHandler {
                 if (i!=0) {
                     while (state!=2) {
                         System.out.println("Betting on : "+a);
-                        betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        //betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                     }
                     state=0;
                 }
@@ -205,9 +204,7 @@ public class YDiaforesHandler {
                     removeFromList=true;
                 }
             }
-        }catch (Exception e) {
-            Logger.logStringtoLogFile("Didnt find point diffrence values ----> playDiafores()");
-        }
+
     }
 
     @SuppressWarnings("Duplicates")
@@ -249,8 +246,10 @@ public class YDiaforesHandler {
                 System.out.println("autoClose has been placed");
                 Logger.logStringtoLogFile("Auto Close has been placed SUCCESSFULLY!");
                 // Stops the while loop
-                Main.tipSendTime.remove(index);
-                Main.tipList.remove(tip);
+                if (removeFromList) {
+                    Main.tipSendTime.remove(index);
+                    Main.tipList.remove(tip);
+                }
             }else if (state==1){
                 pb.closeBetWindow();
                 Logger.logStringtoLogFile("Retrying to place bet...");
