@@ -178,6 +178,7 @@ public class YDiaforesHandler {
         try {
             values = inputMessage[3].split(",");
             betSize=(betSize*Float.parseFloat(inputMessage[2]))/values.length;
+            betSize=Math.round(betSize*100f)/100f;
             System.out.println("Betting amount for Diffrences is : "+betSize);
         } catch (Exception e) {
             Logger.logStringtoLogFile("Error : could not split values for YDiaforesHandsler ----> loopThroughBetCategories()");
@@ -191,6 +192,7 @@ public class YDiaforesHandler {
                 //play that bet on this xpath
                 // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
                 i = setPointerDiaforesXpath(a);
+                Logger.logStringtoLogFile("Placing bet for : "+a);
                 if (i!=0) {
                     while (state!=2) {
                         System.out.println("Betting on : "+a);
@@ -302,12 +304,16 @@ public class YDiaforesHandler {
         if (s.equals("1-2")) {
             return 2;
         }else if(s.equals("3-6")) {
+            System.out.println("1");
             return 3;
         }else if(s.equals("7-9")) {
+            System.out.println("2");
             return 4;
         }else if(s.equals("10-13")) {
+            System.out.println("3");
             return 5;
         }else if(s.equals("14-16")) {
+            System.out.println("4");
             return 6;
         }else if(s.equals("17-20")) {
             return 7;
