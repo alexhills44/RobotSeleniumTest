@@ -116,7 +116,6 @@ class AutoClose {
                         }
                     }catch (Exception ex) {
                         // if there is no box in that position stop looking
-                        ex.printStackTrace();
                         isRunning=false;
                     }
                 }

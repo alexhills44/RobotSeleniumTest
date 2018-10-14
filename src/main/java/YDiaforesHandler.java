@@ -195,8 +195,11 @@ public class YDiaforesHandler {
                 if (i!=0) {
                     while (state!=2) {
                         System.out.println("Betting on : "+a);
-                        //betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
-                        state=2;
+                        try {
+                            betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     state=0;
                 }
