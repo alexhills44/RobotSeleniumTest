@@ -28,19 +28,22 @@ class AutoClose {
                 sl.switchToDefaultFrame();
                 ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
                 ms.onLeftClick();
-                try {
-                    ms.randomDelay(2000, 4000);
-                    ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
-                    stop=true;
-                } catch (Exception e) {
-                    ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
-                    stop=true;
-                }
-                ms.onLeftClick();
+
             } catch (Exception e) {
                 Logger.logStringtoLogFile("Error 404 : Element (STOIXHMATA or ANOIXTA) not found ----> navigateToClosingWindow()");
             }
         }
+        try {
+            ms.randomDelay(500, 4000);
+            ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
+            stop=true;
+            ms.onLeftClick();
+        } catch (Exception e) {
+            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+            stop=true;
+            ms.onLeftClick();
+        }
+
     }
 
     private void setAutoCloseSequenceSingle() {

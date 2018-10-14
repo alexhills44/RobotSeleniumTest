@@ -197,9 +197,12 @@ public class YDiaforesHandler {
                         System.out.println("Betting on : "+a);
                         try {
                             betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                            ms.randomDelay(1000,2000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
+                        System.out.println("Current state is : "+state);
+                        Logger.logStringtoLogFile("Current state is : "+state);
                     }
                     state=0;
                 }
@@ -214,8 +217,8 @@ public class YDiaforesHandler {
     @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
         System.out.println("Tryed to Bet");
-        boolean stop=false;
-        while (!stop) {
+
+
             // Sets the bet Size once in the loop
             int index = Main.tipList.indexOf(tip);
             PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
@@ -232,13 +235,13 @@ public class YDiaforesHandler {
                     sl.getText("/html/body/div[1]/div/ul/li[9]/a[1]/div");
                     state =1;
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("Doesnt contain Apodoxh Allagwn");
                 }
                 try {
                     getTextFromSuccessWindow();
                     state=2;
                 }catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println();
                 }
             }
             if (state==2) {
@@ -259,7 +262,7 @@ public class YDiaforesHandler {
                 Logger.logStringtoLogFile("Retrying to place bet...");
                 System.out.println("Retrying to place bet");
             }
-        }
+
     }
 
     @SuppressWarnings("all") //For loop is never used warning
