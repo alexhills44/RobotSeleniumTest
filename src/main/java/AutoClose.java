@@ -19,29 +19,27 @@ class AutoClose {
     // valueCatched = get the Value that Success bet Window says we placed it at
     // betSize = get amount of money placed on that bet (BET_SIZE*betMulty)
     private void navigateToClosingWindow() {
-        final long NANOSEC_PER_SEC = 1000L*1000*1000;
-        long startTime = System.nanoTime();
-        boolean stop=false;
         // Try for 1.5 min
-        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
-            try {
-                sl.switchToDefaultFrame();
-                ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
-                ms.onLeftClick();
+        try {
+            sl.switchToDefaultFrame();
+            ms.scrollToView(PropertiesXpath.getProp("STOIXHMATA"));
+            ms.onLeftClick();
 
-            } catch (Exception e) {
-                Logger.logStringtoLogFile("Error 404 : Element (STOIXHMATA or ANOIXTA) not found ----> navigateToClosingWindow()");
-            }
+        } catch (Exception e) {
+            Logger.logStringtoLogFile("Error 404 : Element (STOIXHMATA or ANOIXTA) not found ----> navigateToClosingWindow()");
         }
+
         try {
             ms.randomDelay(500, 4000);
             ms.scrollToView(PropertiesXpath.getProp("ANOIXTA"));
-            stop=true;
             ms.onLeftClick();
         } catch (Exception e) {
-            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
-            stop=true;
-            ms.onLeftClick();
+            try {
+                ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[4]/div/div/div/div[1]/div/div/div[2]/div/div[3]");
+                ms.onLeftClick();
+            } catch (Exception e1) {
+
+            }
         }
 
     }
