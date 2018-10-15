@@ -25,7 +25,8 @@ class PlaceBet {
             initializer();
             ms.randomDelay(1000,2000);
             setBetSizeToPlace();
-            ms.randomDelay(1000,2000);
+            // TODO : Change it back to 1.2
+            ms.randomDelay(30000,45000);
             clickBetConfirm();
         } catch (Exception e) {
             e.printStackTrace();
