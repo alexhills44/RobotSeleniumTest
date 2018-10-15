@@ -87,8 +87,18 @@ class AutoClose {
             ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
             ms.onLeftClick();
         } catch (Exception e) {
-            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]");
-            ms.onLeftClick();
+            int viewPointer0=0;
+            boolean stop=false;
+            while (viewPointer0<10&&!stop) {
+                try {
+                    viewPointer0++;
+                    ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div["+viewPointer0+"]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]");
+                    ms.onLeftClick();
+                    stop=true;
+                }catch (Exception ex) {
+                    System.out.println("Cog button on viewPointer="+viewPointer0+" not found");
+                }
+            }
             System.out.println("Could not find : COG_SINGLE_ANOIXTA");
         }
         ms.randomDelay(1000, 2000);
@@ -121,6 +131,7 @@ class AutoClose {
                         }
                     }catch (Exception ex) {
                         // if there is no box in that position stop looking
+                        System.out.println("Problem with autoclose method ----> AutocloseClass");
                         isRunning=false;
                     }
                 }
