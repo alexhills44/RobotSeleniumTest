@@ -188,9 +188,10 @@ public class YDiaforesHandler {
                 Logger.logStringtoLogFile("Placing bet for : "+a+" : "+i);
                 if (i!=0) {
                     while (state!=2) {
+//                        sl.switchToDefaultFrame();
                         System.out.println("Betting on : "+a);
                         try {
-                            System.out.println("Text from Box : "+sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"/span[1]]"));
+                            System.out.println("Text from Box : "+sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"/span[2]]"));
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[3]/div[2]
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]/span[2]
