@@ -76,7 +76,6 @@ class AutoClose {
             ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
             ms.onLeftClick();
         } catch (Exception e) {
-            e.printStackTrace();
             Logger.logStringtoLogFile("Error 404 : Element (BOX_SINGLE_ANOIXTA) not found ----> setAutoCloseSequenceSingle()");
         }
     }
@@ -84,8 +83,13 @@ class AutoClose {
     void autoClose() {
         navigateToClosingWindow();
         ms.randomDelay(1000,2000);
-        ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
-        ms.onLeftClick();
+        // First cog Xpath : /html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]/div/div
+        try {
+            ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
+            ms.onLeftClick();
+        } catch (Exception e) {
+            System.out.println("Could not find : COG_SINGLE_ANOIXTA");
+        }
         ms.randomDelay(1000, 2000);
             Logger.logStringtoLogFile("autoclose is NOT single");
             // shows us which bet we are looking at
@@ -161,7 +165,7 @@ class AutoClose {
             ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[" + viewPointer + "]/div/div/div/div[2]/div[3]/div[" + betPointer + "]/div[3]/div/div[3]/div[2]/div/div/div/div[4]/div[3]");
             ms.onLeftClick();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Could not press Confirm Button");
             Logger.logStringtoLogFile("Error : ----> pressConfirmationButton()");
         }
     }
@@ -172,7 +176,7 @@ class AutoClose {
             ms.randomDelay(2500,3000);
             setClosingAmount(oddsCatched);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Could not find closing amount input");
             Logger.logStringtoLogFile("Error : ----> enterAmountClose()");
         }
     }
@@ -182,7 +186,10 @@ class AutoClose {
 
         System.out.println("Bet Odds : " + odds);
         System.out.println("Bet Size : " + betSize);
-        if (odds >= 7.99) {
+        if (odds>=14.99) {
+            System.out.println("Closing Amount to be Placed : "+String.valueOf(4.5 * betSize));
+            ms.typeString(String.valueOf(4.5 * betSize));
+        } else if (odds >= 7.99) {
             System.out.println("Closing Amount to be Placed : "+String.valueOf(3 * betSize));
             ms.typeString(String.valueOf(3 * betSize));
         } else if (odds >= 5.99) {

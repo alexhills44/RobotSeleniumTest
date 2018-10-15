@@ -69,11 +69,10 @@ public class MainProgram implements Runnable {
         as = new ActionSequence(sl,ms);
         openToBasket();
         System.out.println("Started");
-
         while(!ReadTerminal.stopProgram) {
-
             // tipList isnt empty
             if (!Main.tipList.isEmpty()) {
+                sl.tabSwitch(0);
                 // For every tip in the list do
                 ArrayList<String> tempTipList= new ArrayList<String>(Main.tipList);
                 for (String tip :tempTipList) {
@@ -90,6 +89,8 @@ public class MainProgram implements Runnable {
                         new TipHandler(tip,sl,ms,this).run();
                     }
                 }
+            }else {
+                sl.tabSwitch(1);
             }
         }
     }
@@ -116,6 +117,8 @@ public class MainProgram implements Runnable {
         ms.randomDelay(3000,7000);
         as.moveMouseToMatchesPane();
         ms.randomDelay(2000,5000);
+        ms.openNewTab();
+        ms.randomDelay(1000,2000);
     }
 
     private void testSkroutz() {

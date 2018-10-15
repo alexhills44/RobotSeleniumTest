@@ -403,6 +403,17 @@ class MouseMovement {
                 throw new IllegalArgumentException("Cannot type character " + character);
         }
     }
+
+    public void openNewTab () {
+        randomDelay(50,200);
+        robot.keyPress(VK_CONTROL);
+        randomDelay(50,400);
+        robot.keyPress(VK_T);
+        randomDelay(30,50);
+        robot.keyRelease(VK_CONTROL);
+        randomDelay(30,50);
+        robot.keyRelease(VK_T);
+    }
     // TODO : this has to become better its pathetic
     void moveMouseToXIframe() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

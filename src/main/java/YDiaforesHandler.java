@@ -21,15 +21,10 @@ public class YDiaforesHandler {
     private int state =0;
     String tip;
 
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[1]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[2]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[3]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div[1]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div[2]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div[3]
-    //Βραζιλία - Παουλίστα Γυναικών---Ινστιτούτο Μπάμπι Γυναίκες---1---14-16,17-20,21+
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div[1]/div[6]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div[3]/div[6]
+    // TODO : Take String from success
+    // TODO : remove from list
+    // TODO : Fix all the rest of the problems you made
+
 
     YDiaforesHandler (String tip,String[] inputMessage0, SeleniumMethods sl0) {
         inputMessage=inputMessage0;
@@ -48,7 +43,7 @@ public class YDiaforesHandler {
         playDiafores();
         goToMainScreen();
 
-        return "";
+        return xpathToReturn;
     }
 
     @SuppressWarnings("Duplicates")
@@ -84,7 +79,7 @@ public class YDiaforesHandler {
                         System.out.println("2. FOUND MATCH");
                         isSingle = true;
                         doesntExist = false;
-                        xpathMatch = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[" + String.valueOf(competitionNumber) + "]/div[3]/div[1]/div/div[1]";
+                        xpathMatch = "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div[" + String.valueOf(competitionNumber) + "]/div[3]/div[1]/div/div[1]/div/div[3]";
                     }
                 }catch (Exception e) {
 //                    System.out.println("Tournament contains more than one Matches");
@@ -95,7 +90,7 @@ public class YDiaforesHandler {
                         isRunning=false;
                         System.out.println("2. FOUND MATCH");
                         doesntExist=false;
-                        xpathMatch="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]";
+                        xpathMatch="/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[2]/div[1]/div[3]/div["+String.valueOf(competitionNumber)+"]/div[3]/div["+String.valueOf(matchNumber)+"]/div/div[1]/div/div[3]";
                     }
                 } catch (Exception e) {
 //                    System.out.println("YHandicapHandler ----> Could not find the match Specified");
@@ -189,7 +184,6 @@ public class YDiaforesHandler {
         int i;
             for (String a: values) {
                 //play that bet on this xpath
-                // "/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[11]/div[2]/div/div["+teamNumber+1+"]+"/div["+i+"]"
                 i = setPointerDiaforesXpath(a);
                 Logger.logStringtoLogFile("Placing bet for : "+a+" : "+i);
                 if (i!=0) {
@@ -206,10 +200,7 @@ public class YDiaforesHandler {
                     }
                     state=0;
                 }
-                ////////////"/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]"
-                if (values[values.length-1].contains(a)) {
-                    removeFromList=true;
-                }
+                xpathToReturn="$";
             }
 
     }

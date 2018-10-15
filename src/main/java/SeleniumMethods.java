@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.ProfilesIni;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Set;
 
 public class SeleniumMethods {
@@ -129,5 +130,10 @@ public class SeleniumMethods {
     @SuppressWarnings("unused")
     public Set<Cookie> getCookies() {
         return driver.manage().getCookies();
+    }
+
+    public void tabSwitch(int tabNumber) {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(tabNumber)); //switches to new tab
     }
 }
