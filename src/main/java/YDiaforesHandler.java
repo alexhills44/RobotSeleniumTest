@@ -190,7 +190,9 @@ public class YDiaforesHandler {
                     while (state!=2) {
                         System.out.println("Betting on : "+a);
                         try {
-                            if (!sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]").equals("")) {
+                            if (sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]")!=null || sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]/span[2]")!=null) {
+                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]/span[2]
+                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]
                                 betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                                 ms.randomDelay(1000,2000);
                             }
