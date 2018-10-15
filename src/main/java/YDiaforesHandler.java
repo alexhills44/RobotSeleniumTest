@@ -268,6 +268,7 @@ public class YDiaforesHandler {
         String[] lineArray = betInfo[0].split(" ");
         try {
             oddsCaught = lineArray[lineArray.length-1];
+            System.out.println("Odds caught : " + oddsCaught);
         } catch (Exception e) {
             Logger.logStringtoLogFile("Error : could not find odd from bet ----> getOddFromBet()");
         }
