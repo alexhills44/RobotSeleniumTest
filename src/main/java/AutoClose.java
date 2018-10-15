@@ -87,10 +87,11 @@ class AutoClose {
             ms.scrollToView(PropertiesXpath.getProp("COG_SINGLE_ANOIXTA"));
             ms.onLeftClick();
         } catch (Exception e) {
+            ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[6]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]");
+            ms.onLeftClick();
             System.out.println("Could not find : COG_SINGLE_ANOIXTA");
         }
         ms.randomDelay(1000, 2000);
-            Logger.logStringtoLogFile("autoclose is NOT single");
             // shows us which bet we are looking at
             int betPointer =0;
             // Tells the while Loop when to Stop
