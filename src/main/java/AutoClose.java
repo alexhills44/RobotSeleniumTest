@@ -92,7 +92,7 @@ class AutoClose {
             while (viewPointer0<10&&!stop) {
                 try {
                     viewPointer0++;
-                    ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div["+viewPointer0+"]/div/div/div/div[2]/div[3]/div[1]/div[3]/div/div[3]/div[2]");
+                    ms.scrollToView("/html/body/div[1]/div/div[2]/div[2]/div/div[1]/div/div[2]/div/div/div[5]/div/div/div/div[2]/div[3]/div["+viewPointer0+"]/div[3]/div/div[3]/div[2]/div/div");
                     ms.onLeftClick();
                     stop=true;
                 }catch (Exception ex) {
