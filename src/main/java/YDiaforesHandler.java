@@ -205,7 +205,7 @@ public class YDiaforesHandler {
                     }
                     state=0;
                 }
-                xpathToReturn="$";
+                xpathToReturn="";
             }
 
     }
