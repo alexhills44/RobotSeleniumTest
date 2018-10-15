@@ -41,7 +41,6 @@ class AutoClose {
 
             }
         }
-
     }
 
     private void setAutoCloseSequenceSingle() {

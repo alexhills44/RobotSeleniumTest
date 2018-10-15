@@ -208,8 +208,6 @@ public class YDiaforesHandler {
     @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
         System.out.println("Tryed to Bet");
-
-
             // Sets the bet Size once in the loop
             int index = Main.tipList.indexOf(tip);
             PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
@@ -228,12 +226,13 @@ public class YDiaforesHandler {
                 } catch (Exception e) {
                     System.out.println("Doesnt contain Apodoxh Allagwn");
                 }
-                try {
-                    getTextFromSuccessWindow();
-                    state=2;
-                }catch (Exception e) {
-                    System.out.println();
-                }
+                getTextFromSuccessWindow();
+//                try {
+//                    getTextFromSuccessWindow();
+//                    state=2;
+//                }catch (Exception e) {
+//                    System.out.println("Could not find success window");
+//                }
             }
             if (state==2) {
                 // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
@@ -286,6 +285,7 @@ public class YDiaforesHandler {
                 ms.onLeftClick();
                 System.out.println("Bet has been placed SUCCESSFULLY!");
                 stop=true;
+                state=2;
             } catch (Exception e) {
                 Logger.logStringtoLogFile("Error : could not find ok button ----> getTextFromSuccessWindow()");
             }
