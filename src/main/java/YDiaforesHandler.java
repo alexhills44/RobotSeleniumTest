@@ -21,9 +21,7 @@ public class YDiaforesHandler {
     private int state =0;
     String tip;
 
-    // TODO : Take String from success
     // TODO : remove from list
-    // TODO : Fix all the rest of the problems you made
 
 
     YDiaforesHandler (String tip,String[] inputMessage0, SeleniumMethods sl0) {
@@ -181,19 +179,24 @@ public class YDiaforesHandler {
     }
 
     private void playDiafores() {
+        boolean stopSearch=false;
+        final long NANOSEC_PER_SEC = 1000L*1000*1000;
+        long startTime = System.nanoTime();
         int i;
             for (String a: values) {
                 //play that bet on this xpath
                 i = setPointerDiaforesXpath(a);
-                Logger.logStringtoLogFile("Placing bet for : "+a+" : "+i);
+                Logger.logStringtoLogFile("Placing bet for : "+a);
                 if (i!=0) {
-                    while (state!=2) {
+                    // continuesly searches for 5 min
+                    while ((state!=2 && !stopSearch && (System.nanoTime()-startTime)< 2*60*NANOSEC_PER_SEC)) {
                         System.out.println("Betting on : "+a);
                         try {
                             betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                             ms.randomDelay(1000,2000);
                         } catch (Exception e) {
                             System.out.println("could not bet!");
+                            stopSearch=true;
                             e.printStackTrace();
                         }
                         System.out.println("Current state is : "+state);
@@ -205,8 +208,6 @@ public class YDiaforesHandler {
             }
 
     }
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[4]/div[2]/div/div[2]/div[2]
-    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[4]/div[2]/div/div[2]/div[2]
 
     @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
@@ -293,16 +294,12 @@ public class YDiaforesHandler {
         if (s.equals("1-2")) {
             return 2;
         }else if(s.equals("3-6")) {
-            System.out.println("1");
             return 3;
         }else if(s.equals("7-9")) {
-            System.out.println("2");
             return 4;
         }else if(s.equals("10-13")) {
-            System.out.println("3");
             return 5;
         }else if(s.equals("14-16")) {
-            System.out.println("4");
             return 6;
         }else if(s.equals("17-20")) {
             return 7;
@@ -312,6 +309,5 @@ public class YDiaforesHandler {
             return 0;
         }
     }
-    // 1st element /html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[2]/span[2]
 
 }

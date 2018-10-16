@@ -36,7 +36,7 @@ class TipHandler {
     // Calls the handler and gets the values
     private void tipHandler () {
         tipArray = tip.split("---");
-        if (tipArray[3].contains(",")&&tipArray[3].contains("-")) {
+        if (tipArray[3].contains("1-2")||tipArray[3].contains("3-6")||tipArray[3].contains("7-9")||tipArray[3].contains("10-13")||tipArray[3].contains("14-16")||tipArray[3].contains("17-20")||tipArray[3].contains("21+")) {
             try {
                 System.out.println("Found Διαφορεσ");
                 YDiaforesHandler diaforesHandler = new YDiaforesHandler(tip,tipArray, sl);
