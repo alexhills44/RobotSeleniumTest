@@ -179,7 +179,6 @@ public class YDiaforesHandler {
     }
 
     private void playDiafores() {
-        boolean stopSearch=false;
         final long NANOSEC_PER_SEC = 1000L*1000*1000;
         long startTime = System.nanoTime();
         int i;
@@ -189,15 +188,13 @@ public class YDiaforesHandler {
                 Logger.logStringtoLogFile("Placing bet for : "+a);
                 if (i!=0) {
                     // continuesly searches for 5 min
-                    while ((state!=2 && !stopSearch && (System.nanoTime()-startTime)< 2*60*NANOSEC_PER_SEC)) {
+                    while ((state!=2 && (System.nanoTime()-startTime)< 2*60*NANOSEC_PER_SEC)) {
                         System.out.println("Betting on : "+a);
                         try {
                             betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                             ms.randomDelay(1000,2000);
                         } catch (Exception e) {
                             System.out.println("could not bet!");
-                            stopSearch=true;
-                            e.printStackTrace();
                         }
                         System.out.println("Current state is : "+state);
                         Logger.logStringtoLogFile("Current state is : "+state);
@@ -242,11 +239,11 @@ public class YDiaforesHandler {
                 System.out.println("autoClose has been placed");
                 Logger.logStringtoLogFile("Auto Close has been placed SUCCESSFULLY!");
                 // Stops the while loop
-                removeFromList++;
-                if (removeFromList==values.length) {
-                    Main.tipSendTime.remove(index);
-                    Main.tipList.remove(tip);
-                }
+//                removeFromList++;
+//                if (removeFromList==values.length) {
+//                    Main.tipSendTime.remove(index);
+//                    Main.tipList.remove(tip);
+//                }
             }
         }else if (state==1){
             pb.closeBetWindow();
@@ -308,6 +305,12 @@ public class YDiaforesHandler {
         }else {
             return 0;
         }
+    }
+
+    private void removeFromList() {
+        int index = Main.tipList.indexOf(tip);
+        Main.tipSendTime.remove(index);
+        Main.tipList.remove(tip);
     }
 
 }
