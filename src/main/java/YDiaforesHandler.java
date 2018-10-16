@@ -40,6 +40,7 @@ public class YDiaforesHandler {
         // play bet
         playDiafores();
         goToMainScreen();
+        removeFromList();
 
         return xpathToReturn;
     }
