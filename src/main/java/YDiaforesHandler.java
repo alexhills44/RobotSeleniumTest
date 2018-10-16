@@ -17,7 +17,7 @@ public class YDiaforesHandler {
     private static String valuesXpathExtension="/div[2]/div/div[1]";
     private float betSize=PropertiesHandler.getBetSize();
     private String oddsCaught;
-    private boolean removeFromList=false;
+    private int removeFromList=0;
     private int state =0;
     String tip;
 
@@ -190,17 +190,8 @@ public class YDiaforesHandler {
                     while (state!=2) {
                         System.out.println("Betting on : "+a);
                         try {
-                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div["+i+"]
-                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[3]/div[2]
-                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]/span[2]
-                                ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]
-                            if (sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]")!=null) {
-                                betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
-                                ms.randomDelay(1000,2000);
-                            }else {
-                                System.out.println("Bet is closed - Fraged");
-                            }
-
+                            betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
+                            ms.randomDelay(1000,2000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -213,6 +204,8 @@ public class YDiaforesHandler {
             }
 
     }
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[4]/div[2]/div/div[2]/div[2]
+    ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[4]/div[2]/div/div[2]/div[2]
 
     @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
@@ -237,23 +230,17 @@ public class YDiaforesHandler {
                     System.out.println("Doesnt contain Apodoxh Allagwn");
                 }
                 getTextFromSuccessWindow();
-//                try {
-//                    getTextFromSuccessWindow();
-//                    state=2;
-//                }catch (Exception e) {
-//                    System.out.println("Could not find success window");
-//                }
             }
             if (state==2) {
                 // Tries to get Text from the Success window, if it succeeds it sets valueCached and oddsCached
-//            getTextFromSuccessWindow();
                 ms.randomDelay(1000, 2000);
                 //Calls the autoclose Class to se the auto close amount
                 new AutoClose(sl,ms,inputMessage, oddsCaught, "",betSize).autoClose();
                 System.out.println("autoClose has been placed");
                 Logger.logStringtoLogFile("Auto Close has been placed SUCCESSFULLY!");
                 // Stops the while loop
-                if (removeFromList) {
+                removeFromList++;
+                if (removeFromList==values.length) {
                     Main.tipSendTime.remove(index);
                     Main.tipList.remove(tip);
                 }
@@ -285,25 +272,13 @@ public class YDiaforesHandler {
 
     @SuppressWarnings("Duplicates")
     private void getTextFromSuccessWindow() {
-//        final long NANOSEC_PER_SEC = 1000L*1000*1000;
-//        long startTime = System.nanoTime();
-//        boolean stop=false;
-//        // Try for 1.5 min
-//        while ((System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC && !stop) {
-//            try {
         ms.randomDelay(3000,6000);
-                getOddAndValueFromBetPlacedIFRAME();
-                ms.randomDelay(500,700);
-                ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
-                ms.onLeftClick();
-                System.out.println("Bet has been placed SUCCESSFULLY!");
-                state=2;
-//                stop=true;
-//                state=2;
-//            } catch (Exception e) {
-//                Logger.logStringtoLogFile("Error : could not find ok button ----> getTextFromSuccessWindow()");
-//            }
-//        }
+        getOddAndValueFromBetPlacedIFRAME();
+        ms.randomDelay(500,700);
+        ms.scrollToViewIFRAME(PropertiesXpath.getProp("BW_OK_BUTTON"));
+        ms.onLeftClick();
+        System.out.println("Bet has been placed SUCCESSFULLY!");
+        state=2;
     }
 
     private void goToMainScreen() {
