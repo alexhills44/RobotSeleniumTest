@@ -194,8 +194,12 @@ public class YDiaforesHandler {
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[3]/div[2]
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]/span[2]
                                 ///html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div[1]/div/div[3]/div[6]/div[2]/div/div[2]/div[5]
+                            if (sl.getText(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]")!=null) {
                                 betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                                 ms.randomDelay(1000,2000);
+                            }else {
+                                System.out.println("Bet is closed - Fraged");
+                            }
 
                         } catch (Exception e) {
                             e.printStackTrace();
