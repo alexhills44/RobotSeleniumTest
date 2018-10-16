@@ -212,10 +212,11 @@ public class YDiaforesHandler {
 
     @SuppressWarnings("Duplicates")
     private void betTip (String xpath) {
-        System.out.println("Tryed to Bet");
+        PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
+        if (state==0) {
+            System.out.println("Tryed to Bet");
             // Sets the bet Size once in the loop
             int index = Main.tipList.indexOf(tip);
-            PlaceBet pb = new PlaceBet(sl,ms,betSize,xpath);
             pb.clickOnBet();
             ms.randomDelay(2000, 4000);
             // Place bet and press confirm bet
@@ -252,11 +253,12 @@ public class YDiaforesHandler {
                     Main.tipSendTime.remove(index);
                     Main.tipList.remove(tip);
                 }
-            }else if (state==1){
-                pb.closeBetWindow();
-                Logger.logStringtoLogFile("Retrying to place bet...");
-                System.out.println("Retrying to place bet");
             }
+        }else if (state==1){
+            pb.closeBetWindow();
+            Logger.logStringtoLogFile("Retrying to place bet...");
+            System.out.println("Retrying to place bet");
+        }
 
     }
 
