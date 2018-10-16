@@ -193,6 +193,7 @@ public class YDiaforesHandler {
                             betTip(xPathToDiffrence+"/div[2]/div/div["+(teamNumber+1)+"]/div["+i+"]");
                             ms.randomDelay(1000,2000);
                         } catch (Exception e) {
+                            System.out.println("could not bet!");
                             e.printStackTrace();
                         }
                         System.out.println("Current state is : "+state);
@@ -225,6 +226,7 @@ public class YDiaforesHandler {
             while (state==0 && (System.nanoTime()-startTime)< 0.5*60*NANOSEC_PER_SEC) {
                 try {
                     sl.getText("/html/body/div[1]/div/ul/li[9]/a[1]/div");
+                    System.out.println("passed exception apodoxh allagwn");
                     state =1;
                 } catch (Exception e) {
                     System.out.println("Doesnt contain Apodoxh Allagwn");
