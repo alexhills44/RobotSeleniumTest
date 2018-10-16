@@ -34,6 +34,7 @@ public class YDiaforesHandler {
     String getDiafores () throws Exception{
         competitionMatchFinder();
         goToMatchBets();
+        goToDiaforesView();
         ms.randomDelay(3000,6000);
         tipArrayBreak();
         loopThroughBetCategories();
@@ -312,6 +313,11 @@ public class YDiaforesHandler {
         int index = Main.tipList.indexOf(tip);
         Main.tipSendTime.remove(index);
         Main.tipList.remove(tip);
+    }
+
+    private void goToDiaforesView() {
+        ms.scrollToView("/html/body/div[1]/div/div[2]/div[1]/div/div/div[2]/div[2]");
+        ms.randomDelay(200,300);
     }
 
 }
