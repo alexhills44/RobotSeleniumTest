@@ -22,7 +22,7 @@ public class SeleniumMethods {
     //Open first Time
     SeleniumMethods() {
         if (PropertiesHandler.getUsrAgent()==0) {
-            System.setProperty("webdriver.gecko.driver", "src/drivers/geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", "C:\\Users\\Alex\\IdeaProjects\\RobotSeleniumTest\\src\\drivers\\geckodriver.exe");
 //            FirefoxOptions options = new FirefoxOptions();
 //            ProfilesIni allProfiles = new ProfilesIni();
 //            FirefoxProfile selenium_profile = allProfiles.getProfile("default");

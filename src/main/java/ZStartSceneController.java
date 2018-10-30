@@ -29,7 +29,7 @@ public class ZStartSceneController implements Initializable{
     public void startButton() {
         getValuesFromFields();
 
-        ExecutorService x = Executors.newFixedThreadPool(1);
+        ExecutorService x = Executors.newFixedThreadPool(20);
         x.execute(new ReadTerminal());
     }
 

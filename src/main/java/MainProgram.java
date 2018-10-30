@@ -43,6 +43,7 @@ public class MainProgram implements Runnable {
             y++;
             yOffset=y-y1;
         }
+            sl.pageCloser();
     }
 
     // Checks if  the user wants to calibrate or no calibration has been done before
@@ -57,7 +58,6 @@ public class MainProgram implements Runnable {
             PropertiesHandler.setCalibrate(false);
             PropertiesHandler.setYOffset(yOffset);
             PropertiesHandler.endProp();
-            sl.pageCloser();
         }
     }
 
