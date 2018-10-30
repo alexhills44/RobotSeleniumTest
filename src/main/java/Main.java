@@ -1,9 +1,12 @@
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.Vector;
 
 
@@ -19,7 +22,9 @@ public class Main extends Application{
     // TODO : Add LogFile
     // TODO : Add YDiaforesHandler
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        System.setErr( new PrintStream("C:\\Users\\Alex\\Desktop\\error.txt"));
+        System.setOut( new PrintStream("C:\\Users\\Alex\\Desktop\\out.txt"));
         Initialization();
         launch(args);
     }
